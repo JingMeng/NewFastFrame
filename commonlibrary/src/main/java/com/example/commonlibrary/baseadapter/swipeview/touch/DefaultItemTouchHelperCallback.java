@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2016 Yan Zhenjie
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,9 +16,9 @@
 package com.example.commonlibrary.baseadapter.swipeview.touch;
 
 import android.graphics.Canvas;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
 
@@ -86,26 +86,20 @@ public class DefaultItemTouchHelperCallback extends ItemTouchHelper.Callback {
             int swipeFlags = onItemMovementListener.onSwipeFlags(recyclerView, targetViewHolder);
             return makeMovementFlags(dragFlags, swipeFlags);
         } else {
-            //适用GridLayoutManager类型和LinearLayoutManager类型。
-            RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+            //閫傜敤GridLayoutManager绫诲瀷鍜孡inearLayoutManager绫诲瀷銆?            RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
             if (layoutManager instanceof GridLayoutManager) {
-                //拖拽的方向。
-                int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+                //鎷栨嫿鐨勬柟鍚戙€?                int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
                 int swipeFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
-                //侧滑的方向：left right。
-                return makeMovementFlags(dragFlags, swipeFlags);
+                //渚ф粦鐨勬柟鍚戯細left right銆?                return makeMovementFlags(dragFlags, swipeFlags);
             } else if (layoutManager instanceof LinearLayoutManager) {
-                //线性方向分为：水平和垂直方向。
-                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
+                //绾挎€ф柟鍚戝垎涓猴細姘村钩鍜屽瀭鐩存柟鍚戙€?                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
                 if (linearLayoutManager.getOrientation() == LinearLayoutManager.HORIZONTAL) {
                     int dragFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
                     int swipeFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
                     return makeMovementFlags(dragFlags, swipeFlags);
                 } else {
-                    //拖拽的方向。
-                    int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
-                    //侧滑的方向：left right。
-                    int swipeFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+                    //鎷栨嫿鐨勬柟鍚戙€?                    int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
+                    //渚ф粦鐨勬柟鍚戯細left right銆?                    int swipeFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
                     return makeMovementFlags(dragFlags, swipeFlags);
                 }
             }
@@ -115,10 +109,8 @@ public class DefaultItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     @Override
     public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-        //判断当前是否是swipe方式：侧滑。
-        if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
-            //1.ItemView--ViewHolder; 2.侧滑条目的透明度程度关联谁？dX(delta增量，范围：当前条目-width~width)。
-            RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+        //鍒ゆ柇褰撳墠鏄惁鏄痵wipe鏂瑰紡锛氫晶婊戙€?        if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
+            //1.ItemView--ViewHolder; 2.渚ф粦鏉＄洰鐨勯€忔槑搴︾▼搴﹀叧鑱旇皝锛焏X(delta澧為噺锛岃寖鍥达細褰撳墠鏉＄洰-width~width)銆?            RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
             float alpha = 1;
             if (layoutManager instanceof LinearLayoutManager) {
                 int orientation = ((LinearLayoutManager) layoutManager).getOrientation();
@@ -136,19 +128,16 @@ public class DefaultItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     @Override
     public boolean onMove(RecyclerView arg0, RecyclerView.ViewHolder srcHolder, RecyclerView.ViewHolder targetHolder) {
-        if (srcHolder.getItemViewType() == targetHolder.getItemViewType()) {// 相同类型的允许切换。
-            if (onItemMoveListener == null)
+        if (srcHolder.getItemViewType() == targetHolder.getItemViewType()) {// 鐩稿悓绫诲瀷鐨勫厑璁稿垏鎹€?            if (onItemMoveListener == null)
                 return false;
-            //回调刷新数据及界面。
-            return onItemMoveListener.onItemMove(srcHolder.getAdapterPosition(), targetHolder.getAdapterPosition());
+            //鍥炶皟鍒锋柊鏁版嵁鍙婄晫闈€?            return onItemMoveListener.onItemMove(srcHolder.getAdapterPosition(), targetHolder.getAdapterPosition());
         }
         return false;
     }
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-        //回调刷新数据及界面。
-        if (onItemMoveListener != null)
+        //鍥炶皟鍒锋柊鏁版嵁鍙婄晫闈€?        if (onItemMoveListener != null)
             onItemMoveListener.onItemDismiss(viewHolder.getAdapterPosition());
     }
 

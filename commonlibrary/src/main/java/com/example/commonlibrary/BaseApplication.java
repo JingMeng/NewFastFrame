@@ -1,8 +1,8 @@
-package com.example.commonlibrary;
+﻿package com.example.commonlibrary;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
+import androidx.multidex.MultiDex;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.commonlibrary.dagger.component.AppComponent;
@@ -54,8 +54,8 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        // 这两行必须写在init之前，否则这些配置在init过程中将无效
-        ARouter.openLog();     // 打印日志
+        // 杩欎袱琛屽繀椤诲啓鍦╥nit涔嬪墠锛屽惁鍒欒繖浜涢厤缃湪init杩囩▼涓皢鏃犳晥
+        ARouter.openLog();     // 鎵撳嵃鏃ュ織
         ARouter.openDebug();
         ARouter.init(this);
         initDagger();
@@ -81,7 +81,7 @@ public class BaseApplication extends Application {
         }).retrofitConfig(new GlobalConfigModule.RetrofitConfig() {
             @Override
             public void config(Application application, Retrofit.Builder builder) {
-//                这里的配置baseURL会覆盖之前的baseUrl
+//                杩欓噷鐨勯厤缃産aseURL浼氳鐩栦箣鍓嶇殑baseUrl
             }
         }).okHttpGlobalHandler(new OkHttpGlobalHandler() {
             @Override
@@ -114,3 +114,4 @@ public class BaseApplication extends Application {
         applicationDelegate.onTerminate(this);
     }
 }
+

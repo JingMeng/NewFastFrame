@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2016 Yan Zhenjie
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,8 +15,8 @@
  */
 package com.example.commonlibrary.baseadapter.swipeview.touch;
 
-import android.support.annotation.IntDef;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.IntDef;
+import androidx.recyclerview.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
 import java.lang.annotation.Retention;
@@ -47,3 +47,4 @@ public interface OnItemStateChangedListener {
     @interface ActionStateMode {
     }
 }
+

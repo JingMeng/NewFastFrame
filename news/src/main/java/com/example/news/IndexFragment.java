@@ -1,7 +1,7 @@
-package com.example.news;
+﻿package com.example.news;
 
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import com.google.android.material.tabs.TabLayout;
+import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -32,9 +32,8 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 
 /**
- * 项目名称:    NewFastFrame
- * 创建人:        陈锦军
- * 创建时间:    2017/9/17      17:32
+ * 椤圭洰鍚嶇О:    NewFastFrame
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/9/17      17:32
  * QQ:             1981367757
  */
 
@@ -78,28 +77,28 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
     @Override
     protected void initData() {
         titleList = new ArrayList<>();
-        titleList.add("要闻");
-        titleList.add("公告");
-        titleList.add("学术");
-        titleList.add("马院");
-        titleList.add("艺媒");
-        titleList.add("数理");
-        titleList.add("海洋");
-        titleList.add("机电");
-        titleList.add("地空");
-        titleList.add("环境");
-        titleList.add("工程");
-        titleList.add("材化");
-        titleList.add("资源");
-        titleList.add("自动化");
-        titleList.add("信工");
-        titleList.add("地院");
-        titleList.add("经管");
-        titleList.add("公管");
-        titleList.add("计院 ");
-        titleList.add("地科");
-        titleList.add("外院");
-        titleList.add("福利");
+        titleList.add("瑕侀椈");
+        titleList.add("鍏憡");
+        titleList.add("瀛︽湳");
+        titleList.add("椹櫌");
+        titleList.add("鑹哄獟");
+        titleList.add("鏁扮悊");
+        titleList.add("娴锋磱");
+        titleList.add("鏈虹數");
+        titleList.add("鍦扮┖");
+        titleList.add("鐜");
+        titleList.add("宸ョ▼");
+        titleList.add("鏉愬寲");
+        titleList.add("璧勬簮");
+        titleList.add("鑷姩鍖?);
+        titleList.add("淇″伐");
+        titleList.add("鍦伴櫌");
+        titleList.add("缁忕");
+        titleList.add("鍏");
+        titleList.add("璁￠櫌 ");
+        titleList.add("鍦扮");
+        titleList.add("澶栭櫌");
+        titleList.add("绂忓埄");
         fragmentList = new ArrayList<>();
         fragmentList.add(NewsListFragment.newInstance(NewsUtil.CUG_NEWS));
         fragmentList.add(NewsListFragment.newInstance(NewsUtil.CUG_NOTIFY));
@@ -142,7 +141,7 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
         display.setCurrentItem(0);
         ToolBarOption toolBarOption = new ToolBarOption();
         toolBarOption.setBgColor(getResources().getColor(R.color.base_color_text_grey));
-        toolBarOption.setTitle("地大新闻");
+        toolBarOption.setTitle("鍦板ぇ鏂伴椈");
         toolBarOption.setNeedNavigation(true);
         setToolBar(toolBarOption);
         RxBusManager.getInstance().registerEvent(TypeNewsEvent.class, new Consumer<TypeNewsEvent>() {
@@ -207,13 +206,13 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
                 .getOtherNewsTypeBeanDao().queryBuilder().where(OtherNewsTypeBeanDao
                         .Properties.HasSelected.eq(Boolean.TRUE)).list();
         OtherNewsTypeBean item_1 = new OtherNewsTypeBean();
-        item_1.setName("要闻");
+        item_1.setName("瑕侀椈");
         OtherNewsTypeBean item_2 = new OtherNewsTypeBean();
-        item_2.setName("公告");
+        item_2.setName("鍏憡");
         OtherNewsTypeBean item_3 = new OtherNewsTypeBean();
-        item_3.setName("学术");
+        item_3.setName("瀛︽湳");
         OtherNewsTypeBean item_4 = new OtherNewsTypeBean();
-        item_4.setName("福利");
+        item_4.setName("绂忓埄");
         result.add(0, item_4);
         result.add(0, item_3);
         result.add(0, item_2);
@@ -240,3 +239,4 @@ public class IndexFragment extends BaseFragment implements View.OnClickListener 
         return new IndexFragment();
     }
 }
+

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (C) 2013 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,7 +20,7 @@ package com.example.cootek.newfastframe.view.slide;
 import android.content.Context;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.VelocityTrackerCompat;
-import android.support.v4.view.ViewCompat;
+import androidx.core.view.ViewCompat;
 import android.support.v4.widget.ScrollerCompat;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -1500,3 +1500,4 @@ public class ViewDragHelper {
         return result;
     }
 }
+

@@ -1,6 +1,6 @@
-package com.example.news;
+﻿package com.example.news;
 
-import android.support.v7.widget.GridLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import android.view.View;
 
 import com.example.commonlibrary.BaseApplication;
@@ -17,9 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 项目名称:    NewFastFrame
- * 创建人:        陈锦军
- * 创建时间:    2017/9/18      14:58
+ * 椤圭洰鍚嶇О:    NewFastFrame
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/9/18      14:58
  * QQ:             1981367757
  */
 
@@ -87,16 +86,16 @@ public class CenterFragment extends BaseFragment {
     private List<CenterBean> getDefaultData() {
         List<CenterBean> result = new ArrayList<>();
         CenterBean library = new CenterBean();
-        library.setTitle("图书馆系统");
+        library.setTitle("鍥句功棣嗙郴缁?);
         library.setResId(R.mipmap.ic_launcher);
         result.add(library);
         CenterBean card = new CenterBean();
-        card.setTitle("一卡通系统");
+        card.setTitle("涓€鍗￠€氱郴缁?);
         card.setResId(R.mipmap.ic_launcher);
         result.add(card);
         for (int i = 0; i < 5; i++) {
             CenterBean centerBean = new CenterBean();
-            centerBean.setTitle("标题" + i);
+            centerBean.setTitle("鏍囬" + i);
             centerBean.setResId(R.mipmap.ic_launcher);
             result.add(centerBean);
         }
@@ -108,3 +107,4 @@ public class CenterFragment extends BaseFragment {
         return new CenterFragment();
     }
 }
+

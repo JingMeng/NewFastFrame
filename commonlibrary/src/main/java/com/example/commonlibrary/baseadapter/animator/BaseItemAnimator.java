@@ -1,10 +1,10 @@
-package com.example.commonlibrary.baseadapter.animator;
+﻿package com.example.commonlibrary.baseadapter.animator;
 
 
-import android.support.v4.view.ViewCompat;
+import androidx.core.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
-import android.support.v7.widget.RecyclerView.ViewHolder;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -688,3 +688,4 @@ public abstract class BaseItemAnimator extends SimpleItemAnimator {
     }
   }
 }
+

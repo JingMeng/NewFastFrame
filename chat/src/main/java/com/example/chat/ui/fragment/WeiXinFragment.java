@@ -1,8 +1,8 @@
-package com.example.chat.ui.fragment;
+﻿package com.example.chat.ui.fragment;
 
 import android.content.Intent;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,9 +29,8 @@ import com.example.commonlibrary.cusotomview.ListViewDecoration;
 import java.util.List;
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2017/1/6      23:03
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/1/6      23:03
  * QQ:             1981367757
  */
 public class WeiXinFragment extends BaseFragment<List<WinXinBean>,WinXinInfoPresenter> implements WinXinInfoContacts.View<List<WinXinBean>>,OnLoadMoreListener {
@@ -101,9 +100,9 @@ public class WeiXinFragment extends BaseFragment<List<WinXinBean>,WinXinInfoPres
                                         PopupMenu popupMenu = new PopupMenu(getActivity(), view);
                                         popupMenu.getMenuInflater().inflate(R.menu.wei_xin_fragment_item_menu, popupMenu.getMenu());
                                         if (ChatDB.create().getWeixinInfoReadStatus(bean.getUrl()) == 1) {
-                                                popupMenu.getMenu().findItem(R.id.wei_xin_fragment_item_menu_read).setTitle("标记为未读状态");
+                                                popupMenu.getMenu().findItem(R.id.wei_xin_fragment_item_menu_read).setTitle("鏍囪涓烘湭璇荤姸鎬?);
                                         } else {
-                                                popupMenu.getMenu().findItem(R.id.wei_xin_fragment_item_menu_read).setTitle("标记为已读状态");
+                                                popupMenu.getMenu().findItem(R.id.wei_xin_fragment_item_menu_read).setTitle("鏍囪涓哄凡璇荤姸鎬?);
                                         }
                                         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                                                 @Override
@@ -119,7 +118,7 @@ public class WeiXinFragment extends BaseFragment<List<WinXinBean>,WinXinInfoPres
                                                                 startActivity(intent);
 
                                                         } else if (i == R.id.wei_xin_fragment_item_menu_read) {
-                                                                if (item.getTitle().equals("标记为未读状态")) {
+                                                                if (item.getTitle().equals("鏍囪涓烘湭璇荤姸鎬?)) {
                                                                         ChatDB.create().saveWeiXinInfoReadStatus(bean.getUrl(), 0);
                                                                 } else {
                                                                         ChatDB.create().saveWeiXinInfoReadStatus(bean.getUrl(), 1);
@@ -194,3 +193,4 @@ public class WeiXinFragment extends BaseFragment<List<WinXinBean>,WinXinInfoPres
                 loadMoreData();
         }
 }
+

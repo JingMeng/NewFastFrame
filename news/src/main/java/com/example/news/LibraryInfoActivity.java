@@ -1,9 +1,9 @@
-package com.example.news;
+﻿package com.example.news;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import com.google.android.material.tabs.TabLayout;
+import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.commonlibrary.BaseActivity;
@@ -16,9 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 项目名称:    NewFastFrame
- * 创建人:        陈锦军
- * 创建时间:    2017/9/18      16:50
+ * 椤圭洰鍚嶇О:    NewFastFrame
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/9/18      16:50
  * QQ:             1981367757
  */
 @Route(path = "library/index")
@@ -57,8 +56,8 @@ public class LibraryInfoActivity extends BaseActivity{
         viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
         List<String> titleList=new ArrayList<>();
         List<BaseFragment>  fragmentList=new ArrayList<>();
-        titleList.add("当前");
-        titleList.add("历史");
+        titleList.add("褰撳墠");
+        titleList.add("鍘嗗彶");
         fragmentList.add(BookInfoListFragment.newInstance(titleList.get(0)));
         fragmentList.add(BookInfoListFragment.newInstance(titleList.get(1)));
         viewPagerAdapter.setTitleAndFragments(titleList,fragmentList);
@@ -66,7 +65,7 @@ public class LibraryInfoActivity extends BaseActivity{
         display.setAdapter(viewPagerAdapter);
         display.setCurrentItem(0);
         ToolBarOption toolBarOption=new ToolBarOption();
-        toolBarOption.setTitle("图书借阅情况");
+        toolBarOption.setTitle("鍥句功鍊熼槄鎯呭喌");
         toolBarOption.setNeedNavigation(true);
         setToolBar(toolBarOption);
     }
@@ -76,3 +75,4 @@ public class LibraryInfoActivity extends BaseActivity{
         context.startActivity(intent);
     }
 }
+

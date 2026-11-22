@@ -1,10 +1,10 @@
-package com.example.commonlibrary.baseadapter.empty;
+﻿package com.example.commonlibrary.baseadapter.empty;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.AttrRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,9 +16,8 @@ import com.bumptech.glide.Glide;
 import com.example.commonlibrary.R;
 
 /**
- * 项目名称:    Cugappplat
- * 创建人:        陈锦军
- * 创建时间:    2017/4/3      14:39
+ * 椤圭洰鍚嶇О:    Cugappplat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/4/3      14:39
  * QQ:             1981367757
  */
 
@@ -156,10 +155,10 @@ public class EmptyLayout extends FrameLayout implements View.OnClickListener {
     }
 
 
-    //        定义一个注解，限定传入的状态值
-//    @Retention(RetentionPolicy.SOURCE)
+    //        瀹氫箟涓€涓敞瑙ｏ紝闄愬畾浼犲叆鐨勭姸鎬佸€?//    @Retention(RetentionPolicy.SOURCE)
 //    @IntDef({STATUS_HIDE, STATUS_LOADING, STATUS_NO_DATA, STATUS_NO_NET})
 //    public @interface EmptyStatus {
 //
 //    }
 }
+

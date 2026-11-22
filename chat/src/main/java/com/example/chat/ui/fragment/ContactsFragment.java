@@ -1,9 +1,9 @@
-package com.example.chat.ui.fragment;
+﻿package com.example.chat.ui.fragment;
 
 import android.content.Intent;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.AlphabetIndexer;
 import android.widget.LinearLayout;
@@ -27,9 +27,8 @@ import com.example.commonlibrary.baseadapter.listener.OnSimpleItemClickListener;
 import com.example.commonlibrary.cusotomview.ListViewDecoration;
 
 /**
- * 项目名称:    HappyChat
- * 创建人:        陈锦军
- * 创建时间:    2016/9/15      15:25
+ * 椤圭洰鍚嶇О:    HappyChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2016/9/15      15:25
  * QQ:             1981367757
  */
 public class ContactsFragment extends BaseFragment implements MyLetterView.MyLetterChangeListener, View.OnClickListener {
@@ -77,10 +76,10 @@ public class ContactsFragment extends BaseFragment implements MyLetterView.MyLet
 
         @Override
         public void initData() {
-                LogUtil.e("这里设置display的adapter121");
+                LogUtil.e("杩欓噷璁剧疆display鐨刟dapter121");
                 mMyLetterView.setTextView(middle);
                 adapter = new ContactsAdapter();
-                LogUtil.e("初始化的所有好友信息");
+                LogUtil.e("鍒濆鍖栫殑鎵€鏈夊ソ鍙嬩俊鎭?);
                 adapter.addData(UserCacheManager.getInstance().getAllContacts());
                 if (adapter.getData() != null && adapter.getData().size() > 0) {
                         for (User user :
@@ -123,7 +122,7 @@ public class ContactsFragment extends BaseFragment implements MyLetterView.MyLet
         public void onHiddenChanged(boolean hidden) {
                 super.onHiddenChanged(hidden);
                 if (!hidden) {
-                        ((MainActivity) getActivity()).initActionBar("好友");
+                        ((MainActivity) getActivity()).initActionBar("濂藉弸");
                 }
         }
 
@@ -138,7 +137,7 @@ public class ContactsFragment extends BaseFragment implements MyLetterView.MyLet
                 mIndexer = new AlphabetIndexer(ChatDB.create().getSortedKeyCursor(), 0, alphabet);
                 adapter.setSectionIndexer(mIndexer);
                 User user= UserCacheManager.getInstance().getUser(belongId);
-                LogUtil.e("这里添加的好友星星如下");
+                LogUtil.e("杩欓噷娣诲姞鐨勫ソ鍙嬫槦鏄熷涓?);
                 LogUtil.e(user);
                 adapter.addData(user);
         }
@@ -163,3 +162,4 @@ public class ContactsFragment extends BaseFragment implements MyLetterView.MyLet
 
         }
 }
+

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2016 Yan Zhenjie
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,8 +16,8 @@
 package com.example.commonlibrary.baseadapter.swipeview;
 
 import android.content.Context;
-import android.support.annotation.IntDef;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.IntDef;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -443,3 +443,4 @@ public class SwipeMenuRecyclerView extends RecyclerView {
         return super.onTouchEvent(e);
     }
 }
+

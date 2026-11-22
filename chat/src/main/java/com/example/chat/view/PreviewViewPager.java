@@ -1,15 +1,14 @@
-package com.example.chat.view;
+﻿package com.example.chat.view;
 
 import android.content.Context;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2016/11/30      21:35
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2016/11/30      21:35
  * QQ:             1981367757
  */
 
@@ -43,3 +42,4 @@ public class PreviewViewPager extends ViewPager {
                 return false;
         }
 }
+

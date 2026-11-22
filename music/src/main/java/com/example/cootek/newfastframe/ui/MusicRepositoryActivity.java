@@ -1,9 +1,9 @@
-package com.example.cootek.newfastframe.ui;
+﻿package com.example.cootek.newfastframe.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import com.google.android.material.tabs.TabLayout;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.commonlibrary.BaseFragment;
 import com.example.commonlibrary.baseadapter.adapter.ViewPagerAdapter;
@@ -54,14 +54,14 @@ public class MusicRepositoryActivity extends SlideMusicBaseActivity {
     @Override
     protected void initData() {
         ToolBarOption toolBarOption = new ToolBarOption();
-        toolBarOption.setTitle("乐库");
+        toolBarOption.setTitle("涔愬簱");
         toolBarOption.setNeedNavigation(true);
         setToolBar(toolBarOption);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         List<String> list = new ArrayList<>();
-        list.add("推荐");
-        list.add("排行");
-        list.add("歌手");
+        list.add("鎺ㄨ崘");
+        list.add("鎺掕");
+        list.add("姝屾墜");
         List<BaseFragment> fragmentList = new ArrayList<>();
         fragmentList.add(RecommendFragment.newInstance());
         fragmentList.add(RankFragment.newInstance());
@@ -103,3 +103,4 @@ public class MusicRepositoryActivity extends SlideMusicBaseActivity {
 
 
 }
+

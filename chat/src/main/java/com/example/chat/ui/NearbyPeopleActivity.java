@@ -1,11 +1,11 @@
-package com.example.chat.ui;
+﻿package com.example.chat.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -30,9 +30,8 @@ import java.util.List;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2017/1/11      12:42
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/1/11      12:42
  * QQ:             1981367757
  */
 
@@ -107,7 +106,7 @@ public class NearbyPeopleActivity extends SlideBaseActivity<List<NearbyInfo>,Nea
         private void initActionBar() {
                 ToolBarOption toolBarOption = new ToolBarOption();
                 toolBarOption.setAvatar(UserManager.getInstance().getCurrentUser().getAvatar());
-                toolBarOption.setTitle("附近的人");
+                toolBarOption.setTitle("闄勮繎鐨勪汉");
                 toolBarOption.setNeedNavigation(true);
                 toolBarOption.setRightResId(R.drawable.ic_list_blue_grey_900_24dp);
                 toolBarOption.setRightListener(new View.OnClickListener() {
@@ -115,10 +114,10 @@ public class NearbyPeopleActivity extends SlideBaseActivity<List<NearbyInfo>,Nea
                         public void onClick(View v) {
 
                                 List<String> list = new ArrayList<>();
-                                list.add("查看全部");
-                                list.add("只查看女生");
-                                list.add("只查看男生");
-                                showChooseDialog("搜索条件", list, new AdapterView.OnItemClickListener() {
+                                list.add("鏌ョ湅鍏ㄩ儴");
+                                list.add("鍙煡鐪嬪コ鐢?);
+                                list.add("鍙煡鐪嬬敺鐢?);
+                                showChooseDialog("鎼滅储鏉′欢", list, new AdapterView.OnItemClickListener() {
                                         @Override
                                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                                 dismissBaseDialog();
@@ -138,7 +137,7 @@ public class NearbyPeopleActivity extends SlideBaseActivity<List<NearbyInfo>,Nea
 
                 }
                 if (longitude != 0 || latitude != 0) {
-                        LogUtil.e("已经定位过了，无需再定位");
+                        LogUtil.e("宸茬粡瀹氫綅杩囦簡锛屾棤闇€鍐嶅畾浣?);
                         boolean result=false;
                         boolean isAll=false;
                         if (currentPosition == 1) {
@@ -174,7 +173,7 @@ public class NearbyPeopleActivity extends SlideBaseActivity<List<NearbyInfo>,Nea
                 if (list != null && list.size() > 0) {
                        mNearbyPeopleAdapter.addData(list);
                 } else {
-                        ToastUtils.showShortToast("查询得到的附近人为空");
+                        ToastUtils.showShortToast("鏌ヨ寰楀埌鐨勯檮杩戜汉涓虹┖");
                 }
         }
 
@@ -191,3 +190,4 @@ public class NearbyPeopleActivity extends SlideBaseActivity<List<NearbyInfo>,Nea
 
         }
 }
+

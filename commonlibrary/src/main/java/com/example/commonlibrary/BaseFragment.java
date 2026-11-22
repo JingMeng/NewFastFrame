@@ -1,8 +1,8 @@
-package com.example.commonlibrary;
+﻿package com.example.commonlibrary;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,17 +30,15 @@ import javax.inject.Inject;
 import static android.view.View.GONE;
 
 /**
- * 项目名称:    Cugappplat
- * 创建人:        陈锦军
- * 创建时间:    2017/4/3      14:24
+ * 椤圭洰鍚嶇О:    Cugappplat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/4/3      14:24
  * QQ:             1981367757
  */
 
 public abstract class BaseFragment<T, P extends BasePresenter> extends RxFragment implements IView<T> {
 
     /**
-     * 采用懒加载
-     */
+     * 閲囩敤鎳掑姞杞?     */
     protected View root;
     private EmptyLayout mEmptyLayout;
     private boolean hasInit = false;
@@ -99,7 +97,7 @@ public abstract class BaseFragment<T, P extends BasePresenter> extends RxFragmen
                 ((ViewGroup) root.getParent()).removeView(root);
             }
             if (container != null) {
-                CommonLogger.e("添加父类");
+                CommonLogger.e("娣诲姞鐖剁被");
                 container.addView(root);
             }
             initBaseView();
@@ -146,7 +144,7 @@ public abstract class BaseFragment<T, P extends BasePresenter> extends RxFragmen
 
 
     /**
-     * 视图真正可见的时候才调用
+     * 瑙嗗浘鐪熸鍙鐨勬椂鍊欐墠璋冪敤
      */
 
     @Override
@@ -317,3 +315,4 @@ public abstract class BaseFragment<T, P extends BasePresenter> extends RxFragmen
 
 
 }
+

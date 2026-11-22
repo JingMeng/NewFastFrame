@@ -1,11 +1,11 @@
-package com.example.chat.ui;
+﻿package com.example.chat.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -24,9 +24,8 @@ import java.util.List;
 
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2017/1/6      21:59
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/1/6      21:59
  * QQ:             1981367757
  */
 public class HappyActivity extends SlideBaseActivity {
@@ -80,10 +79,10 @@ public class HappyActivity extends SlideBaseActivity {
                 fragmentList.add(happyContentFragment);
                 fragmentList.add(pictureFragment);
                 List<String> list = new ArrayList<>();
-                list.add("微信精选");
-                list.add("精选趣图");
-                list.add("精选笑话");
-                list.add("美女图片");
+                list.add("寰俊绮鹃€?);
+                list.add("绮鹃€夎叮鍥?);
+                list.add("绮鹃€夌瑧璇?);
+                list.add("缇庡コ鍥剧墖");
                 ViewPageAdapter viewPageAdapter = new ViewPageAdapter(fragmentList, list, getSupportFragmentManager());
                 display.setOffscreenPageLimit(1);
                 display.setAdapter(viewPageAdapter);
@@ -96,7 +95,7 @@ public class HappyActivity extends SlideBaseActivity {
                         toolBarOption.setAvatar(UserManager.getInstance().getCurrentUser().getAvatar());
 
                 toolBarOption.setNeedNavigation(true);
-                String title = "开心时刻";
+                String title = "寮€蹇冩椂鍒?;
                 toolBarOption.setTitle(title);
                 setToolBar(toolBarOption);
         }
@@ -117,7 +116,7 @@ public class HappyActivity extends SlideBaseActivity {
                         finish();
 
                 } else if (i == R.id.happy_main_create_group) {
-                        ToastUtils.showShortToast("点击了创建群");
+                        ToastUtils.showShortToast("鐐瑰嚮浜嗗垱寤虹兢");
                         Intent selectIntent = new Intent(this, SelectedFriendsActivity.class);
                         selectIntent.putExtra("from", "createGroup");
                         startActivity(selectIntent);
@@ -135,3 +134,4 @@ public class HappyActivity extends SlideBaseActivity {
 
         }
 }
+

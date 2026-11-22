@@ -1,10 +1,10 @@
-package com.example.chat.ui;
+﻿package com.example.chat.ui;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,9 +26,8 @@ import com.example.commonlibrary.cusotomview.ToolBarOption;
 
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2017/1/7      10:55
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/1/7      10:55
  * QQ:             1981367757
  */
 
@@ -214,3 +213,4 @@ public class WeiXinNewsActivity extends SlideBaseActivity implements View.OnClic
 
     }
 }
+

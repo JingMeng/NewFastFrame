@@ -1,8 +1,8 @@
-package com.example.live.ui;
+﻿package com.example.live.ui;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import com.google.android.material.tabs.TabLayout;
+import androidx.viewpager.widget.ViewPager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -78,7 +78,7 @@ public class MainActivity extends BaseActivity<List<CategoryLiveBean>, MainPrese
             }
         });
         ToolBarOption toolBarOption = new ToolBarOption();
-        toolBarOption.setTitle("全民直播");
+        toolBarOption.setTitle("鍏ㄦ皯鐩存挱");
         toolBarOption.setBgColor(getResources().getColor(R.color.base_color_text_grey));
         setToolBar(toolBarOption);
     }
@@ -95,7 +95,7 @@ public class MainActivity extends BaseActivity<List<CategoryLiveBean>, MainPrese
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.live_menu_item_search) {
-            ToastUtils.showLongToast("启动搜索界面");
+            ToastUtils.showLongToast("鍚姩鎼滅储鐣岄潰");
             SearchLiveActivity.start(this);
         }
         return true;
@@ -108,7 +108,7 @@ public class MainActivity extends BaseActivity<List<CategoryLiveBean>, MainPrese
         if (data != null && data.size() > 0) {
             List<String> titleList = new ArrayList<>();
             List<BaseFragment> fragmentList = new ArrayList<>();
-            titleList.add("推荐");
+            titleList.add("鎺ㄨ崘");
             fragmentList.add(RecommendLiveFragment.newInstance());
             for (CategoryLiveBean bean :
                     data) {
@@ -167,7 +167,7 @@ public class MainActivity extends BaseActivity<List<CategoryLiveBean>, MainPrese
         List<CategoryLiveBean> list = new ArrayList<>();
         CategoryLiveBean categoryLiveBean = new CategoryLiveBean();
         categoryLiveBean.setIcon_image("");
-        categoryLiveBean.setName("推荐");
+        categoryLiveBean.setName("鎺ㄨ崘");
         list.add(categoryLiveBean);
         list.addAll(data);
         popWindowAdapter.addData(list);
@@ -181,3 +181,4 @@ public class MainActivity extends BaseActivity<List<CategoryLiveBean>, MainPrese
         return contentView;
     }
 }
+

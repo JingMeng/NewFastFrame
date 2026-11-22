@@ -1,8 +1,8 @@
-package com.example.cootek.newfastframe.ui.fragment;
+﻿package com.example.cootek.newfastframe.ui.fragment;
 
 import android.content.Intent;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.example.commonlibrary.BaseFragment;
@@ -109,7 +109,7 @@ public class RankFragment extends BaseFragment<RankListBean, RankPresenter> impl
     @Override
     public void showError(String errorMsg, EmptyLayout.OnRetryListener listener) {
         hideLoading();
-        ToastUtils.showShortToast("网络加载失败，请重新刷新下");
+        ToastUtils.showShortToast("缃戠粶鍔犺浇澶辫触锛岃閲嶆柊鍒锋柊涓?);
     }
 
 
@@ -124,3 +124,4 @@ public class RankFragment extends BaseFragment<RankListBean, RankPresenter> impl
         return new RankFragment();
     }
 }
+

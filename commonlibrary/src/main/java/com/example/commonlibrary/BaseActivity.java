@@ -1,10 +1,10 @@
-package com.example.commonlibrary;
+﻿package com.example.commonlibrary;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,15 +38,14 @@ import static android.view.View.GONE;
 
 
 /**
- * 项目名称:    Cugappplat
- * 创建人:        陈锦军
- * 创建时间:    2017/4/3      14:21
+ * 椤圭洰鍚嶇О:    Cugappplat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/4/3      14:21
  * QQ:             1981367757
  */
 
 public  abstract class BaseActivity<T, P extends BasePresenter> extends RxAppCompatActivity implements IView<T> {
 
-    //  这里的布局view可能为空，取决于子类布局中是否含有该空布局
+    //  杩欓噷鐨勫竷灞€view鍙兘涓虹┖锛屽彇鍐充簬瀛愮被甯冨眬涓槸鍚﹀惈鏈夎绌哄竷灞€
 
 
     private EmptyLayout mEmptyLayout;
@@ -273,7 +272,7 @@ public  abstract class BaseActivity<T, P extends BasePresenter> extends RxAppCom
     }
 
     /**
-     * 第一次加载的时候调用该方法设置resId
+     * 绗竴娆″姞杞界殑鏃跺€欒皟鐢ㄨ鏂规硶璁剧疆resId
      *
      * @param fragment
      * @param resId
@@ -355,3 +354,4 @@ public  abstract class BaseActivity<T, P extends BasePresenter> extends RxAppCom
         }
     }
 }
+

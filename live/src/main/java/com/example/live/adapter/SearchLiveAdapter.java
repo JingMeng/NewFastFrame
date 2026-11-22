@@ -1,6 +1,6 @@
-package com.example.live.adapter;
+﻿package com.example.live.adapter;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.commonlibrary.baseadapter.adapter.BaseRecyclerAdapter;
 import com.example.commonlibrary.baseadapter.viewholder.BaseWrappedViewHolder;
@@ -8,9 +8,8 @@ import com.example.live.R;
 import com.example.live.bean.SearchLiveBean;
 
 /**
- * 项目名称:    NewFastFrame
- * 创建人:        陈锦军
- * 创建时间:    2017/9/15      10:56
+ * 椤圭洰鍚嶇О:    NewFastFrame
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/9/15      10:56
  * QQ:             1981367757
  */
 
@@ -38,3 +37,4 @@ public class SearchLiveAdapter extends BaseRecyclerAdapter<SearchLiveBean.DataBe
 
     }
 }
+

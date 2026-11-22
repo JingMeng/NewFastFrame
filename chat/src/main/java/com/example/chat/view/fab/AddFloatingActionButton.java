@@ -1,4 +1,4 @@
-package com.example.chat.view.fab;
+﻿package com.example.chat.view.fab;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -9,7 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.Shape;
 import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
+import androidx.annotation.DrawableRes;
 import android.util.AttributeSet;
 
 import com.example.chat.R;
@@ -89,3 +89,4 @@ public class AddFloatingActionButton extends FloatingActionButton {
                 return drawable;
         }
 }
+

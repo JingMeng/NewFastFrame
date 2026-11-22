@@ -1,15 +1,14 @@
-package com.example.chat.adapter;
+﻿package com.example.chat.adapter;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.List;
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2017/5/27      10:45
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/5/27      10:45
  * QQ:             1981367757
  */
 
@@ -38,3 +37,4 @@ public class ViewPageAdapter extends FragmentPagerAdapter {
                 return mTitleList.get(position);
         }
 }
+

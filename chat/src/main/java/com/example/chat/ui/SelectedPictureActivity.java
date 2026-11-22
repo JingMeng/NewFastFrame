@@ -1,10 +1,10 @@
-package com.example.chat.ui;
+﻿package com.example.chat.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -31,9 +31,8 @@ import java.util.List;
 
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2016/11/29      12:01
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2016/11/29      12:01
  * QQ:             1981367757
  */
 
@@ -67,7 +66,7 @@ public class SelectedPictureActivity extends SlideBaseActivity implements View.O
 
         @Override
         public void initData() {
-                LogUtil.e("这里1");
+                LogUtil.e("杩欓噷1");
                 new LoadPictureUtil().getAllImageFolder(this, this);
                 mAdapter = new SelectedPictureAdapter();
                 mImageFoldersAdapter = new ImageFoldersAdapter();
@@ -82,7 +81,7 @@ public class SelectedPictureActivity extends SlideBaseActivity implements View.O
         protected void onResume() {
                 super.onResume();
                 if (CommonImageLoader.getInstance().getImageFolders().size() > 0) {
-                        LogUtil.e("onResume绑定数据");
+                        LogUtil.e("onResume缁戝畾鏁版嵁");
                         mAdapter.notifyDataSetChanged();
                         notifyTextChanged();
                 }
@@ -117,11 +116,11 @@ public class SelectedPictureActivity extends SlideBaseActivity implements View.O
                 } else if (i == R.id.btn_selected_picture_all) {
                         List<ImageFolder> list = CommonImageLoader.getInstance().getImageFolders();
                         if (list == null || list.size() == 0) {
-                                ToastUtils.showShortToast("当前没有任何照片");
+                                ToastUtils.showShortToast("褰撳墠娌℃湁浠讳綍鐓х墖");
                                 return;
                         }
                         if (imageFolderPopupWindow == null) {
-                                LogUtil.e("创建下拉窗口123");
+                                LogUtil.e("鍒涘缓涓嬫媺绐楀彛123");
                                 imageFolderPopupWindow = new ImageFolderPopupWindow(this, mImageFoldersAdapter) {
                                         @Override
                                         public void onItemClick(View view, int position, long id) {
@@ -164,7 +163,7 @@ public class SelectedPictureActivity extends SlideBaseActivity implements View.O
                         switch (requestCode) {
                                 case Constant.REQUEST_CODE_TAKE_PHOTO:
                                         if (data == null) {
-//                                                由于拍照指定了uri，所以返回的数据为null
+//                                                鐢变簬鎷嶇収鎸囧畾浜唘ri锛屾墍浠ヨ繑鍥炵殑鏁版嵁涓簄ull
                                                 ImageItem imageItem = new ImageItem();
                                                 imageItem.setPath(photoFile.getAbsolutePath());
                                                 CommonImageLoader.getInstance().getSelectedImages().add(imageItem);
@@ -196,13 +195,13 @@ public class SelectedPictureActivity extends SlideBaseActivity implements View.O
 
         @Override
         public void onImageLoaded(List<ImageFolder> imageFolderList) {
-                LogUtil.e("加载数据完成");
+                LogUtil.e("鍔犺浇鏁版嵁瀹屾垚");
                 if (imageFolderList.size() > 0) {
-                        LogUtil.e("存入内存");
+                        LogUtil.e("瀛樺叆鍐呭瓨");
                         CommonImageLoader.getInstance().setImageFolders(imageFolderList);
-                        LogUtil.e("图片文件夹个数:" + CommonImageLoader.getInstance().getImageFolders().size());
-                        LogUtil.e("现在选择的图片文件夹中图片的个数" + CommonImageLoader.getInstance().getCurrentImageFolder().getAllImages().size());
-                        LogUtil.e("加载数据完成" + imageFolderList.size());
+                        LogUtil.e("鍥剧墖鏂囦欢澶逛釜鏁?" + CommonImageLoader.getInstance().getImageFolders().size());
+                        LogUtil.e("鐜板湪閫夋嫨鐨勫浘鐗囨枃浠跺す涓浘鐗囩殑涓暟" + CommonImageLoader.getInstance().getCurrentImageFolder().getAllImages().size());
+                        LogUtil.e("鍔犺浇鏁版嵁瀹屾垚" + imageFolderList.size());
                         mAdapter.clearAllData();
                         mAdapter.addData(CommonImageLoader.getInstance().getCurrentImageFolder().getAllImages());
                         ImageItem imageItem = new ImageItem();
@@ -225,7 +224,7 @@ public class SelectedPictureActivity extends SlideBaseActivity implements View.O
 
 
 
-                        LogUtil.e("位置是多少" + position);
+                        LogUtil.e("浣嶇疆鏄灏? + position);
                         Intent intent = new Intent(SelectedPictureActivity.this, BasePreViewActivity.class);
                         intent.putExtra(CommonImageLoader.CURRENT_POSITION, (position - 1));
                         intent.putExtra(CommonImageLoader.PREVIEW_FROM, CommonImageLoader.PREVIEW_SELECT);
@@ -250,3 +249,4 @@ public class SelectedPictureActivity extends SlideBaseActivity implements View.O
 
         }
 }
+

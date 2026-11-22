@@ -1,7 +1,7 @@
-package com.example.cootek.newfastframe.ui.fragment;
+﻿package com.example.cootek.newfastframe.ui.fragment;
 
 import android.content.Intent;
-import android.support.v4.widget.SwipeRefreshLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.TextView;
@@ -119,7 +119,7 @@ public class TestFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     private List<String> getInitData() {
         List<String> list = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            list.add("初始化数据" + i);
+            list.add("鍒濆鍖栨暟鎹? + i);
         }
         return list;
     }
@@ -127,7 +127,7 @@ public class TestFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     private List<String> getData() {
         List<String> list = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
-            list.add("测试" + i);
+            list.add("娴嬭瘯" + i);
         }
         return list;
     }
@@ -171,3 +171,4 @@ public class TestFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
 
 }
+

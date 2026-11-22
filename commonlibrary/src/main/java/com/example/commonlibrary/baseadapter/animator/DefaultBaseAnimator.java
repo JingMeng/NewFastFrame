@@ -1,7 +1,7 @@
-package com.example.commonlibrary.baseadapter.animator;
+﻿package com.example.commonlibrary.baseadapter.animator;
 
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.RecyclerView;
+import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.animation.LinearInterpolator;
 
 /**
@@ -55,3 +55,4 @@ public class DefaultBaseAnimator extends BaseItemAnimator {
                 .start();
     }
 }
+

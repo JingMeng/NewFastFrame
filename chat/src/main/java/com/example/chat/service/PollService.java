@@ -1,4 +1,4 @@
-package com.example.chat.service;
+﻿package com.example.chat.service;
 
 import android.app.Service;
 import android.content.Intent;
@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.example.chat.base.Constant;
 import com.example.chat.bean.ChatMessage;
@@ -30,9 +30,8 @@ import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.listener.FindListener;
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2016/11/13      17:00
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2016/11/13      17:00
  * QQ:             1981367757
  */
 
@@ -59,7 +58,7 @@ public class PollService extends Service {
                 new Thread(new Runnable() {
                         @Override
                         public void run() {
-                                LogUtil.e("后台定时服务run22334566789");
+                                LogUtil.e("鍚庡彴瀹氭椂鏈嶅姟run22334566789");
                                 Looper.prepare();
                                 mHandler = new Handler() {
                                         @Override
@@ -73,7 +72,7 @@ public class PollService extends Service {
                                 LogUtil.e("12221");
                         }
                 }).start();
-                LogUtil.e("这里Thread2");
+                LogUtil.e("杩欓噷Thread2");
 //                new Thread(new Runnable() {
 //                        @Override
 //                        public void run() {
@@ -86,7 +85,7 @@ public class PollService extends Service {
 
         private void dealWork() {
                 LogUtil.e("1dealWork");
-                LogUtil.e("拉取单聊消息");
+                LogUtil.e("鎷夊彇鍗曡亰娑堟伅");
                 BmobQuery<ChatMessage> query = new BmobQuery<>();
                 if (UserManager.getInstance().getCurrentUser() != null) {
                         query.addWhereEqualTo(Constant.TAG_TO_ID, UserManager.getInstance().getCurrentUserObjectId());
@@ -95,13 +94,12 @@ public class PollService extends Service {
                 }
                 query.addWhereEqualTo(Constant.TAG_MESSAGE_SEND_STATUS, Constant.SEND_STATUS_SUCCESS);
                 query.addWhereEqualTo(Constant.TAG_MESSAGE_READ_STATUS, Constant.READ_STATUS_UNREAD);
-//                按升序进行排序
-                query.setLimit(50);
+//                鎸夊崌搴忚繘琛屾帓搴?                query.setLimit(50);
                 query.order("createdAt");
                 query.findObjects(BaseApplication.getInstance(), new FindListener<ChatMessage>() {
                         @Override
                         public void onSuccess(List<ChatMessage> list) {
-                                LogUtil.e("1拉取单聊消息成功");
+                                LogUtil.e("1鎷夊彇鍗曡亰娑堟伅鎴愬姛");
                                 if (list != null && list.size() > 0) {
                                         Intent intent = new Intent(Constant.NEW_MESSAGE_ACTION);
                                         intent.putExtra("from", "person");
@@ -112,13 +110,13 @@ public class PollService extends Service {
 
                         @Override
                         public void onError(int i, String s) {
-                                LogUtil.e("拉取单聊消息失败");
-                                LogUtil.e("在服务器上查询聊天消息失败：" + s + i);
+                                LogUtil.e("鎷夊彇鍗曡亰娑堟伅澶辫触");
+                                LogUtil.e("鍦ㄦ湇鍔″櫒涓婃煡璇㈣亰澶╂秷鎭け璐ワ細" + s + i);
                         }
                 });
-//                                这里开始检测群结构消息
+//                                杩欓噷寮€濮嬫娴嬬兢缁撴瀯娑堟伅
                 BmobQuery<GroupTableMessage> groupTableQuery = new BmobQuery<>();
-//                                第一次检测不需要该条件
+//                                绗竴娆℃娴嬩笉闇€瑕佽鏉′欢
 
                 String lastGroupMessageTime = MessageCacheManager.getInstance().getLastGroupMessageTime(Constant.GROUP_TABLE_TIME);
                 if (lastGroupMessageTime == null) {
@@ -126,24 +124,24 @@ public class PollService extends Service {
                 }
                 groupTableQuery.addWhereEqualTo("readStatus", Constant.READ_STATUS_UNREAD);
                 if (lastGroupMessageTime.equals("0000-00-00 01:00:00")) {
-                        LogUtil.e("第一次检测群结构消息，不设条件");
+                        LogUtil.e("绗竴娆℃娴嬬兢缁撴瀯娑堟伅锛屼笉璁炬潯浠?);
                 } else {
-                        LogUtil.e("1不是第一次检测消息");
+                        LogUtil.e("1涓嶆槸绗竴娆℃娴嬫秷鎭?);
                         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         try {
                                 Date oldDate=sdf1.parse(MessageCacheManager.getInstance().getLastShareMessageTime(Constant.GROUP_TABLE_TIME));
                                 long currentTime=oldDate.getTime();
-                                LogUtil.e("之前的时间"+currentTime+",,,"+sdf1.format(oldDate));
+                                LogUtil.e("涔嬪墠鐨勬椂闂?+currentTime+",,,"+sdf1.format(oldDate));
                                 currentTime+=1000;
                                 Date date=new Date(currentTime);
                                 String newTime=sdf1.format(date);
-                                LogUtil.e("Long时间"+currentTime);
-                                LogUtil.e("现在的时间"+newTime);
+                                LogUtil.e("Long鏃堕棿"+currentTime);
+                                LogUtil.e("鐜板湪鐨勬椂闂?+newTime);
                                 groupTableQuery.addWhereGreaterThan("updatedAt", new BmobDate(date));
 //                                groupTableQuery.addWhereGreaterThan("updatedAt", new BmobDate(sdf1.parse(lastGroupMessageTime)));
                         } catch (ParseException e) {
                                 e.printStackTrace();
-                                LogUtil.e("解析时间出错");
+                                LogUtil.e("瑙ｆ瀽鏃堕棿鍑洪敊");
                         }
                 }
                 if (UserManager.getInstance().getCurrentUser() != null) {
@@ -157,7 +155,7 @@ public class PollService extends Service {
                                 public void onSuccess(List<GroupTableMessage> list) {
                                         if (list != null && list.size() > 0) {
                                                 String time = list.get(list.size() - 1).getUpdatedAt();
-                                                LogUtil.e("最大的群结构更新时间：" + time);
+                                                LogUtil.e("鏈€澶х殑缇ょ粨鏋勬洿鏂版椂闂达細" + time);
                                                 MessageCacheManager.getInstance().setLastGroupMessageTime(Constant.GROUP_TABLE_TIME, time);
                                                 Intent tableIntent = new Intent(Constant.NEW_MESSAGE_ACTION);
                                                 tableIntent.putExtra("from", "groupTable");
@@ -168,12 +166,12 @@ public class PollService extends Service {
 
                                 @Override
                                 public void onError(int i, String s) {
-                                        LogUtil.e("在服务器上查询群结构表消息失败：" + s + i);
+                                        LogUtil.e("鍦ㄦ湇鍔″櫒涓婃煡璇㈢兢缁撴瀯琛ㄦ秷鎭け璐ワ細" + s + i);
                                 }
                         }
                 );
-                LogUtil.e("这里开始在服务器上拉取说说消息1");
-//                                拉取条件是，不管发送状态为成功或者是失败（失败意味着是推送失败的情况）,首次拉取全部数据，以后每一拉取数据在之前拉取数据的时间之后
+                LogUtil.e("杩欓噷寮€濮嬪湪鏈嶅姟鍣ㄤ笂鎷夊彇璇磋娑堟伅1");
+//                                鎷夊彇鏉′欢鏄紝涓嶇鍙戦€佺姸鎬佷负鎴愬姛鎴栬€呮槸澶辫触锛堝け璐ユ剰鍛崇潃鏄帹閫佸け璐ョ殑鎯呭喌锛?棣栨鎷夊彇鍏ㄩ儴鏁版嵁锛屼互鍚庢瘡涓€鎷夊彇鏁版嵁鍦ㄤ箣鍓嶆媺鍙栨暟鎹殑鏃堕棿涔嬪悗
                 BmobQuery<SharedMessage> shareQuery = new BmobQuery<>();
                 if (UserCacheManager.getInstance().getContacts() != null && UserCacheManager.getInstance().getContacts().size() > 0) {
                         List<String> list = new ArrayList<>(UserCacheManager.getInstance().getContacts().keySet());
@@ -182,7 +180,7 @@ public class PollService extends Service {
                         shareQuery.addWhereContainedIn("belongId", list);
                 } else {
                         if (UserManager.getInstance().getCurrentUser() == null) {
-                                LogUtil.e("用户已退出登录");
+                                LogUtil.e("鐢ㄦ埛宸查€€鍑虹櫥褰?);
                                 return;
                         }
                         shareQuery.addWhereEqualTo("belongId", UserManager.getInstance().getCurrentUser().getObjectId());
@@ -190,27 +188,25 @@ public class PollService extends Service {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 if (!MessageCacheManager.getInstance().getLastShareMessageTime(Constant.SHARE_TIME).equals("0000-00-00 01:00:00")) {
                         try {
-//                                这里是bmob的一个bug，相同时间竟然也能查询得到，所以这里在原有的时间上多添加了一秒
-                                LogUtil.e("时间是多少:"+MessageCacheManager.getInstance().getLastShareMessageTime(Constant.SHARE_TIME));
+//                                杩欓噷鏄痓mob鐨勪竴涓猙ug锛岀浉鍚屾椂闂寸珶鐒朵篃鑳芥煡璇㈠緱鍒帮紝鎵€浠ヨ繖閲屽湪鍘熸湁鐨勬椂闂翠笂澶氭坊鍔犱簡涓€绉?                                LogUtil.e("鏃堕棿鏄灏?"+MessageCacheManager.getInstance().getLastShareMessageTime(Constant.SHARE_TIME));
                                 Date oldDate=simpleDateFormat.parse(MessageCacheManager.getInstance().getLastShareMessageTime(Constant.SHARE_TIME));
                                 long currentTime=oldDate.getTime();
-                                LogUtil.e("之前的时间"+currentTime+",,,"+simpleDateFormat.format(oldDate));
+                                LogUtil.e("涔嬪墠鐨勬椂闂?+currentTime+",,,"+simpleDateFormat.format(oldDate));
                                 currentTime+=1000;
                                 Date date=new Date(currentTime);
                                String newTime=simpleDateFormat.format(date);
-                                LogUtil.e("Long时间"+currentTime);
-                                LogUtil.e("现在的时间"+newTime);
+                                LogUtil.e("Long鏃堕棿"+currentTime);
+                                LogUtil.e("鐜板湪鐨勬椂闂?+newTime);
                                 shareQuery.addWhereGreaterThan("createdAt", new BmobDate(date));
 
                         } catch (ParseException e) {
                                 e.printStackTrace();
-                                LogUtil.e("时间解析出错"+e.getMessage());
+                                LogUtil.e("鏃堕棿瑙ｆ瀽鍑洪敊"+e.getMessage());
                         }
                 } else {
-                        LogUtil.e("第一次拉取说说消息");
+                        LogUtil.e("绗竴娆℃媺鍙栬璇存秷鎭?);
                 }
-//                                拉取最新的10条说说消息
-                shareQuery.order("-createdAt");
+//                                鎷夊彇鏈€鏂扮殑10鏉¤璇存秷鎭?                shareQuery.order("-createdAt");
                 shareQuery.setLimit(10);
                 shareQuery.findObjects(BaseApplication.getInstance(), new FindListener<SharedMessage>() {
                         @Override
@@ -218,9 +214,8 @@ public class PollService extends Service {
                                 if (list != null && list.size() > 0) {
                                         String time = list.get(0).getUpdatedAt();
                                         MessageCacheManager.getInstance().setLastShareMessageTime(Constant.SHARE_TIME,time);
-                                        LogUtil.e("最大的说说消息更新时间" + time);
-//                                        这里筛选出不可见人列表是否包含本用户
-                                        LogUtil.e("定时检测到的说说消息如下");
+                                        LogUtil.e("鏈€澶х殑璇磋娑堟伅鏇存柊鏃堕棿" + time);
+//                                        杩欓噷绛涢€夊嚭涓嶅彲瑙佷汉鍒楄〃鏄惁鍖呭惈鏈敤鎴?                                        LogUtil.e("瀹氭椂妫€娴嬪埌鐨勮璇存秷鎭涓?);
                                         List<SharedMessage> result = new ArrayList<>(list);
                                         for (SharedMessage message :
                                                 list) {
@@ -236,7 +231,7 @@ public class PollService extends Service {
                                                         }
                                                 }
                                         }
-                                        LogUtil.e("筛选可见后的说说列表");
+                                        LogUtil.e("绛涢€夊彲瑙佸悗鐨勮璇村垪琛?);
                                         for (SharedMessage message :
                                                 result) {
                                                 LogUtil.e(message);
@@ -248,13 +243,13 @@ public class PollService extends Service {
                                                 sendBroadcast(intent);
                                         }
                                 } else {
-                                        LogUtil.e("服务器上面暂时没有好友发的说说消息");
+                                        LogUtil.e("鏈嶅姟鍣ㄤ笂闈㈡殏鏃舵病鏈夊ソ鍙嬪彂鐨勮璇存秷鎭?);
                                 }
                         }
 
                         @Override
                         public void onError(int i, String s) {
-                                LogUtil.e("定时拉取数据失败" + s);
+                                LogUtil.e("瀹氭椂鎷夊彇鏁版嵁澶辫触" + s);
                         }
                 });
         }
@@ -266,3 +261,4 @@ public class PollService extends Service {
 
         }
 }
+

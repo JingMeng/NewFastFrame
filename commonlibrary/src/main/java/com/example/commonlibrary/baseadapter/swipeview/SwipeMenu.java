@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2016 Yan Zhenjie
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +16,7 @@
 package com.example.commonlibrary.baseadapter.swipeview;
 
 import android.content.Context;
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -106,3 +106,4 @@ public class SwipeMenu {
         return mViewType;
     }
 }
+

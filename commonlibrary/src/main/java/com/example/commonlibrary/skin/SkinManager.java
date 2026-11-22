@@ -1,4 +1,4 @@
-package com.example.commonlibrary.skin;
+﻿package com.example.commonlibrary.skin;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,10 +10,10 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import android.support.v4.view.LayoutInflaterCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
 
@@ -59,10 +59,9 @@ public class SkinManager {
 
     private void init() {
         factoryMap = new HashMap<>();
-        CommonLogger.e("开始加载");
+        CommonLogger.e("寮€濮嬪姞杞?);
         listeners = new ArrayList<>();
-//        复制所有资源文件到缓存目录中
-        SkinUtil.setUpSkinFile();
+//        澶嶅埗鎵€鏈夎祫婧愭枃浠跺埌缂撳瓨鐩綍涓?        SkinUtil.setUpSkinFile();
         context = BaseApplication.getInstance();
         reset();
     }
@@ -106,7 +105,7 @@ public class SkinManager {
                 } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
                     e.printStackTrace();
                     String message = null;
-                    CommonLogger.e("加载皮肤资源出错啦啦啦11" + message);
+                    CommonLogger.e("鍔犺浇鐨偆璧勬簮鍑洪敊鍟﹀暒鍟?1" + message);
                     if (e.getStackTrace() != null) {
                         for (StackTraceElement bean :
                                 e.getStackTrace()) {
@@ -125,7 +124,7 @@ public class SkinManager {
                     if (listener != null) {
                         listener.onSuccess();
                     }
-                    CommonLogger.e("加载资源成功啦啦啦");
+                    CommonLogger.e("鍔犺浇璧勬簮鎴愬姛鍟﹀暒鍟?);
                     notifySkinResourceUpdate();
                 } else {
                     if (listener != null) {
@@ -147,7 +146,7 @@ public class SkinManager {
         }
         int id = resources.getIdentifier(context.getResources().getResourceEntryName(resId), "color", packageName);
         if (id == 0) {
-//            如果找不到资源，返回本地资源
+//            濡傛灉鎵句笉鍒拌祫婧愶紝杩斿洖鏈湴璧勬簮
             return ContextCompat.getColor(context, resId);
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -166,7 +165,7 @@ public class SkinManager {
                 skin.applyAllViewSkin();
             }
         } else {
-            CommonLogger.e("factor大小为空");
+            CommonLogger.e("factor澶у皬涓虹┖");
         }
     }
 
@@ -189,12 +188,12 @@ public class SkinManager {
 
     public ColorStateList getColorStateList(int resId) {
         if (isLocal) {
-            CommonLogger.e("放回本地");
+            CommonLogger.e("鏀惧洖鏈湴");
             return ContextCompat.getColorStateList(context, resId);
         }
         int id = resources.getIdentifier(context.getResources().getResourceEntryName(resId), "color", packageName);
         if (id == 0) {
-//            如果找不到资源，返回本地资源
+//            濡傛灉鎵句笉鍒拌祫婧愶紝杩斿洖鏈湴璧勬簮
             return ContextCompat.getColorStateList(context, resId);
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -231,3 +230,4 @@ public class SkinManager {
         isLocal = local;
     }
 }
+

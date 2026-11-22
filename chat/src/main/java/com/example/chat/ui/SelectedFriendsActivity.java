@@ -1,10 +1,10 @@
-package com.example.chat.ui;
+﻿package com.example.chat.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.AlphabetIndexer;
@@ -37,9 +37,8 @@ import java.util.List;
 import cn.bmob.v3.listener.SaveListener;
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2016/11/27      20:36
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2016/11/27      20:36
  * QQ:             1981367757
  */
 public class SelectedFriendsActivity extends SlideBaseActivity implements MyLetterView.MyLetterChangeListener, ContactsAdapter.OnItemCheckListener {
@@ -84,42 +83,42 @@ public class SelectedFriendsActivity extends SlideBaseActivity implements MyLett
                 from = getIntent().getStringExtra("from");
                 ToolBarOption toolBarOption = new ToolBarOption();
                 toolBarOption.setNeedNavigation(true);
-                toolBarOption.setTitle("选择好友");
-                toolBarOption.setRightText("完成");
+                toolBarOption.setTitle("閫夋嫨濂藉弸");
+                toolBarOption.setRightText("瀹屾垚");
                 toolBarOption.setRightListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                                 if (from.equals("createGroup")) {
                                         List<String> list = new ArrayList<>();
-                                        list.add("群组名");
-                                        list.add("群描述");
+                                        list.add("缇ょ粍鍚?);
+                                        list.add("缇ゆ弿杩?);
                                         if (selectedContacts != null && selectedContacts.size() > 0) {
-                                                showEditDialog("建群", list, new OnEditDataCompletedListener() {
+                                                showEditDialog("寤虹兢", list, new OnEditDataCompletedListener() {
                                                         @Override
                                                         public void onDataInputCompleted(List<String> data) {
                                                                 if (!CommonUtils.isNetWorkAvailable(BaseApplication.getInstance())) {
-                                                                        LogUtil.e("网络连接失败");
-                                                                        ToastUtils.showShortToast("网络连接失败");
+                                                                        LogUtil.e("缃戠粶杩炴帴澶辫触");
+                                                                        ToastUtils.showShortToast("缃戠粶杩炴帴澶辫触");
                                                                         return;
                                                                 }
                                                                 if (selectedContacts.size() > 0) {
-                                                                        showLoadDialog("正在建群中.....");
+                                                                        showLoadDialog("姝ｅ湪寤虹兢涓?....");
                                                                         MsgManager.getInstance().sendCreateGroupMessage(data.get(0), data.get(1), selectedContacts, new SaveListener() {
                                                                                 @Override
                                                                                 public void onSuccess() {
-                                                                                        LogUtil.e("1总体建群成功");
-                                                                                        ToastUtils.showShortToast("建群成功");
+                                                                                        LogUtil.e("1鎬讳綋寤虹兢鎴愬姛");
+                                                                                        ToastUtils.showShortToast("寤虹兢鎴愬姛");
                                                                                         dismissLoadDialog();
                                                                                         finish();
                                                                                 }
                                                                                 @Override
                                                                                 public void onFailure(int i, String s) {
                                                                                         dismissLoadDialog();
-                                                                                        LogUtil.e("总体建群失败" + s + i);
+                                                                                        LogUtil.e("鎬讳綋寤虹兢澶辫触" + s + i);
                                                                                 }
                                                                         });
                                                                 } else {
-                                                                        ToastUtils.showShortToast("你没有选择好友");
+                                                                        ToastUtils.showShortToast("浣犳病鏈夐€夋嫨濂藉弸");
                                                                 }
                                                         }
                                                 });
@@ -158,7 +157,7 @@ public class SelectedFriendsActivity extends SlideBaseActivity implements MyLett
         }
 
         private ImageView getImageView(String url, String tag) {
-                LogUtil.e("添加View11111 ");
+                LogUtil.e("娣诲姞View11111 ");
                 ImageView avatar = new ImageView(SelectedFriendsActivity.this);
                 int size = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40, getResources().getDisplayMetrics());
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(size, size);
@@ -181,7 +180,7 @@ public class SelectedFriendsActivity extends SlideBaseActivity implements MyLett
                 } else {
                         selectedContacts.remove(user.getObjectId());
                         if (bottomDisplay.findViewWithTag(user.getObjectId()) != null) {
-                                LogUtil.e("移除View");
+                                LogUtil.e("绉婚櫎View");
                                 bottomDisplay.removeView(bottomDisplay.findViewWithTag(user.getObjectId()));
                         }
                 }
@@ -193,3 +192,4 @@ public class SelectedFriendsActivity extends SlideBaseActivity implements MyLett
 
         }
 }
+

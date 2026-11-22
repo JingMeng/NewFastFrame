@@ -1,10 +1,10 @@
-package com.example.chat.ui;
+﻿package com.example.chat.ui;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.AdapterView;
@@ -35,9 +35,8 @@ import java.util.List;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2016/10/30      16:38
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2016/10/30      16:38
  * QQ:             1981367757
  */
 public class MapActivity extends SlideBaseActivity implements View.OnClickListener {
@@ -85,10 +84,10 @@ public class MapActivity extends SlideBaseActivity implements View.OnClickListen
                         @Override
                         public void onMapLoaded() {
                                 mMap.setOnMapLoadedListener(null);
-                                LogUtil.e("视图加载完成1111122111");
+                                LogUtil.e("瑙嗗浘鍔犺浇瀹屾垚1111122111");
                                 send.setClickable(true);
                                 type.setClickable(true);
-                                LogUtil.e("1浏览更新");
+                                LogUtil.e("1娴忚鏇存柊");
                                 updateMarkerLocation();
                         }
                 });
@@ -103,8 +102,7 @@ public class MapActivity extends SlideBaseActivity implements View.OnClickListen
                 type.setClickable(false);
                 destination = getIntent().getStringExtra("destination");
                 if (destination != null && destination.equals("browse")) {
-//                        如果是浏览
-                        send.setVisibility(View.GONE);
+//                        濡傛灉鏄祻瑙?                        send.setVisibility(View.GONE);
                         longitude = Double.valueOf(getIntent().getStringExtra("longitude"));
                         latitude = Double.valueOf(getIntent().getStringExtra("latitude"));
                         address = getIntent().getStringExtra("address");
@@ -118,7 +116,7 @@ public class MapActivity extends SlideBaseActivity implements View.OnClickListen
 
         private void addMarkerOnMap(String message) {
                 if (mMarker == null) {
-                        LogUtil.e("这里设置图标选项");
+                        LogUtil.e("杩欓噷璁剧疆鍥炬爣閫夐」");
                         mOptions = new MarkerOptions();
                         mOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
                         mOptions.snippet(message);
@@ -130,8 +128,7 @@ public class MapActivity extends SlideBaseActivity implements View.OnClickListen
         }
 
         /**
-         * 开始定位点的动画
-         */
+         * 寮€濮嬪畾浣嶇偣鐨勫姩鐢?         */
         private void startMarkerAnimation() {
                 if (mMarker != null) {
                         ScaleAnimation animation = new ScaleAnimation(0, 1, 0, 1);
@@ -212,10 +209,10 @@ public class MapActivity extends SlideBaseActivity implements View.OnClickListen
                                                 FileOutputStream outputStream = new FileOutputStream(localPath);
                                                 boolean result = bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
                                                 if (result) {
-                                                        LogUtil.e("截屏成功");
+                                                        LogUtil.e("鎴睆鎴愬姛");
                                                         sendResult(true);
                                                 } else {
-                                                        LogUtil.e("截屏失败");
+                                                        LogUtil.e("鎴睆澶辫触");
                                                         sendResult(false);
                                                 }
                                                 outputStream.flush();
@@ -241,11 +238,11 @@ public class MapActivity extends SlideBaseActivity implements View.OnClickListen
                 } else if (i == R.id.btn_map_type) {
                         if (list == null) {
                                 list = new ArrayList<>();
-                                list.add("标准模式");
-                                list.add("卫星模式");
-                                list.add("夜间模式");
+                                list.add("鏍囧噯妯″紡");
+                                list.add("鍗槦妯″紡");
+                                list.add("澶滈棿妯″紡");
                         }
-                        showChooseDialog("选择视图类型", list, new AdapterView.OnItemClickListener() {
+                        showChooseDialog("閫夋嫨瑙嗗浘绫诲瀷", list, new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                         dismissBaseDialog();
@@ -291,7 +288,7 @@ public class MapActivity extends SlideBaseActivity implements View.OnClickListen
 
 
         private void updateMarkerLocation() {
-                LogUtil.e("更新定位拉");
+                LogUtil.e("鏇存柊瀹氫綅鎷?);
                 if (latitude == 0 || longitude == 0) {
                         if (destination != null && destination.equals("browse")) {
                                 longitude = Double.valueOf(getIntent().getStringExtra("longitude"));
@@ -311,10 +308,10 @@ public class MapActivity extends SlideBaseActivity implements View.OnClickListen
                         @Override
                         public void onFinish() {
 
-                                LogUtil.e("循环吗");
+                                LogUtil.e("寰幆鍚?);
                                 mMap.clear();
                                 addMarkerOnMap(address);
-                                LogUtil.e("添加一个标记11");
+                                LogUtil.e("娣诲姞涓€涓爣璁?1");
                                 mMap.moveCamera(CameraUpdateFactory.changeTilt(60));
                                 try {
                                         Thread.sleep(2000);
@@ -349,3 +346,4 @@ public class MapActivity extends SlideBaseActivity implements View.OnClickListen
 
         }
 }
+

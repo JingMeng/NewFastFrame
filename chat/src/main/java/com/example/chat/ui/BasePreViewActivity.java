@@ -1,8 +1,8 @@
-package com.example.chat.ui;
+﻿package com.example.chat.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -26,40 +26,37 @@ import java.util.List;
 
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2016/11/29      15:52
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2016/11/29      15:52
  * QQ:             1981367757
  */
 
 public class BasePreViewActivity extends SlideBaseActivity implements View.OnClickListener, Animation.AnimationListener {
 
         /**
-         * 现在预览的图片位置
-         */
+         * 鐜板湪棰勮鐨勫浘鐗囦綅缃?         */
         protected int currentPosition;
 
 
         /**
-         * 头部布局
+         * 澶撮儴甯冨眬
          */
         protected RelativeLayout topBar;
 
 
         /**
-         * 底部布局
+         * 搴曢儴甯冨眬
          */
         protected RelativeLayout bottomView;
 
 
         /**
-         * 已选择的图片信息
-         */
+         * 宸查€夋嫨鐨勫浘鐗囦俊鎭?         */
         protected List<ImageItem> selectedList = new ArrayList<>();
 
 
         /**
-         * 传递过来需要预览的图片信息
+         * 浼犻€掕繃鏉ラ渶瑕侀瑙堢殑鍥剧墖淇℃伅
          */
         protected ArrayList<ImageItem> previewList = new ArrayList<>();
 
@@ -131,7 +128,7 @@ public class BasePreViewActivity extends SlideBaseActivity implements View.OnCli
                 currentPosition = getIntent().getIntExtra(CommonImageLoader.CURRENT_POSITION, 0);
                 from = getIntent().getStringExtra(CommonImageLoader.PREVIEW_FROM);
                 if (from.equals(CommonImageLoader.PREVIEW_DELETE)) {
-                        LogUtil.e("可删除的预览");
+                        LogUtil.e("鍙垹闄ょ殑棰勮");
                         finish.setVisibility(View.GONE);
                         delete.setVisibility(View.VISIBLE);
                         bottomView.setVisibility(View.GONE);
@@ -140,7 +137,7 @@ public class BasePreViewActivity extends SlideBaseActivity implements View.OnCli
                 } else if (from.equals(CommonImageLoader.PREVIEW_SELECT)) {
                         previewList = CommonImageLoader.getInstance().getCurrentImageFolder().getAllImages();
 //                        isOrigin = getIntent().getBooleanExtra(CommonImageLoader.IS_ORIGIN, false);
-                        LogUtil.e("可选择的预览");
+                        LogUtil.e("鍙€夋嫨鐨勯瑙?);
                         finish.setVisibility(View.VISIBLE);
                         delete.setVisibility(View.GONE);
                         bottomView.setVisibility(View.VISIBLE);
@@ -157,7 +154,7 @@ public class BasePreViewActivity extends SlideBaseActivity implements View.OnCli
                 mImagePageAdapter.setOnPhotoViewClickListener(new ImagePageAdapter.OnPhotoViewClickListener() {
                         @Override
                         public void onPhotoViewClick(View view, int position) {
-                                LogUtil.e("点击图片拉" + position);
+                                LogUtil.e("鐐瑰嚮鍥剧墖鎷? + position);
                                 Animation topAnimation;
                                 if (topBar.getVisibility() == View.VISIBLE) {
                                         topAnimation = AnimationUtils.loadAnimation(BasePreViewActivity.this, R.anim.top_out);
@@ -182,7 +179,7 @@ public class BasePreViewActivity extends SlideBaseActivity implements View.OnCli
                 display.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
                         @Override
                         public void onPageSelected(int position) {
-                                LogUtil.e("滚动");
+                                LogUtil.e("婊氬姩");
                                 currentPosition = position;
                                 if (from.equals(CommonImageLoader.PREVIEW_SELECT)) {
                                         description.setText(getString(R.string.preview_image_count, position + 1, previewList.size()));
@@ -201,16 +198,16 @@ public class BasePreViewActivity extends SlideBaseActivity implements View.OnCli
 
 
         private void notifyTextChanged() {
-                LogUtil.e("数据更新");
+                LogUtil.e("鏁版嵁鏇存柊");
                 LogUtil.e("currentPosition" + currentPosition);
-                LogUtil.e("已选择的大小" + selectedList.size());
+                LogUtil.e("宸查€夋嫨鐨勫ぇ灏? + selectedList.size());
                 if (selectedList.contains(previewList.get(currentPosition))) {
 
-                        LogUtil.e("数据更新true");
+                        LogUtil.e("鏁版嵁鏇存柊true");
                         select.setChecked(true);
                 } else {
                         select.setChecked(false);
-                        LogUtil.e("数据更新false");
+                        LogUtil.e("鏁版嵁鏇存柊false");
                 }
                 if (selectedList.size() > 0) {
                         finish.setEnabled(true);
@@ -225,16 +222,16 @@ public class BasePreViewActivity extends SlideBaseActivity implements View.OnCli
         public void onClick(View v) {
                 int i = v.getId();
                 if (i == R.id.iv_picture_top_bar_back) {
-                        LogUtil.e("点击返回键");
+                        LogUtil.e("鐐瑰嚮杩斿洖閿?);
                         finish();
 
                 } else if (i == R.id.btn_picture_top_bar_finish) {
-                        LogUtil.e("点击完成键");
+                        LogUtil.e("鐐瑰嚮瀹屾垚閿?);
                         finish();
 
                 } else if (i == R.id.iv_picture_top_bar_delete) {
-                        LogUtil.e("点击删除键");
-                        showBaseDialog("提示", "确定要删除该照片吗?", "取消", "确定", new View.OnClickListener() {
+                        LogUtil.e("鐐瑰嚮鍒犻櫎閿?);
+                        showBaseDialog("鎻愮ず", "纭畾瑕佸垹闄よ鐓х墖鍚?", "鍙栨秷", "纭畾", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                         cancelBaseDialog();
@@ -245,7 +242,7 @@ public class BasePreViewActivity extends SlideBaseActivity implements View.OnCli
                                         dismissBaseDialog();
                                         selectedList.remove(currentPosition);
                                         if (selectedList.size() > 0) {
-                                                LogUtil.e("通知数据改变");
+                                                LogUtil.e("閫氱煡鏁版嵁鏀瑰彉");
                                                 mImagePageAdapter.notifyDataSetChanged();
                                                 display.setCurrentItem(currentPosition, true);
                                                 description.setText(getString(R.string.preview_image_count, currentPosition + 1, selectedList.size()));
@@ -259,7 +256,7 @@ public class BasePreViewActivity extends SlideBaseActivity implements View.OnCli
                         int size = CommonImageLoader.getInstance().getMaxSelectedCount();
                         if (select.isChecked()) {
                                 if (selectedList.size() >= size) {
-                                        ToastUtils.showShortToast("最多只能添加" + size + "图片");
+                                        ToastUtils.showShortToast("鏈€澶氬彧鑳芥坊鍔? + size + "鍥剧墖");
                                         select.setChecked(false);
                                 } else {
                                         LogUtil.e("selectedList.size()" + selectedList.size());
@@ -327,3 +324,4 @@ public class BasePreViewActivity extends SlideBaseActivity implements View.OnCli
 
         }
 }
+

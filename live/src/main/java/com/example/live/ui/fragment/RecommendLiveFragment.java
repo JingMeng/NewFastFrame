@@ -1,6 +1,6 @@
-package com.example.live.ui.fragment;
+﻿package com.example.live.ui.fragment;
 
-import android.support.v4.widget.SwipeRefreshLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.commonlibrary.BaseFragment;
 import com.example.commonlibrary.baseadapter.SuperRecyclerView;
@@ -17,9 +17,8 @@ import com.example.live.mvp.recommend.RecommendLivePresenter;
 import javax.inject.Inject;
 
 /**
- * 项目名称:    NewFastFrame
- * 创建人:        陈锦军
- * 创建时间:    2017/9/14      17:20
+ * 椤圭洰鍚嶇О:    NewFastFrame
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/9/14      17:20
  * QQ:             1981367757
  */
 
@@ -98,3 +97,4 @@ public class RecommendLiveFragment extends BaseFragment<RecommendLiveBean, Recom
         swipeRefreshLayout.setRefreshing(false);
     }
 }
+

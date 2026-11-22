@@ -1,4 +1,4 @@
-package com.example.commonlibrary.cusotomview;
+﻿package com.example.commonlibrary.cusotomview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -9,8 +9,8 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.RequiresApi;
+import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -26,9 +26,8 @@ import com.example.commonlibrary.utils.DensityUtil;
 import java.util.List;
 
 /**
- * 项目名称:    NewFastFrame
- * 创建人:        陈锦军
- * 创建时间:    2017/11/5      10:35
+ * 椤圭洰鍚嶇О:    NewFastFrame
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/11/5      10:35
  * QQ:             1981367757
  */
 
@@ -45,9 +44,7 @@ public class ViewPagerIndicator extends LinearLayout {
     private static final int COLOR_TEXT_HIGHLIGHT = 0xFFFFFFFF;
     private ViewPager mViewPager;
     private HorizontalScrollView mScrollView;
-    private boolean isClicked = false; //判断是否是由点击产生的滑动
-    private int scrollLocation; //Tab滚动的位置
-    private int lineHeight =3;
+    private boolean isClicked = false; //鍒ゆ柇鏄惁鏄敱鐐瑰嚮浜х敓鐨勬粦鍔?    private int scrollLocation; //Tab婊氬姩鐨勪綅缃?    private int lineHeight =3;
 
 
     public int getLineHeight() {
@@ -64,15 +61,14 @@ public class ViewPagerIndicator extends LinearLayout {
 
     public ViewPagerIndicator(Context context, AttributeSet attrs) {
         super(context, attrs);
-        //获取可见的tab数量
+        //鑾峰彇鍙鐨則ab鏁伴噺
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ViewPagerIndicator);
         mVisibleTabCount = a.getInt(R.styleable.ViewPagerIndicator_visibleTabCount, COUNT_DEFAULT_TAB);
         if (mVisibleTabCount < 0) {
             mVisibleTabCount = COUNT_DEFAULT_TAB;
         }
         a.recycle();
-        //初始化画笔
-        mPaint = new Paint();
+        //鍒濆鍖栫敾绗?        mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setColor(Color.parseColor("#ffffff"));
         mPaint.setStyle(Paint.Style.FILL);
@@ -109,7 +105,7 @@ public class ViewPagerIndicator extends LinearLayout {
     }
 
     /**
-     * 通过布局添加Tab
+     * 閫氳繃甯冨眬娣诲姞Tab
      */
     @Override
     protected void onFinishInflate() {
@@ -132,7 +128,7 @@ public class ViewPagerIndicator extends LinearLayout {
 
 
     private void iniLine() {
-        int w = getMeasuredWidth();  //屏幕宽度
+        int w = getMeasuredWidth();  //灞忓箷瀹藉害
         mInitTranslationX = w / mVisibleTabCount / 2 - mLineWidth / 2;
 
     }
@@ -154,8 +150,7 @@ public class ViewPagerIndicator extends LinearLayout {
     }
 
     /**
-     * 指示器跟随手指进行滚动
-     *
+     * 鎸囩ず鍣ㄨ窡闅忔墜鎸囪繘琛屾粴鍔?     *
      * @param position
      * @param offset
      */
@@ -185,7 +180,7 @@ public class ViewPagerIndicator extends LinearLayout {
                 scrollLocation = position * tabWidth;
             }
         }
-        //滑动完成时,将标记位恢复
+        //婊戝姩瀹屾垚鏃?灏嗘爣璁颁綅鎭㈠
         if (offset == 0) {
             isClicked = false;
         }
@@ -203,7 +198,7 @@ public class ViewPagerIndicator extends LinearLayout {
     }
 
     /**
-     * 根据title创建tab
+     * 鏍规嵁title鍒涘缓tab
      *
      * @param title
      * @return
@@ -234,7 +229,7 @@ public class ViewPagerIndicator extends LinearLayout {
     }
 
     /**
-     * 设置可见Tab数量
+     * 璁剧疆鍙Tab鏁伴噺
      *
      * @param count
      */
@@ -243,7 +238,7 @@ public class ViewPagerIndicator extends LinearLayout {
     }
 
     /**
-     * 设置关联的ViewPager
+     * 璁剧疆鍏宠仈鐨刅iewPager
      *
      * @param viewPager
      * @param position
@@ -280,7 +275,7 @@ public class ViewPagerIndicator extends LinearLayout {
     }
 
     /**
-     * 设置外层HorizontalScrollView
+     * 璁剧疆澶栧眰HorizontalScrollView
      *
      * @param scrollView
      */
@@ -296,7 +291,7 @@ public class ViewPagerIndicator extends LinearLayout {
     }
 
     /**
-     * 高亮显示选中tab文本
+     * 楂樹寒鏄剧ず閫変腑tab鏂囨湰
      *
      * @param position
      */
@@ -317,8 +312,7 @@ public class ViewPagerIndicator extends LinearLayout {
     }
 
     /**
-     * 设置Tab的点击事件
-     */
+     * 璁剧疆Tab鐨勭偣鍑讳簨浠?     */
     public void setItemClickEvent() {
         int cCount = getChildCount();
         for (int i = 0; i < cCount; i++) {
@@ -334,3 +328,4 @@ public class ViewPagerIndicator extends LinearLayout {
         }
     }
 }
+

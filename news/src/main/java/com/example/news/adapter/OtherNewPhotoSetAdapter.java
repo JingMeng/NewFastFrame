@@ -1,6 +1,6 @@
-package com.example.news.adapter;
+﻿package com.example.news.adapter;
 
-import android.support.v4.view.PagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +16,8 @@ import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
- * 项目名称:    NewFastFrame
- * 创建人:        陈锦军
- * 创建时间:    2017/9/26      17:05
+ * 椤圭洰鍚嶇О:    NewFastFrame
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/9/26      17:05
  * QQ:             1981367757
  */
 
@@ -85,3 +84,4 @@ public class OtherNewPhotoSetAdapter extends PagerAdapter{
         container.removeView((View) object);
     }
 }
+

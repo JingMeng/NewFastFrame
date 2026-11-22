@@ -1,8 +1,8 @@
-package com.example.commonlibrary.baseadapter.viewholder;
+﻿package com.example.commonlibrary.baseadapter.viewholder;
 
 import android.content.Context;
 import android.net.Uri;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,9 +22,8 @@ import java.util.Set;
 
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2017/3/25      14:38
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/3/25      14:38
  * QQ:             1981367757
  */
 
@@ -174,7 +173,7 @@ public class BaseWrappedViewHolder extends RecyclerView.ViewHolder {
 
 
     /**
-     * 直接给view主题设置事件监听
+     * 鐩存帴缁檝iew涓婚璁剧疆浜嬩欢鐩戝惉
      *
      * @param id
      * @param onClickListener
@@ -242,7 +241,7 @@ public class BaseWrappedViewHolder extends RecyclerView.ViewHolder {
             Glide.with(itemView.getContext()).load(url).into(new SimpleTarget<GlideDrawable>() {
                 @Override
                 public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
-                    CommonLogger.e("设置背景");
+                    CommonLogger.e("璁剧疆鑳屾櫙");
                     getView(id).setBackground(resource);
                 }
             });
@@ -251,7 +250,7 @@ public class BaseWrappedViewHolder extends RecyclerView.ViewHolder {
     }
 
     public BaseWrappedViewHolder bindAdapter(BaseRecyclerAdapter adapter) {
-        CommonLogger.e("绑定adapter");
+        CommonLogger.e("缁戝畾adapter");
         this.adapter = adapter;
         return this;
     }
@@ -261,3 +260,4 @@ public class BaseWrappedViewHolder extends RecyclerView.ViewHolder {
         return adapter;
     }
 }
+

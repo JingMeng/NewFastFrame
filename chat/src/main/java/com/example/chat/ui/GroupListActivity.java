@@ -1,10 +1,10 @@
-package com.example.chat.ui;
+﻿package com.example.chat.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 import com.example.chat.R;
@@ -18,9 +18,8 @@ import com.example.commonlibrary.cusotomview.ToolBarOption;
 
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2017/1/10      10:03
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/1/10      10:03
  * QQ:             1981367757
  */
 public class GroupListActivity extends SlideBaseActivity {
@@ -75,7 +74,7 @@ public class GroupListActivity extends SlideBaseActivity {
         private void initActionBar() {
                 ToolBarOption toolBarOption = new ToolBarOption();
                 toolBarOption.setAvatar(UserManager.getInstance().getCurrentUser().getAvatar());
-                toolBarOption.setTitle("群列表");
+                toolBarOption.setTitle("缇ゅ垪琛?);
                 toolBarOption.setNeedNavigation(true);
                 setToolBar(toolBarOption);
         }
@@ -90,3 +89,4 @@ public class GroupListActivity extends SlideBaseActivity {
 
         }
 }
+

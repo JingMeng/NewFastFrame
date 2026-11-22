@@ -1,7 +1,7 @@
-package com.example.cootek.newfastframe.ui;
+﻿package com.example.cootek.newfastframe.ui;
 
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import com.google.android.material.tabs.TabLayout;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.commonlibrary.baseadapter.adapter.ViewPagerAdapter;
 import com.example.commonlibrary.cusotomview.ToolBarOption;
@@ -52,15 +52,15 @@ public class LocalMusicListActivity extends MusicBaseActivity {
     @Override
     protected void initData() {
         ToolBarOption toolBarOption = new ToolBarOption();
-        toolBarOption.setTitle("本地音乐");
+        toolBarOption.setTitle("鏈湴闊充箰");
         toolBarOption.setNeedNavigation(true);
         setToolBar(toolBarOption);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         tabLayout.setupWithViewPager(display);
         List<String> titleList = new ArrayList<>();
-        titleList.add("单曲");
-        titleList.add("歌手");
-        titleList.add("专辑");
+        titleList.add("鍗曟洸");
+        titleList.add("姝屾墜");
+        titleList.add("涓撹緫");
         List<BaseFragment> fragmentList = new ArrayList<>();
         fragmentList.add(LocalListFragment.newInstance());
         fragmentList.add(SingerListFragment.newInstance());
@@ -71,3 +71,4 @@ public class LocalMusicListActivity extends MusicBaseActivity {
         display.setCurrentItem(0);
     }
 }
+

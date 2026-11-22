@@ -1,8 +1,8 @@
-package com.example.chat.ui;
+﻿package com.example.chat.ui;
 
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -16,9 +16,8 @@ import com.example.commonlibrary.utils.ToastUtils;
 import static android.view.View.GONE;
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2016/12/27      22:14
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2016/12/27      22:14
  * QQ:             1981367757
  */
 
@@ -80,13 +79,13 @@ public class SearchActivity extends SlideBaseActivity {
                 MenuItemCompat.setOnActionExpandListener(menuItem, new MenuItemCompat.OnActionExpandListener() {
                         @Override
                         public boolean onMenuItemActionExpand(MenuItem item) {
-                                ToastUtils.showShortToast("蔓延");
+                                ToastUtils.showShortToast("钄撳欢");
                                 return true;
                         }
 
                         @Override
                         public boolean onMenuItemActionCollapse(MenuItem item) {
-                                ToastUtils.showShortToast("收缩");
+                                ToastUtils.showShortToast("鏀剁缉");
                                 finish();
                                 return true;
                         }
@@ -119,3 +118,4 @@ public class SearchActivity extends SlideBaseActivity {
 
         }
 }
+

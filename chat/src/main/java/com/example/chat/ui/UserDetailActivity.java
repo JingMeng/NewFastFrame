@@ -1,14 +1,14 @@
-package com.example.chat.ui;
+﻿package com.example.chat.ui;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Rect;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,9 +59,8 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
 
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2016/11/22      9:41
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2016/11/22      9:41
  * QQ:             1981367757
  */
 
@@ -161,9 +160,8 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
                                         mCommentPopupWindow.dismiss();
                                 }
 
-//                                这里进行点击关闭编辑框
-                                if (bottomInput.getVisibility() == View.VISIBLE) {
-                                        LogUtil.e("触摸界面点击关闭输入法");
+//                                杩欓噷杩涜鐐瑰嚮鍏抽棴缂栬緫妗?                                if (bottomInput.getVisibility() == View.VISIBLE) {
+                                        LogUtil.e("瑙︽懜鐣岄潰鐐瑰嚮鍏抽棴杈撳叆娉?);
                                         dealBottomView(false);
                                         return true;
                                 }
@@ -175,8 +173,8 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
         private int getListOffset() {
                 int offset = 0;
                 if (currentCommentPosition == -1) {
-                        ToastUtils.showShortToast("点击评论");
-                        LogUtil.e("22222点击评论");
+                        ToastUtils.showShortToast("鐐瑰嚮璇勮");
+                        LogUtil.e("22222鐐瑰嚮璇勮");
                         int firstVisiblePosition = mLinearLayoutManager.findFirstVisibleItemPosition();
                         View view = mLinearLayoutManager.getChildAt(currentPosition - firstVisiblePosition);
                         offset += view.getHeight();
@@ -195,7 +193,7 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
         public void initData() {
                 uid = getIntent().getStringExtra("uid");
                 if (uid.equals(UserManager.getInstance().getCurrentUserObjectId())) {
-                        LogUtil.e("当前用户111");
+                        LogUtil.e("褰撳墠鐢ㄦ埛111");
                         floatingActionButton.setVisibility(View.VISIBLE);
                         mUser = UserManager.getInstance().getCurrentUser();
                 } else {
@@ -211,8 +209,7 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
                 display.setLoadMoreFooterView(new LoadMoreFooterView(this));
                 display.setOnLoadMoreListener(this);
                 display.addHeaderView(getHeaderView());
-//                设置item内部的点击事件
-                mShareMultipleLayoutAdapter.setOnShareMessageItemClickListener(this);
+//                璁剧疆item鍐呴儴鐨勭偣鍑讳簨浠?                mShareMultipleLayoutAdapter.setOnShareMessageItemClickListener(this);
                 mShareMultipleLayoutAdapter.setOnItemClickListener(new OnSimpleItemChildClickListener() {
                         @Override
                         public void onItemChildClick(int position, View view, int id) {
@@ -225,7 +222,7 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
                                 } else if (id == R.id.iv_share_fragment_item_main_comment) {
                                         boolean isLike = false;
                                         if (mShareMultipleLayoutAdapter.getData(position).getLikerList() != null && mShareMultipleLayoutAdapter.getData(position).getLikerList().contains(UserManager.getInstance().getCurrentUserObjectId())) {
-                                                LogUtil.e("已有赞");
+                                                LogUtil.e("宸叉湁璧?);
                                                 isLike = true;
                                         }
                                         onCommentBtnClick(view, mShareMultipleLayoutAdapter.getData(position).getObjectId(), position, isLike);
@@ -233,7 +230,7 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
 
                         }
                 });
-//                设置加载更多点击事件
+//                璁剧疆鍔犺浇鏇村鐐瑰嚮浜嬩欢
 
                 display.setAdapter(mShareMultipleLayoutAdapter);
 //                        mShareMultipleLayoutAdapter.setOnShareMessageItemClickListener(this);
@@ -274,7 +271,7 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
                 signature.setText(mUser.getSignature());
                 address.setText(mUser.getAddress());
                 nick.setText(mUser.getNick());
-                sex.setText(mUser.isSex() ? "男" : "女");
+                sex.setText(mUser.isSex() ? "鐢? : "濂?);
                 Glide.with(this).load(mUser.getAvatar())
                         .bitmapTransform(new BlurTransformation(this, 5))
                         .into(bg);
@@ -286,13 +283,12 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
 //
 //        /**
 //         * @param appBarLayout   appBarLayout
-//         * @param verticalOffset 偏移量     0-1   0:完全展开      1：完全收缩
-//         */
+//         * @param verticalOffset 鍋忕Щ閲?    0-1   0:瀹屽叏灞曞紑      1锛氬畬鍏ㄦ敹缂?//         */
 //        @Override
 //        public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
 //
 //                float percent = Math.abs(verticalOffset) / (float) appBarLayout.getTotalScrollRange();
-//                LogUtil.e("百分比:" + percent);
+//                LogUtil.e("鐧惧垎姣?" + percent);
 ////                ViewHelper.setAlpha(bgCover, percent);
 //                if (percent > 0.5) {
 //                        middle.setVisibility(View.GONE);
@@ -317,7 +313,7 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
                 } else if (i == R.id.iv_user_detail_send) {
                         String content = input.getText().toString().trim();
                         if (content.equals("") || content.contains("$") || content.contains("&")) {
-                                LogUtil.e("评论内容不能为空或包含特殊符号，比如$或者&");
+                                LogUtil.e("璇勮鍐呭涓嶈兘涓虹┖鎴栧寘鍚壒娈婄鍙凤紝姣斿$鎴栬€?");
                         } else {
                                 String wrappedContent;
                                 if (replyUid != null) {
@@ -380,7 +376,7 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
 
         @Override
         public void onAddShareMessage(SharedMessage sharedMessage) {
-                LogUtil.e("实时检测到说说消息到拉");
+                LogUtil.e("瀹炴椂妫€娴嬪埌璇磋娑堟伅鍒版媺");
                 LogUtil.e(sharedMessage);
                 if (mShareMultipleLayoutAdapter.getData().contains(sharedMessage)) {
                         SharedMessage oldSharedMessage = mShareMultipleLayoutAdapter.getSharedMessageById(sharedMessage.getObjectId());
@@ -411,9 +407,9 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
 
         @Override
         public void onCommentBtnClick(View view, String id, int shareMessagePosition, boolean isLike) {
-                LogUtil.e("点击评论按钮");
-                LogUtil.e("是否已点赞" + isLike);
-                LogUtil.e("位置" + shareMessagePosition);
+                LogUtil.e("鐐瑰嚮璇勮鎸夐挳");
+                LogUtil.e("鏄惁宸茬偣璧? + isLike);
+                LogUtil.e("浣嶇疆" + shareMessagePosition);
                 currentId = id;
                 currentPosition = shareMessagePosition;
                 if (mCommentPopupWindow == null) {
@@ -422,20 +418,20 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
                                 @Override
                                 public void onItemClick(View view, int position, boolean isLiker) {
                                         if (position == 0) {
-                                                LogUtil.e("处理赞的操作");
+                                                LogUtil.e("澶勭悊璧炵殑鎿嶄綔");
                                                 if (isLiker) {
-                                                        LogUtil.e("这里取消点赞操作");
-                                                        LogUtil.e("删除点赞是的ID" + currentId);
+                                                        LogUtil.e("杩欓噷鍙栨秷鐐硅禐鎿嶄綔");
+                                                        LogUtil.e("鍒犻櫎鐐硅禐鏄殑ID" + currentId);
                                                         presenter.deleteLiker(currentId);
                                                 } else {
-                                                        LogUtil.e("这里添加点赞操作");
-                                                        LogUtil.e("position为多少" + position);
-                                                        LogUtil.e("添加点赞时的ID" + currentId);
+                                                        LogUtil.e("杩欓噷娣诲姞鐐硅禐鎿嶄綔");
+                                                        LogUtil.e("position涓哄灏? + position);
+                                                        LogUtil.e("娣诲姞鐐硅禐鏃剁殑ID" + currentId);
                                                         presenter.addLiker(currentId);
                                                 }
                                         } else if (position == 1) {
-                                                LogUtil.e("处理评论的操作");
-//                                                进行位移
+                                                LogUtil.e("澶勭悊璇勮鐨勬搷浣?);
+//                                                杩涜浣嶇Щ
                                                 currentCommentPosition = -1;
                                                 replyUid = null;
                                                 commentItemOffset = 0;
@@ -445,9 +441,9 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
                         });
                 }
                 if (isLike) {
-                        mCommentPopupWindow.setLikerName("取消");
+                        mCommentPopupWindow.setLikerName("鍙栨秷");
                 } else {
-                        mCommentPopupWindow.setLikerName("赞");
+                        mCommentPopupWindow.setLikerName("璧?);
                 }
                 mCommentPopupWindow.showPopupWindow(view);
 
@@ -466,7 +462,7 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
 
         @Override
         public void onCommentItemClick(View view, String id, int shareMessagePosition, int commentPosition, String replyUid) {
-                LogUtil.e("位置" + shareMessagePosition);
+                LogUtil.e("浣嶇疆" + shareMessagePosition);
                 currentPosition = shareMessagePosition;
                 currentCommentPosition = commentPosition;
                 ViewParent viewParent = view.getParent();
@@ -491,18 +487,18 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
 
         private void showCommentDialog(final String id, final int commentPosition) {
                 List<String> list = new ArrayList<>();
-                list.add("复制");
+                list.add("澶嶅埗");
                 if (CommonUtils.content2List(mShareMultipleLayoutAdapter.getSharedMessageById(id).getCommentMsgList().get(commentPosition)).get(0).equals(UserManager.getInstance().getCurrentUser().getObjectId())) {
-                        list.add("删除");
+                        list.add("鍒犻櫎");
                 }
-                showChooseDialog("操作", list, new AdapterView.OnItemClickListener() {
+                showChooseDialog("鎿嶄綔", list, new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position1, long id1) {
                                 dismissBaseDialog();
                                 if (position1 == 0) {
-                                        LogUtil.e("复制操作");
+                                        LogUtil.e("澶嶅埗鎿嶄綔");
                                 } else {
-                                        LogUtil.e("删除操作");
+                                        LogUtil.e("鍒犻櫎鎿嶄綔");
                                         presenter.deleteComment(id, commentPosition);
                                 }
                         }
@@ -536,8 +532,8 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
 
         @Override
         public void onDeleteShareMessageClick(final String id) {
-                LogUtil.e("删除");
-                showBaseDialog("提示", "确定要删除该说说消息吗?", "取消", "确定", new View.OnClickListener() {
+                LogUtil.e("鍒犻櫎");
+                showBaseDialog("鎻愮ず", "纭畾瑕佸垹闄よ璇磋娑堟伅鍚?", "鍙栨秷", "纭畾", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                                 cancelBaseDialog();
@@ -553,23 +549,23 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
 
         @Override
         public void onPhotoItemClick(final View view, final String id, final int photoPosition, final String url) {
-                LogUtil.e("点击图片");
-                LogUtil.e("点击的说说ID");
+                LogUtil.e("鐐瑰嚮鍥剧墖");
+                LogUtil.e("鐐瑰嚮鐨勮璇碔D");
                 List<String> cache = MessageCacheManager.getInstance().getShareMessageCache(id);
                 final String newUrl;
                 if (!url.contains("$")) {
-                        LogUtil.e("这是图片URL");
+                        LogUtil.e("杩欐槸鍥剧墖URL");
                         if (cache == null || cache.size() == 0) {
-                                LogUtil.e("没有缓存证明不是自己发的说说");
+                                LogUtil.e("娌℃湁缂撳瓨璇佹槑涓嶆槸鑷繁鍙戠殑璇磋");
                                 newUrl = url;
                         } else {
-                                LogUtil.e("有缓存证明是自己的图片说说，这里就是用缓存");
+                                LogUtil.e("鏈夌紦瀛樿瘉鏄庢槸鑷繁鐨勫浘鐗囪璇达紝杩欓噷灏辨槸鐢ㄧ紦瀛?);
                                 newUrl = cache.get(photoPosition);
                         }
                         LogUtil.e("url:" + newUrl);
                         File file = new File(newUrl);
                         if (file.exists()) {
-                                LogUtil.e("提前加载图片文件成功");
+                                LogUtil.e("鎻愬墠鍔犺浇鍥剧墖鏂囦欢鎴愬姛");
                                 List<ImageItem> list = new ArrayList<>();
                                 ImageItem imageItem;
                                 for (String str :
@@ -584,7 +580,7 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
                                 intent.putExtra("position", photoPosition);
                                 intent.putExtra("name", "photo");
                                 intent.putExtra("url", url);
-                                LogUtil.e("启动图片浏览界面11");
+                                LogUtil.e("鍚姩鍥剧墖娴忚鐣岄潰11");
                                 startActivity(intent);
                                 ActivityCompat.startActivity(UserDetailActivity.this, intent, ActivityOptionsCompat.makeSceneTransitionAnimation(UserDetailActivity.this, view, "photo").toBundle());
 //                                Picasso.with(this).load(file).fetch(new Callback() {
@@ -595,8 +591,8 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
 //
 //                                        @Override
 //                                        public void onError() {
-//                                                LogUtil.e("提前加载失败");
-//                                                ToastUtils.showShortToast("加载失败");
+//                                                LogUtil.e("鎻愬墠鍔犺浇澶辫触");
+//                                                ToastUtils.showShortToast("鍔犺浇澶辫触");
 //                                        }
 //                                });
                         } else {
@@ -614,40 +610,40 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
                                 intent.putExtra("position", photoPosition);
                                 intent.putExtra("name", "photo");
                                 intent.putExtra("url", url);
-                                LogUtil.e("启动图片浏览界面11");
+                                LogUtil.e("鍚姩鍥剧墖娴忚鐣岄潰11");
                                 startActivity(intent);
 //                                Picasso.with(this).load(newUrl).fetch(new Callback() {
 //                                        @Override
 //                                        public void onSuccess() {
-//                                                LogUtil.e("1提前加载成功");
-//                                                LogUtil.e("提前加载图片文件成功");
+//                                                LogUtil.e("1鎻愬墠鍔犺浇鎴愬姛");
+//                                                LogUtil.e("鎻愬墠鍔犺浇鍥剧墖鏂囦欢鎴愬姛");
 ////                                                ActivityCompat.startActivity(getActivity(), intent, ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), view, "photo").toBundle());
 ////                                                ImageDisplayActivity.start(getActivity(), view, newUrl);
 //                                        }
 //
 //                                        @Override
 //                                        public void onError() {
-//                                                LogUtil.e("提前加载失败");
-//                                                ToastUtils.showShortToast("加载失败");
+//                                                LogUtil.e("鎻愬墠鍔犺浇澶辫触");
+//                                                ToastUtils.showShortToast("鍔犺浇澶辫触");
 //                                        }
 //                                });
                         }
                 } else {
                         if (cache == null || cache.size() == 0) {
-                                LogUtil.e("没有缓存证明不是自己发的说说");
-                                LogUtil.e("这是视频和封面混合的URL列表");
+                                LogUtil.e("娌℃湁缂撳瓨璇佹槑涓嶆槸鑷繁鍙戠殑璇磋");
+                                LogUtil.e("杩欐槸瑙嗛鍜屽皝闈㈡贩鍚堢殑URL鍒楄〃");
                                 List<String> urlList = CommonUtils.content2List(url);
                                 if (urlList != null && urlList.size() > 0) {
                                         String videoUrl = null;
                                         String imageUrl = null;
-                                        LogUtil.e("视频URL列表");
+                                        LogUtil.e("瑙嗛URL鍒楄〃");
                                         for (String str : urlList
                                                 ) {
                                                 if (str.contains(".jpg") || str.contains(".png") || str.contains(".jpeg")) {
-                                                        LogUtil.e("封面图片URL" + str);
+                                                        LogUtil.e("灏侀潰鍥剧墖URL" + str);
                                                         imageUrl = str;
                                                 } else {
-                                                        LogUtil.e("视频URL" + str);
+                                                        LogUtil.e("瑙嗛URL" + str);
                                                         videoUrl = str;
                                                 }
                                         }
@@ -661,7 +657,7 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
                                         }
                                 }
                         } else {
-                                LogUtil.e("有缓存证明是自己的视频说说，这里就是用缓存");
+                                LogUtil.e("鏈夌紦瀛樿瘉鏄庢槸鑷繁鐨勮棰戣璇达紝杩欓噷灏辨槸鐢ㄧ紦瀛?);
                                 String videoUrl = cache.get(1);
                                 Intent intent = new Intent(UserDetailActivity.this, VideoPlayActivity.class);
                                 intent.putExtra("path", videoUrl);
@@ -680,44 +676,44 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
         @Override
         public void updateShareMessageDeleted(String id) {
                 SharedMessage sharedMessage = mShareMultipleLayoutAdapter.getSharedMessageById(id);
-                LogUtil.e("将要删除的说说消息数据格式");
+                LogUtil.e("灏嗚鍒犻櫎鐨勮璇存秷鎭暟鎹牸寮?);
                 if (sharedMessage != null) {
                         LogUtil.e(sharedMessage);
                         mShareMultipleLayoutAdapter.getData().remove(sharedMessage);
                         mShareMultipleLayoutAdapter.notifyDataSetChanged();
-//                这里通知删除
+//                杩欓噷閫氱煡鍒犻櫎
                         notifySharedMessageChanged(id, false);
 //                        ((MainActivity) getActivity()).notifySharedMessageChanged(sharedMessage.getObjectId(), false);
                 } else {
-                        LogUtil.e("该说说已删除");
+                        LogUtil.e("璇ヨ璇村凡鍒犻櫎");
                 }
         }
 
         @Override
         public void updateLikerAdd(String id) {
                 if (!mShareMultipleLayoutAdapter.getSharedMessageById(id).getLikerList().contains(UserManager.getInstance().getCurrentUserObjectId())) {
-                        LogUtil.e("还未点赞，这里添加点赞");
+                        LogUtil.e("杩樻湭鐐硅禐锛岃繖閲屾坊鍔犵偣璧?);
                         mShareMultipleLayoutAdapter.getSharedMessageById(id).getLikerList().add(UserManager.getInstance().getCurrentUserObjectId());
                         mShareMultipleLayoutAdapter.notifyDataSetChanged();
                 } else {
-                        LogUtil.e("已经点赞，这里添加点赞失败,可能的原因是因为实时已经检测到拉");
+                        LogUtil.e("宸茬粡鐐硅禐锛岃繖閲屾坊鍔犵偣璧炲け璐?鍙兘鐨勫師鍥犳槸鍥犱负瀹炴椂宸茬粡妫€娴嬪埌鎷?);
                 }
         }
 
         @Override
         public void updateLikerDeleted(String id) {
                 if (mShareMultipleLayoutAdapter.getSharedMessageById(id).getLikerList().contains(UserManager.getInstance().getCurrentUserObjectId())) {
-                        LogUtil.e("已有点赞，这里删除点赞");
+                        LogUtil.e("宸叉湁鐐硅禐锛岃繖閲屽垹闄ょ偣璧?);
                         mShareMultipleLayoutAdapter.getSharedMessageById(id).getLikerList().remove(UserManager.getInstance().getCurrentUserObjectId());
                         mShareMultipleLayoutAdapter.notifyDataSetChanged();
                 } else {
-                        LogUtil.e("没有点赞，这里删除点赞失败，可能的原因是因为实时已经检测到啦");
+                        LogUtil.e("娌℃湁鐐硅禐锛岃繖閲屽垹闄ょ偣璧炲け璐ワ紝鍙兘鐨勫師鍥犳槸鍥犱负瀹炴椂宸茬粡妫€娴嬪埌鍟?);
                 }
         }
 
         @Override
         public void updateCommentAdded(String id, String content, int position) {
-                LogUtil.e("更新添加评论操作，这里就不更新了，因为在实时检测的时候已经更新拉");
+                LogUtil.e("鏇存柊娣诲姞璇勮鎿嶄綔锛岃繖閲屽氨涓嶆洿鏂颁簡锛屽洜涓哄湪瀹炴椂妫€娴嬬殑鏃跺€欏凡缁忔洿鏂版媺");
                 dealBottomView(false);
                 mShareMultipleLayoutAdapter.notifyDataSetChanged();
 
@@ -725,7 +721,7 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
 
         @Override
         public void updateCommentDeleted(String id, String content, int position) {
-                LogUtil.e("更新删除评论操作，这里就不更新了，因为在实时检测的时候已经更新啦啦啦");
+                LogUtil.e("鏇存柊鍒犻櫎璇勮鎿嶄綔锛岃繖閲屽氨涓嶆洿鏂颁簡锛屽洜涓哄湪瀹炴椂妫€娴嬬殑鏃跺€欏凡缁忔洿鏂板暒鍟﹀暒");
                 mShareMultipleLayoutAdapter.notifyDataSetChanged();
         }
 
@@ -761,9 +757,9 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
         @Override
         public void onRefresh() {
                 SharedMessage shareMessage = mShareMultipleLayoutAdapter.getData(0);
-                LogUtil.e("下拉加载的前一个说说消息为1");
+                LogUtil.e("涓嬫媺鍔犺浇鐨勫墠涓€涓璇存秷鎭负1");
                 if (shareMessage == null) {
-                        LogUtil.e("首次加载数据");
+                        LogUtil.e("棣栨鍔犺浇鏁版嵁");
                         loadData(true, "0000-00-00 01:00:00");
                 } else {
                         LogUtil.e(shareMessage);
@@ -791,7 +787,8 @@ public class UserDetailActivity extends SlideBaseActivity<List<SharedMessage>,Sh
                 if (size > 0) {
                         loadData(false, mShareMultipleLayoutAdapter.getData(size - 1).getCreatedAt());
                 } else {
-                        LogUtil.e("获取更多的时候data为空");
+                        LogUtil.e("鑾峰彇鏇村鐨勬椂鍊檇ata涓虹┖");
                 }
         }
 }
+

@@ -1,10 +1,10 @@
-package com.example.commonlibrary.baseadapter.adapter;
+﻿package com.example.commonlibrary.baseadapter.adapter;
 
 import android.animation.Animator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by 陈锦军 on 16/3/12.
+ * Created by 闄堥敠鍐?on 16/3/12.
  */
 public abstract class BaseRecyclerAdapter<T, K extends BaseWrappedViewHolder> extends RecyclerView.Adapter<K> {
 
@@ -312,13 +312,11 @@ public abstract class BaseRecyclerAdapter<T, K extends BaseWrappedViewHolder> ex
 
     private K createGenericKInstance(Class aClass, View view) {
         try {
-//                构造函数
-            Constructor constructor;
-//                获取修饰符
-            String modifier = Modifier.toString(aClass.getModifiers());
+//                鏋勯€犲嚱鏁?            Constructor constructor;
+//                鑾峰彇淇グ绗?            String modifier = Modifier.toString(aClass.getModifiers());
             String name = aClass.getName();
 
-//                内部类并且不是静态类
+//                鍐呴儴绫诲苟涓斾笉鏄潤鎬佺被
             if (name.contains("$") && !modifier.contains("static")) {
                 constructor = aClass.getDeclaredConstructor(getClass(), View.class);
                 return (K) constructor.newInstance(this, view);
@@ -498,3 +496,4 @@ public abstract class BaseRecyclerAdapter<T, K extends BaseWrappedViewHolder> ex
         return onItemClickListener;
     }
 }
+

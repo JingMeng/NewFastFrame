@@ -1,7 +1,7 @@
-package com.example.commonlibrary.dagger.module;
+﻿package com.example.commonlibrary.dagger.module;
 
 import android.app.Application;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.example.commonlibrary.bean.music.DaoMaster;
 import com.example.commonlibrary.bean.music.DaoSession;
@@ -124,3 +124,4 @@ public class GlobalConfigModule {
 
 
 }
+

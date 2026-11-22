@@ -1,6 +1,6 @@
-package com.example.live.adapter.holder;
+﻿package com.example.live.adapter.holder;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 import com.example.commonlibrary.baseadapter.SuperRecyclerView;
@@ -14,9 +14,8 @@ import com.example.live.bean.RecommendLiveBean;
 import java.util.List;
 
 /**
- * 项目名称:    NewFastFrame
- * 创建人:        陈锦军
- * 创建时间:    2017/9/14      17:51
+ * 椤圭洰鍚嶇О:    NewFastFrame
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/9/14      17:51
  * QQ:             1981367757
  */
 
@@ -86,3 +85,4 @@ public class RecommendLiveViewHolder extends BaseWrappedViewHolder {
         }
     }
 }
+

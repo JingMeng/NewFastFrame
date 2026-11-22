@@ -1,8 +1,8 @@
-package com.example.chat.ui;
+﻿package com.example.chat.ui;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.example.chat.R;
 import com.example.commonlibrary.mvp.presenter.BasePresenter;
@@ -13,9 +13,8 @@ import com.komi.slider.position.SliderPosition;
 
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2017/5/26      11:58
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/5/26      11:58
  * QQ:             1981367757
  */
 
@@ -50,3 +49,4 @@ public abstract class SlideBaseActivity<T,P extends BasePresenter> extends MainB
                 iSlider.slideExit();
         }
 }
+

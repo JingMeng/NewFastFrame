@@ -1,7 +1,7 @@
-package com.example.news.dagger;
+﻿package com.example.news.dagger;
 
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.example.commonlibrary.bean.music.DaoSession;
 import com.example.commonlibrary.dagger.scope.PerApplication;
@@ -22,9 +22,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * 项目名称:    NewFastFrame
- * 创建人:        陈锦军
- * 创建时间:    2017/9/16      16:14
+ * 椤圭洰鍚嶇О:    NewFastFrame
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/9/16      16:14
  * QQ:             1981367757
  */
 @Module
@@ -78,3 +77,4 @@ public class NewsModule {
         return new NewsInterceptor();
     }
 }
+

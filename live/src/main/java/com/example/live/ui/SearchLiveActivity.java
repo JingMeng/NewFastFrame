@@ -1,8 +1,8 @@
-package com.example.live.ui;
+﻿package com.example.live.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v4.widget.SwipeRefreshLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -32,9 +32,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 /**
- * 项目名称:    NewFastFrame
- * 创建人:        陈锦军
- * 创建时间:    2017/9/15      10:32
+ * 椤圭洰鍚嶇О:    NewFastFrame
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/9/15      10:32
  * QQ:             1981367757
  */
 
@@ -110,7 +109,7 @@ public class SearchLiveActivity extends BaseActivity<List<SearchLiveBean.DataBea
             }
         });
         ToolBarOption toolBarOption = new ToolBarOption();
-        toolBarOption.setTitle("搜索");
+        toolBarOption.setTitle("鎼滅储");
         toolBarOption.setNeedNavigation(true);
         setToolBar(toolBarOption);
     }
@@ -126,7 +125,7 @@ public class SearchLiveActivity extends BaseActivity<List<SearchLiveBean.DataBea
             loadMoreFooterView.setStatus(LoadMoreFooterView.Status.GONE);
         }
         if (TextUtils.isEmpty(input.getText().toString().trim())) {
-            ToastUtils.showShortToast("内容不能为空哦");
+            ToastUtils.showShortToast("鍐呭涓嶈兘涓虹┖鍝?);
         } else {
             presenter.search(false, true, input.getText().toString().trim());
         }
@@ -135,7 +134,7 @@ public class SearchLiveActivity extends BaseActivity<List<SearchLiveBean.DataBea
     @Override
     public void loadMore() {
         if (TextUtils.isEmpty(input.getText().toString().trim())) {
-            ToastUtils.showShortToast("内容不能为空哦");
+            ToastUtils.showShortToast("鍐呭涓嶈兘涓虹┖鍝?);
         } else {
             presenter.search(false, false, input.getText().toString().trim());
         }
@@ -166,9 +165,10 @@ public class SearchLiveActivity extends BaseActivity<List<SearchLiveBean.DataBea
     @Override
     public void onClick(View v) {
         if (TextUtils.isEmpty(input.getText().toString().trim())) {
-            ToastUtils.showShortToast("内容不能为空哦");
+            ToastUtils.showShortToast("鍐呭涓嶈兘涓虹┖鍝?);
         } else {
             presenter.search(false, true, input.getText().toString().trim());
         }
     }
 }
+

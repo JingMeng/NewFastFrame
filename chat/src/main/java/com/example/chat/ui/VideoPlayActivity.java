@@ -1,10 +1,10 @@
-package com.example.chat.ui;
+﻿package com.example.chat.ui;
 
 import android.annotation.TargetApi;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -21,9 +21,8 @@ import mabeijianxi.camera.views.SurfaceVideoView;
 import static mabeijianxi.camera.util.DeviceUtils.getScreenWidth;
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2016/12/23      20:50
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2016/12/23      20:50
  * QQ:             1981367757
  */
 
@@ -32,29 +31,28 @@ public class VideoPlayActivity extends SlideBaseActivity implements
         MediaPlayer.OnPreparedListener, View.OnClickListener, MediaPlayer.OnCompletionListener,
         MediaPlayer.OnInfoListener {
         /**
-         * 播放控件
+         * 鎾斁鎺т欢
          */
         private SurfaceVideoView mVideoView;
         /**
-         * 暂停按钮
+         * 鏆傚仠鎸夐挳
          */
         private View mPlayerStatus;
         private View mLoading;
 
         /**
-         * 播放路径
+         * 鎾斁璺緞
          */
         private String mPath;
         /**
-         * 是否需要回复播放
-         */
+         * 鏄惁闇€瑕佸洖澶嶆挱鏀?         */
         private boolean mNeedResume;
 
         @Override
         protected void onCreate(@Nullable Bundle savedInstanceState) {
                 getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                 super.onCreate(savedInstanceState);
-//                防止锁屏
+//                闃叉閿佸睆
 
         }
 
@@ -140,7 +138,7 @@ public class VideoPlayActivity extends SlideBaseActivity implements
         @Override
         public void onCompletion(MediaPlayer mp) {
                 if (!isFinishing()) {
-                        Toast.makeText(this, "播放完成", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "鎾斁瀹屾垚", Toast.LENGTH_SHORT).show();
                         mPlayerStatus.setVisibility(View.VISIBLE);
                 }
         }
@@ -150,8 +148,8 @@ public class VideoPlayActivity extends SlideBaseActivity implements
         @Override
         public boolean onError(MediaPlayer mp, int what, int extra) {
                 if (!isFinishing()) {
-                        // 播放失败
-                        LogUtil.e("播放失败");
+                        // 鎾斁澶辫触
+                        LogUtil.e("鎾斁澶辫触");
                 }
                 finish();
                 return false;
@@ -161,7 +159,7 @@ public class VideoPlayActivity extends SlideBaseActivity implements
         public boolean onInfo(MediaPlayer mp, int what, int extra) {
                 switch (what) {
                         case MediaPlayer.MEDIA_INFO_BAD_INTERLEAVING:
-                                // 音频和视频数据不正确
+                                // 闊抽鍜岃棰戞暟鎹笉姝ｇ‘
                                 break;
                         case MediaPlayer.MEDIA_INFO_BUFFERING_START:
                                 if (!isFinishing())
@@ -192,8 +190,7 @@ public class VideoPlayActivity extends SlideBaseActivity implements
 
         @Override
         public boolean dispatchKeyEvent(KeyEvent event) {
-                switch (event.getKeyCode()) {// 跟随系统音量走
-                        case KeyEvent.KEYCODE_VOLUME_DOWN:
+                switch (event.getKeyCode()) {// 璺熼殢绯荤粺闊抽噺璧?                        case KeyEvent.KEYCODE_VOLUME_DOWN:
                         case KeyEvent.KEYCODE_VOLUME_UP:
                                 mVideoView.dispatchKeyEvent(this, event);
                                 break;
@@ -206,7 +203,7 @@ public class VideoPlayActivity extends SlideBaseActivity implements
                 int i = v.getId();
                 if (i == R.id.videoview) {
                         if (mVideoView.isPlaying()) {
-                                Toast.makeText(this, "1正在播放中", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(this, "1姝ｅ湪鎾斁涓?, Toast.LENGTH_SHORT).show();
                                 mVideoView.pause();
                         } else {
                                 if (mVideoView.isRelease())
@@ -229,3 +226,4 @@ public class VideoPlayActivity extends SlideBaseActivity implements
 
         }
 }
+

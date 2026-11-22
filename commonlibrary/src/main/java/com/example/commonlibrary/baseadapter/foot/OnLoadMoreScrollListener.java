@@ -1,6 +1,6 @@
-package com.example.commonlibrary.baseadapter.foot;
+﻿package com.example.commonlibrary.baseadapter.foot;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 
@@ -47,3 +47,4 @@ public abstract class OnLoadMoreScrollListener extends RecyclerView.OnScrollList
 
     public abstract void onLoadMore(RecyclerView recyclerView);
 }
+

@@ -1,9 +1,9 @@
-package com.example.cootek.newfastframe.ui;
+﻿package com.example.cootek.newfastframe.ui;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
+import androidx.annotation.Nullable;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -65,7 +65,7 @@ public class MainActivity extends MusicBaseActivity implements OnLoadMoreListene
         }, new Consumer<Throwable>() {
             @Override
             public void accept(@NonNull Throwable throwable) throws Exception {
-                CommonLogger.e("传递主题出错");
+                CommonLogger.e("浼犻€掍富棰樺嚭閿?);
             }
         });
     }
@@ -143,3 +143,4 @@ public class MainActivity extends MusicBaseActivity implements OnLoadMoreListene
 
     }
 }
+

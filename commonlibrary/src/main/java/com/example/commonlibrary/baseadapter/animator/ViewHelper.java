@@ -1,6 +1,6 @@
-package com.example.commonlibrary.baseadapter.animator;
+﻿package com.example.commonlibrary.baseadapter.animator;
 
-import android.support.v4.view.ViewCompat;
+import androidx.core.view.ViewCompat;
 import android.view.View;
 
 public final class ViewHelper {
@@ -19,3 +19,4 @@ public final class ViewHelper {
     ViewCompat.animate(v).setInterpolator(null).setStartDelay(0);
   }
 }
+

@@ -1,6 +1,6 @@
-package com.example.commonlibrary.net.upload;
+﻿package com.example.commonlibrary.net.upload;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import java.io.IOException;
 
@@ -71,3 +71,4 @@ public class UpLoadRequestBody extends RequestBody {
         }
     }
 }
+

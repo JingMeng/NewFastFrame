@@ -1,8 +1,8 @@
-package com.example.news.mvp.booklist;
+﻿package com.example.news.mvp.booklist;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.View;
 
 import com.example.commonlibrary.BaseFragment;
@@ -31,9 +31,8 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 
 /**
- * 项目名称:    NewFastFrame
- * 创建人:        陈锦军
- * 创建时间:    2017/9/19      10:55
+ * 椤圭洰鍚嶇О:    NewFastFrame
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/9/19      10:55
  * QQ:             1981367757
  */
 
@@ -93,7 +92,7 @@ public class BookInfoListFragment extends BaseFragment<List<BookInfoBean>, BookI
                 .build().inject(this);
         display.setLayoutManager(new WrappedLinearLayoutManager(getContext()));
         refreshLayout.setOnRefreshListener(this);
-        if (title.equals("历史")) {
+        if (title.equals("鍘嗗彶")) {
             display.setLoadMoreFooterView(loadMoreFooterView = new LoadMoreFooterView(getContext()));
             display.setOnLoadMoreListener(this);
         }
@@ -125,7 +124,7 @@ public class BookInfoListFragment extends BaseFragment<List<BookInfoBean>, BookI
 
     @Override
     protected void updateView() {
-        if (title.equals("历史")) {
+        if (title.equals("鍘嗗彶")) {
             presenter.getBorrowBookInfo(true, true, true);
         } else {
             presenter.getBorrowBookInfo(true, true, false);
@@ -147,7 +146,7 @@ public class BookInfoListFragment extends BaseFragment<List<BookInfoBean>, BookI
 
     @Override
     public void onRefresh() {
-        if (title.equals("历史")) {
+        if (title.equals("鍘嗗彶")) {
             presenter.getBorrowBookInfo(false, true, true);
         } else {
             presenter.getBorrowBookInfo(false, true, false);
@@ -173,3 +172,4 @@ public class BookInfoListFragment extends BaseFragment<List<BookInfoBean>, BookI
 
 
 }
+

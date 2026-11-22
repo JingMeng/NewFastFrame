@@ -1,10 +1,10 @@
-package com.example.chat.view;
+﻿package com.example.chat.view;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.support.v7.widget.LinearSnapHelper;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -14,9 +14,8 @@ import com.example.chat.util.PixelUtil;
 
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2017/1/18      16:18
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/1/18      16:18
  * QQ:             1981367757
  */
 
@@ -154,11 +153,12 @@ public class ImageDisplayRecyclerView extends RecyclerView {
                 @Override
                 public int[] calculateDistanceToFinalSnap(@NonNull LayoutManager layoutManager, @NonNull View targetView) {
                         if (!needScroll) {
-                                LogUtil.e("不需要" +
-                                        "滚动");
+                                LogUtil.e("涓嶉渶瑕? +
+                                        "婊氬姩");
                                 return new int[]{0, 0};
                         }
                         return super.calculateDistanceToFinalSnap(layoutManager, targetView);
                 }
         }
 }
+

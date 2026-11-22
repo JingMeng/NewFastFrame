@@ -1,10 +1,10 @@
-package com.example.chat.service;
+﻿package com.example.chat.service;
 
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.example.chat.R;
 import com.example.chat.base.Constant;
@@ -39,9 +39,8 @@ import cn.bmob.v3.listener.DeleteListener;
 import cn.bmob.v3.listener.ValueEventListener;
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2016/11/17      18:47
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2016/11/17      18:47
  * QQ:             1981367757
  */
 
@@ -78,30 +77,30 @@ public class GroupMessageService extends Service {
         }
 
         private void dealListener() {
-                LogUtil.e("111111111111启动接受实时监听的服务啦啦啦");
+                LogUtil.e("111111111111鍚姩鎺ュ彈瀹炴椂鐩戝惉鐨勬湇鍔″暒鍟﹀暒");
                 table = "_User";
                 data = new BmobRealTimeData();
                 data.start(BaseApplication.getInstance(), new ValueEventListener() {
                                 @Override
                                 public void onConnectCompleted() {
-                                        LogUtil.e("实时监听：连接服务器成功啦啦啦");
+                                        LogUtil.e("瀹炴椂鐩戝惉锛氳繛鎺ユ湇鍔″櫒鎴愬姛鍟﹀暒鍟?);
                                         if (data.isConnected()) {
-                                                LogUtil.e("连接啦啦啦");
+                                                LogUtil.e("杩炴帴鍟﹀暒鍟?);
                                                 if (UserCacheManager.getInstance().getContacts() != null && UserCacheManager.getInstance().getContacts().keySet().size() > 0) {
-                                                        LogUtil.e("有好友数据");
+                                                        LogUtil.e("鏈夊ソ鍙嬫暟鎹?);
                                                         uidList.clear();
                                                         uidList.addAll(UserCacheManager.getInstance().getContacts().keySet());
                                                         for (String uid : uidList) {
                                                                 if (!uid.equals(UserManager.getInstance().getCurrentUserObjectId())) {
                                                                         data.subRowUpdate(table, uid);
                                                                 } else {
-                                                                        LogUtil.e("本地用户信息的修改，不监听");
+                                                                        LogUtil.e("鏈湴鐢ㄦ埛淇℃伅鐨勪慨鏀癸紝涓嶇洃鍚?);
                                                                 }
                                                         }
                                                 } else {
-                                                        LogUtil.e("没有好友数据");
+                                                        LogUtil.e("娌℃湁濂藉弸鏁版嵁");
                                                 }
-                                                LogUtil.e("这里开始监听群数据");
+                                                LogUtil.e("杩欓噷寮€濮嬬洃鍚兢鏁版嵁");
                                                 if (MessageCacheManager.getInstance().getAllGroupId() != null && MessageCacheManager.getInstance().getAllGroupId().size() > 0) {
                                                         groupChatMessageList.clear();
                                                         groupChatMessageList.addAll(MessageCacheManager.getInstance().getAllGroupId());
@@ -112,7 +111,7 @@ public class GroupMessageService extends Service {
                                                         }
 
                                                 } else {
-                                                        LogUtil.e("没有群数据可监听");
+                                                        LogUtil.e("娌℃湁缇ゆ暟鎹彲鐩戝惉");
                                                 }
                                                 if (shareMessageList.size() > 0) {
                                                         for (String id :
@@ -123,27 +122,27 @@ public class GroupMessageService extends Service {
                                                 }
 
                                         } else {
-                                                LogUtil.e("未连接");
+                                                LogUtil.e("鏈繛鎺?);
                                         }
                                 }
 
                                 @Override
                                 public void onDataChange(JSONObject jsonObject) {
-                                        LogUtil.e("监听到数据啦啦啦\n");
-                                        LogUtil.e("数据格式如下:\n");
-                                        LogUtil.e("json数据" + jsonObject.toString());
+                                        LogUtil.e("鐩戝惉鍒版暟鎹暒鍟﹀暒\n");
+                                        LogUtil.e("鏁版嵁鏍煎紡濡備笅:\n");
+                                        LogUtil.e("json鏁版嵁" + jsonObject.toString());
                                         try {
                                                 JSONObject object = jsonObject.getJSONObject("data");
                                                 String action = jsonObject.getString("action");
                                                 if (action.equals("updateRow")) {
-                                                        LogUtil.e("更新行的监听到啦");
+                                                        LogUtil.e("鏇存柊琛岀殑鐩戝惉鍒板暒");
                                                 } else if (action.equals("deleteRow")) {
-                                                        LogUtil.e("删除行的监听到啦");
-//                                                        这里只有说说消息监听行的删除
+                                                        LogUtil.e("鍒犻櫎琛岀殑鐩戝惉鍒板暒");
+//                                                        杩欓噷鍙湁璇磋娑堟伅鐩戝惉琛岀殑鍒犻櫎
                                                         String id = jsonObject.getString("objectId");
-                                                        LogUtil.e("删除的说说ID为" + id);
+                                                        LogUtil.e("鍒犻櫎鐨勮璇碔D涓? + id);
                                                         long result = ChatDB.create().deleteSharedMessage(id);
-                                                        LogUtil.e("删除的行号为" + result);
+                                                        LogUtil.e("鍒犻櫎鐨勮鍙蜂负" + result);
                                                         if (result > 0) {
                                                                 if (sListeners.size() > 0) {
                                                                         for (OnShareMessageReceivedListener listener :
@@ -152,24 +151,21 @@ public class GroupMessageService extends Service {
                                                                         }
                                                                 }
                                                         } else {
-                                                                LogUtil.e("删除不成功");
+                                                                LogUtil.e("鍒犻櫎涓嶆垚鍔?);
                                                         }
                                                         return;
                                                 }
                                                 if (!JsonUtil.getString(object, "creatorId").equals("")) {
-                                                        LogUtil.e("实时监听的群结构更新消息到啦1");
+                                                        LogUtil.e("瀹炴椂鐩戝惉鐨勭兢缁撴瀯鏇存柊娑堟伅鍒板暒1");
                                                         final GroupTableMessage groupTableMessage = MsgManager.getInstance().createReceiveGroupTableMsg(object.toString());
-//                                                        判断是否是踢出群的消息
-                                                        if (!groupTableMessage.getGroupNumber().contains(UserManager.getInstance().getCurrentUserObjectId())) {
-//                                                                退出群的消息
-//                                                                在服务器上删除自己的群结构消息
-                                                                LogUtil.e("这里了没??");
+//                                                        鍒ゆ柇鏄惁鏄涪鍑虹兢鐨勬秷鎭?                                                        if (!groupTableMessage.getGroupNumber().contains(UserManager.getInstance().getCurrentUserObjectId())) {
+//                                                                閫€鍑虹兢鐨勬秷鎭?//                                                                鍦ㄦ湇鍔″櫒涓婂垹闄よ嚜宸辩殑缇ょ粨鏋勬秷鎭?                                                                LogUtil.e("杩欓噷浜嗘病??");
                                                                 mNotifyBinder.removeGroup(groupTableMessage.getGroupId());
                                                                 LogUtil.e(MessageCacheManager.getInstance().getGroupTableMessage(groupTableMessage.getGroupId()));
                                                                 MsgManager.getInstance().deleteGroupTableMessage(MessageCacheManager.getInstance().getGroupTableMessage(groupTableMessage.getGroupId()).getObjectId(), new DeleteListener() {
                                                                         @Override
                                                                         public void onSuccess() {
-                                                                                LogUtil.e("在服务器上删除自己的群结构消息成功1");
+                                                                                LogUtil.e("鍦ㄦ湇鍔″櫒涓婂垹闄よ嚜宸辩殑缇ょ粨鏋勬秷鎭垚鍔?");
                                                                                 MessageCacheManager.getInstance().deleteGroupTableMessage(groupTableMessage.getGroupId());
                                                                                 ChatDB.create().deleteRecentMsg(groupTableMessage.getGroupId());
                                                                                 ChatDB.create().deleteGroupTableMessage(groupTableMessage.getGroupId());
@@ -177,7 +173,7 @@ public class GroupMessageService extends Service {
                                                                         }
                                                                         @Override
                                                                         public void onFailure(int i, String s) {
-                                                                                LogUtil.e("在服务器上删除自己的群结构消息失败");
+                                                                                LogUtil.e("鍦ㄦ湇鍔″櫒涓婂垹闄よ嚜宸辩殑缇ょ粨鏋勬秷鎭け璐?);
                                                                         }
                                                                 });
                                                                 return;
@@ -188,17 +184,16 @@ public class GroupMessageService extends Service {
                                                         message.setGroupDescription(groupTableMessage.getGroupDescription());
                                                         message.setGroupNumber(groupTableMessage.getGroupNumber());
                                                         message.setGroupName(groupTableMessage.getGroupName());
-//                                                        这里也要同步更新自己的群结构消息,如果是群主就不需要更新，非群主才需要
-                                                        if (UserManager.getInstance().getCurrentUser() != null && !UserManager.getInstance().getCurrentUser().getObjectId().equals(message.getCreatorId())) {
-                                                                LogUtil.e("非群主，需要更新");
+//                                                        杩欓噷涔熻鍚屾鏇存柊鑷繁鐨勭兢缁撴瀯娑堟伅,濡傛灉鏄兢涓诲氨涓嶉渶瑕佹洿鏂帮紝闈炵兢涓绘墠闇€瑕?                                                        if (UserManager.getInstance().getCurrentUser() != null && !UserManager.getInstance().getCurrentUser().getObjectId().equals(message.getCreatorId())) {
+                                                                LogUtil.e("闈炵兢涓伙紝闇€瑕佹洿鏂?);
                                                                 MsgManager.getInstance().updateGroupTableMessage(message);
                                                         }
                                                         ChatDB.create().saveGroupTableMessage(message);
                                                         MessageCacheManager.getInstance().addGroupTableMessage(message);
                                                         RecentMsg recentMsg=ChatDB.create().getRecentMsg(message.getGroupId());
-                                                        LogUtil.e("1这里更改最近群消息");
+                                                        LogUtil.e("1杩欓噷鏇存敼鏈€杩戠兢娑堟伅");
                                                         if (recentMsg != null) {
-                                                                LogUtil.e("这里正式更改最近群消息");
+                                                                LogUtil.e("杩欓噷姝ｅ紡鏇存敼鏈€杩戠兢娑堟伅");
                                                                 recentMsg.setAvatar(message.getGroupAvatar());
                                                                 recentMsg.setName(message.getGroupName());
                                                                 ChatDB.create().saveRecentMessage(recentMsg);
@@ -208,17 +203,17 @@ public class GroupMessageService extends Service {
                                                         intent1.putExtra(Constant.NEW_MESSAGE, message);
                                                         sendOrderedBroadcast(intent1, null);
                                                 } else if (!JsonUtil.getString(object, "groupId").equals("")) {
-                                                        LogUtil.e("实时监听的群消息到啦");
+                                                        LogUtil.e("瀹炴椂鐩戝惉鐨勭兢娑堟伅鍒板暒");
                                                         GroupChatMessage groupChatMessage = MsgManager.getInstance().createReceiveGroupChatMsg(object);
                                                         if (groupChatMessage.getBelongId().equals(UserManager.getInstance().getCurrentUserObjectId())) {
-//                                                                不接受本用户发过来的消息
-                                                                LogUtil.e("实时检测到本用户的群消息，不接受");
+//                                                                涓嶆帴鍙楁湰鐢ㄦ埛鍙戣繃鏉ョ殑娑堟伅
+                                                                LogUtil.e("瀹炴椂妫€娴嬪埌鏈敤鎴风殑缇ゆ秷鎭紝涓嶆帴鍙?);
                                                                 return;
                                                         }
                                                         Intent intent1 = new Intent(Constant.NEW_MESSAGE_ACTION);
 
                                                         if (ChatDB.create().isExistGroupChatMessage(groupChatMessage.getGroupId(), groupChatMessage.getCreateTime())) {
-                                                                LogUtil.e("这里是更新群消息的昵称或头像");
+                                                                LogUtil.e("杩欓噷鏄洿鏂扮兢娑堟伅鐨勬樀绉版垨澶村儚");
                                                                 ChatDB.create().saveGroupChatMessage(groupChatMessage);
                                                                 intent1.putExtra("isRefresh",true);
                                                         }
@@ -233,14 +228,14 @@ public class GroupMessageService extends Service {
                                                                 }
                                                         }
                                                 } else if (!JsonUtil.getString(object, "username").equals("")) {
-                                                        LogUtil.e("实时监听的用户消息到啦");
+                                                        LogUtil.e("瀹炴椂鐩戝惉鐨勭敤鎴锋秷鎭埌鍟?);
                                                         User user = MsgManager.getInstance().createUserFromJsonObject(object);
                                                         MessageCacheManager.getInstance().setUserDataLastUpdateTime(user.getObjectId(), JsonUtil.getString(object, "updatedAt"));
                                                         ChatDB.create().addOrUpdateContacts(user);
                                                         UserCacheManager.getInstance().addContact(user);
                                                 } else if (JsonUtil.getInt(object, "visibleType") != 0) {
-                                                        LogUtil.e("监听到分享消息");
-                                                        LogUtil.e("监听到说说数据更新操作");
+                                                        LogUtil.e("鐩戝惉鍒板垎浜秷鎭?);
+                                                        LogUtil.e("鐩戝惉鍒拌璇存暟鎹洿鏂版搷浣?);
                                                         SharedMessage sharedMessage = MsgManager.getInstance().createSharedMessageFromJson(object);
                                                         if (sharedMessage != null) {
                                                                 ChatDB.create().saveSharedMessage(sharedMessage);
@@ -255,7 +250,7 @@ public class GroupMessageService extends Service {
                                                 }
                                         } catch (JSONException e) {
                                                 e.printStackTrace();
-                                                LogUtil.e("解析出错");
+                                                LogUtil.e("瑙ｆ瀽鍑洪敊");
                                         }
                                 }
                         }
@@ -269,15 +264,15 @@ public class GroupMessageService extends Service {
                 public void addGroup(String groupId) {
                         if (data.isConnected()) {
                                 if (!groupChatMessageList.contains(groupId)) {
-                                        LogUtil.e("还没有监听过该群消息，这里开始监听");
+                                        LogUtil.e("杩樻病鏈夌洃鍚繃璇ョ兢娑堟伅锛岃繖閲屽紑濮嬬洃鍚?);
                                         groupChatMessageList.add(groupId);
                                         data.subTableUpdate("g" + groupId);
                                         data.subRowUpdate("GroupTableMessage", groupId);
                                 } else {
-                                        LogUtil.e("已经监听过该群消息拉，无需再次监听");
+                                        LogUtil.e("宸茬粡鐩戝惉杩囪缇ゆ秷鎭媺锛屾棤闇€鍐嶆鐩戝惉");
                                 }
                         } else {
-                                LogUtil.e("网络异常，数据与服务器上连接不上group");
+                                LogUtil.e("缃戠粶寮傚父锛屾暟鎹笌鏈嶅姟鍣ㄤ笂杩炴帴涓嶄笂group");
                         }
                 }
 
@@ -287,10 +282,10 @@ public class GroupMessageService extends Service {
                                 if (!uidList.contains(uid)) {
                                         data.subRowUpdate(table, uid);
                                 }else {
-                                        LogUtil.e("已经监听该好友");
+                                        LogUtil.e("宸茬粡鐩戝惉璇ュソ鍙?);
                                 }
                         }else {
-                                LogUtil.e("网络异常，数据也服务器连接不上");
+                                LogUtil.e("缃戠粶寮傚父锛屾暟鎹篃鏈嶅姟鍣ㄨ繛鎺ヤ笉涓?);
                         }
                 }
 
@@ -307,43 +302,42 @@ public class GroupMessageService extends Service {
 
 
                 public void addShareMessage(String shareMessageId) {
-                        LogUtil.e("到服务这里1");
+                        LogUtil.e("鍒版湇鍔¤繖閲?");
                         if (data.isConnected()) {
                                 data.subRowUpdate("SharedMessage", shareMessageId);
                                 data.subRowDelete("SharedMessage", shareMessageId);
                                 if (!shareMessageList.contains(shareMessageId)) {
                                         shareMessageList.add(shareMessageId);
-                                        LogUtil.e("添加说说监听" + shareMessageId);
+                                        LogUtil.e("娣诲姞璇磋鐩戝惉" + shareMessageId);
                                         data.subRowUpdate("SharedMessage", shareMessageId);
                                         data.subRowDelete("SharedMessage", shareMessageId);
                                 } else {
-                                        LogUtil.e("已经监听过该说说" + shareMessageId + "的消息,无需再次监听");
+                                        LogUtil.e("宸茬粡鐩戝惉杩囪璇磋" + shareMessageId + "鐨勬秷鎭?鏃犻渶鍐嶆鐩戝惉");
                                 }
                         } else {
-                                LogUtil.e("网络异常，数据与服务器上连接不上add");
-                                //                                这里把ID缓存到内存中,在网络连接成功的时候，再从缓存中监听
-                                if (!shareMessageList.contains(shareMessageId)) {
+                                LogUtil.e("缃戠粶寮傚父锛屾暟鎹笌鏈嶅姟鍣ㄤ笂杩炴帴涓嶄笂add");
+                                //                                杩欓噷鎶奍D缂撳瓨鍒板唴瀛樹腑,鍦ㄧ綉缁滆繛鎺ユ垚鍔熺殑鏃跺€欙紝鍐嶄粠缂撳瓨涓洃鍚?                                if (!shareMessageList.contains(shareMessageId)) {
                                         shareMessageList.add(shareMessageId);
                                 } else {
-                                        LogUtil.e("已经监听过该说说" + shareMessageId + "的消息,无需再次监听");
+                                        LogUtil.e("宸茬粡鐩戝惉杩囪璇磋" + shareMessageId + "鐨勬秷鎭?鏃犻渶鍐嶆鐩戝惉");
                                 }
                         }
                 }
 
 
                 public void removeShareMessage(String shareMessageId) {
-                        LogUtil.e("到服务这里拉1");
+                        LogUtil.e("鍒版湇鍔¤繖閲屾媺1");
                         if (data.isConnected()) {
-                                LogUtil.e("移除说说监听" + shareMessageId);
+                                LogUtil.e("绉婚櫎璇磋鐩戝惉" + shareMessageId);
                                 data.unsubRowUpdate("SharedMessage", shareMessageId);
                                 data.unsubRowDelete("SharedMessage", shareMessageId);
                                 if (shareMessageList.contains(shareMessageId)) {
                                         shareMessageList.remove(shareMessageId);
                                 } else {
-                                        LogUtil.e("已经移除过该说说" + shareMessageId + "的消息,无需再次移除");
+                                        LogUtil.e("宸茬粡绉婚櫎杩囪璇磋" + shareMessageId + "鐨勬秷鎭?鏃犻渶鍐嶆绉婚櫎");
                                 }
                         } else {
-                                LogUtil.e("网络异常，数据与服务器上连接不上 remove");
+                                LogUtil.e("缃戠粶寮傚父锛屾暟鎹笌鏈嶅姟鍣ㄤ笂杩炴帴涓嶄笂 remove");
                         }
                 }
 
@@ -369,11 +363,11 @@ public class GroupMessageService extends Service {
         @Override
         public void onDestroy() {
                 super.onDestroy();
-                LogUtil.e("这里是实时检测服务的onDestroy");
+                LogUtil.e("杩欓噷鏄疄鏃舵娴嬫湇鍔＄殑onDestroy");
 
                 if (data != null) {
                         if (uidList.size() > 0) {
-                                LogUtil.e("111111111取消实时监听");
+                                LogUtil.e("111111111鍙栨秷瀹炴椂鐩戝惉");
                                 for (String uid : uidList) {
                                         data.unsubRowUpdate(table, uid);
                                 }
@@ -387,7 +381,7 @@ public class GroupMessageService extends Service {
                                 groupChatMessageList.clear();
                         }
                         if (shareMessageList.size() > 0) {
-                                LogUtil.e("有遗留的说说消息未取消监听，现在取消");
+                                LogUtil.e("鏈夐仐鐣欑殑璇磋娑堟伅鏈彇娑堢洃鍚紝鐜板湪鍙栨秷");
                                 for (String id :
                                         shareMessageList) {
                                         data.unsubRowUpdate("SharedMessage", id);
@@ -398,3 +392,4 @@ public class GroupMessageService extends Service {
                 }
         }
 }
+

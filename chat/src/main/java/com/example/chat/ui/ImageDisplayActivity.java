@@ -1,10 +1,10 @@
-package com.example.chat.ui;
+﻿package com.example.chat.ui;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -24,15 +24,13 @@ import static mabeijianxi.camera.util.DeviceUtils.getScreenWidth;
 
 
 /**
- * 项目名称:    HappyChat
- * 创建人:        陈锦军
- * 创建时间:    2016/9/20      22:14
+ * 椤圭洰鍚嶇О:    HappyChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2016/9/20      22:14
  * QQ:             1981367757
  */
 
 /**
- * 图片展示类
- */
+ * 鍥剧墖灞曠ず绫? */
 public class ImageDisplayActivity extends SlideBaseActivity implements MediaPlayer.OnPreparedListener, SurfaceVideoView.OnPlayStateListener, MediaPlayer.OnErrorListener, View.OnClickListener, MediaPlayer.OnInfoListener, MediaPlayer.OnCompletionListener {
 //        private ZoomImageView display;
         private CircleLoadView mCircleLoadView;
@@ -57,7 +55,7 @@ public class ImageDisplayActivity extends SlideBaseActivity implements MediaPlay
 //                display.setOnLongClickListener(new View.OnLongClickListener() {
 //                        @Override
 //                        public boolean onLongClick(View v) {
-//                                LogUtil.e("长按暂时无操作");
+//                                LogUtil.e("闀挎寜鏆傛椂鏃犳搷浣?);
 //                                return true;
 //                        }
 //                });
@@ -95,12 +93,12 @@ public class ImageDisplayActivity extends SlideBaseActivity implements MediaPlay
 //                String url = getIntent().getStringExtra("url");
                 initVideo();
 //                if (url.endsWith(".gif")) {
-//                        LogUtil.e("是gif图片");
+//                        LogUtil.e("鏄痝if鍥剧墖");
 //                        load.setVisibility(View.VISIBLE);
 //                        Glide.with(this).load(url).asGif().diskCacheStrategy(DiskCacheStrategy.SOURCE).thumbnail(0.1f).listener(new ImageRequestListener()).into(display);
 //                }
 //                else if (getIntent().getStringExtra("videoUrl") == null) {
-//                        LogUtil.e("1展示图片" + url);
+//                        LogUtil.e("1灞曠ず鍥剧墖" + url);
 //                        File file = new File(url);
 //                        if (file.exists()) {
 ////                                Picasso.with(this).load(file).into(display);
@@ -125,19 +123,19 @@ public class ImageDisplayActivity extends SlideBaseActivity implements MediaPlay
                         DownLoadManager.getInstance().download(videoUrl, id, new OnDownLoadFileListener() {
                                 @Override
                                 public void onStart() {
-                                        LogUtil.e("开始下载视频");
+                                        LogUtil.e("寮€濮嬩笅杞借棰?);
                                         mCircleLoadView.setVisibility(View.VISIBLE);
                                 }
 
                                 @Override
                                 public void onProgress(int value) {
-                                        LogUtil.e("值大小为" + value);
+                                        LogUtil.e("鍊煎ぇ灏忎负" + value);
                                         mCircleLoadView.updateProgress(value);
                                 }
 
                                 @Override
                                 public void onSuccess(String localPath) {
-                                        LogUtil.e("下载视频成功,保存的路径为" + localPath);
+                                        LogUtil.e("涓嬭浇瑙嗛鎴愬姛,淇濆瓨鐨勮矾寰勪负" + localPath);
                                         mCircleLoadView.setVisibility(View.GONE);
 //                                        dismissLoadDialog();
                                         mSurfaceVideoView.setVideoPath(localPath);
@@ -153,7 +151,7 @@ public class ImageDisplayActivity extends SlideBaseActivity implements MediaPlay
                                 @Override
                                 public void onFailed(BmobException e) {
                                         mCircleLoadView.setVisibility(View.GONE);
-                                        LogUtil.e("下载视频失败" + e.getMessage() + e.getErrorCode());
+                                        LogUtil.e("涓嬭浇瑙嗛澶辫触" + e.getMessage() + e.getErrorCode());
                                 }
                         });
                 } else {
@@ -210,8 +208,7 @@ public class ImageDisplayActivity extends SlideBaseActivity implements MediaPlay
 
         @Override
         public boolean dispatchKeyEvent(KeyEvent event) {
-                switch (event.getKeyCode()) {// 跟随系统音量走
-                        case KeyEvent.KEYCODE_VOLUME_DOWN:
+                switch (event.getKeyCode()) {// 璺熼殢绯荤粺闊抽噺璧?                        case KeyEvent.KEYCODE_VOLUME_DOWN:
                         case KeyEvent.KEYCODE_VOLUME_UP:
                                 mSurfaceVideoView.dispatchKeyEvent(this, event);
                                 break;
@@ -227,8 +224,8 @@ public class ImageDisplayActivity extends SlideBaseActivity implements MediaPlay
         @Override
         public boolean onError(MediaPlayer mp, int what, int extra) {
                 if (!isFinishing()) {
-                        // 播放失败
-                        LogUtil.e("播放失败");
+                        // 鎾斁澶辫触
+                        LogUtil.e("鎾斁澶辫触");
                 }
                 finish();
                 return false;
@@ -237,7 +234,7 @@ public class ImageDisplayActivity extends SlideBaseActivity implements MediaPlay
         @Override
         public void onClick(View v) {
                 if (mSurfaceVideoView.isPlaying()) {
-                        Toast.makeText(this, "1正在播放中", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "1姝ｅ湪鎾斁涓?, Toast.LENGTH_SHORT).show();
                         mSurfaceVideoView.pause();
                 } else {
                         if (mSurfaceVideoView.isRelease())
@@ -252,7 +249,7 @@ public class ImageDisplayActivity extends SlideBaseActivity implements MediaPlay
         public boolean onInfo(MediaPlayer mp, int what, int extra) {
                 switch (what) {
                         case MediaPlayer.MEDIA_INFO_BAD_INTERLEAVING:
-                                // 音频和视频数据不正确
+                                // 闊抽鍜岃棰戞暟鎹笉姝ｇ‘
                                 break;
                         case MediaPlayer.MEDIA_INFO_BUFFERING_START:
                                 if (!isFinishing())
@@ -276,7 +273,7 @@ public class ImageDisplayActivity extends SlideBaseActivity implements MediaPlay
         @Override
         public void onCompletion(MediaPlayer mp) {
                 if (!isFinishing()) {
-                        Toast.makeText(this, "播放完成", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "鎾斁瀹屾垚", Toast.LENGTH_SHORT).show();
                         mCircleLoadView.setVisibility(View.VISIBLE);
                 }
         }
@@ -285,7 +282,7 @@ public class ImageDisplayActivity extends SlideBaseActivity implements MediaPlay
                 Intent imageIntent = new Intent(activity, ImageDisplayActivity.class);
                 imageIntent.putExtra("name", "photo");
                 imageIntent.putExtra("url", url);
-                LogUtil.e("启动图片浏览界面11");
+                LogUtil.e("鍚姩鍥剧墖娴忚鐣岄潰11");
                 ActivityCompat.startActivity(activity, imageIntent, ActivityOptionsCompat.makeSceneTransitionAnimation(activity, view, "photo").toBundle());
         }
 
@@ -294,3 +291,4 @@ public class ImageDisplayActivity extends SlideBaseActivity implements MediaPlay
 
         }
 }
+

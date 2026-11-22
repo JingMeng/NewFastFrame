@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.chat">
-    <!--网络连接权限-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--?????????-->
     <uses-permission android:name="android.permission.INTERNET"/>
-    <!--监听网络变化的权限-->
+    <!--??????????????->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <!--设备休眠-->
+    <!--??????-->
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <!-- sd卡存储-->
+    <!-- sd?????->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <!--摄像头-->
+    <!--?????->
     <uses-permission android:name="android.permission.CAMERA"/>
-    <!--录音-->
+    <!--???-->
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    <!--通知震动-->
+    <!--??????-->
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
@@ -32,16 +31,16 @@
     <uses-permission android:name="android.permission.SEND_SMS"/>
 
 
-    <!--用于访问GPS定位-->
+    <!--??????GPS???-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <!--用于申请调用A-GPS模块-->
+    <!--?????????A-GPS???-->
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
 
 
-    <!--允许程序访问CellID或WiFi热点来获取粗略的位置-->   <!--用于进行网络定位-->
+    <!--?????????CellID??iFi???????????????-->   <!--????????????-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <!--<permission android:name="cn.bmob.permission.push" android:protectionLevel="normal"/>-->
-    <!--<uses-permission android:name="cn.bmob.permission.push"/>&lt;!&ndash; 添加自定义的权限&ndash;&gt;-->
+    <!--<uses-permission android:name="cn.bmob.permission.push"/>&lt;!&ndash; ????????????&ndash;&gt;-->
     <uses-permission android:name="android.permission.READ_LOGS"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
@@ -97,20 +96,20 @@
 
 
 
-        <!--小视频界面-->
+        <!--????????->
         <activity android:name="mabeijianxi.camera.MediaRecorderActivity"/>
         <activity android:name=".ui.VideoPlayActivity"/>
-        <!--高德地图API_KEY-->
+        <!--??????API_KEY-->
         <meta-data android:name="com.amap.api.v2.apikey"
             android:value="d20d35b2237fa46693bfad21e0bc41fe">
         </meta-data>
-        <!--定位服务-->
+        <!--??????-->
 
         <service android:name="com.amap.api.location.APSService"/>
 
-        <!--后台实时监听服务-->
+        <!--????????????-->
         <service android:name=".service.GroupMessageService"/>
-        <!--推送服务-->
+        <!--???????->
         <service android:name=".service.PollService">
 
 
@@ -125,42 +124,42 @@
             </intent-filter>
         </service>
 
-        <!-- 用于进程保活 -->
+        <!-- ????????? -->
         <service
             android:name="cn.bmob.push.lib.service.PushNotifyService"
             android:process=":bmobpush">
         </service>
 
         <receiver android:name="cn.bmob.push.PushReceiver">
-            <!--优先级设置最高/以至于不会被KILL掉-->
+            <!--????????????????????KILL??->
             <intent-filter android:priority="2147483647">
-                <!-- 系统启动完成后会调用 -->
+                <!-- ??????????????? -->
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <!-- 解锁完成后会调用 -->
+                <!-- ???????????? -->
                 <action android:name="android.intent.action.USER_PRESENT"/>
-                <!-- 监听网络连通性 -->
+                <!-- ????????????-->
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>
         </receiver>
 
-        <!--推送消息的接收器-->
+        <!--?????????????->
         <receiver android:name=".receiver.PushMessageReceiver">
             <intent-filter>
                 <action android:name="cn.bmob.push.action.MESSAGE"/>
             </intent-filter>
         </receiver>
-        <!-- 接收心跳和唤醒的广播，要和PushService运行在同个进程 -->
+        <!-- ????????????????????ushService???????????-->
         <receiver
             android:name="cn.bmob.push.PushNotifyReceiver"
             android:process=":bmobpush">
             <intent-filter>
-                <!-- 接收心跳广播的action -->
+                <!-- ???????????ction -->
                 <action android:name="cn.bmob.push.action.HEARTBEAT"/>
-                <!-- 接收唤醒广播的action -->
+                <!-- ???????????ction -->
                 <action android:name="cn.bmob.push.action.NOTIFY"/>
             </intent-filter>
         </receiver>
-        <!--推送服务-->
+        <!--???????->
         <meta-data
             android:name="com.example.chat.ChatApplication"
             android:value="IModuleConfig" />

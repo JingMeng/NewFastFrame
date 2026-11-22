@@ -1,10 +1,10 @@
-package com.example.chat.ui;
+﻿package com.example.chat.ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -26,9 +26,8 @@ import cn.bmob.v3.listener.FindListener;
 
 
 /**
- * 项目名称:    HappyChat
- * 创建人:        陈锦军
- * 创建时间:    2016/9/25      12:18
+ * 椤圭洰鍚嶇О:    HappyChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2016/9/25      12:18
  * QQ:             1981367757
  */
 public class SearchFriendActivity extends SlideBaseActivity implements View.OnClickListener {
@@ -90,15 +89,15 @@ public class SearchFriendActivity extends SlideBaseActivity implements View.OnCl
                 ToolBarOption toolBarOption = new ToolBarOption();
                 toolBarOption.setAvatar(null);
                 toolBarOption.setNeedNavigation(true);
-                toolBarOption.setTitle("查找好友");
+                toolBarOption.setTitle("鏌ユ壘濂藉弸");
                 setToolBar(toolBarOption);
         }
 
         private void searchUsers() {
-                showLoadDialog("正在搜索，请稍候.......");
+                showLoadDialog("姝ｅ湪鎼滅储锛岃绋嶅€?......");
                 if (TextUtils.isEmpty(input.getText().toString().trim())) {
                         dismissLoadDialog();
-                        ToastUtils.showShortToast("请输入用户名进行查询!");
+                        ToastUtils.showShortToast("璇疯緭鍏ョ敤鎴峰悕杩涜鏌ヨ!");
                         return;
                 }
                 UserManager.getInstance().queryUsers(input.getText().toString().trim(), new FindListener<User>() {
@@ -106,8 +105,8 @@ public class SearchFriendActivity extends SlideBaseActivity implements View.OnCl
                                 public void onSuccess(List<User> list) {
                                         dismissLoadDialog();
                                         if (list != null && list.size() > 0) {
-                                                LogUtil.e("查询用户成功：个数为" + list.size());
-                                                LogUtil.e(list.size() + "大小");
+                                                LogUtil.e("鏌ヨ鐢ㄦ埛鎴愬姛锛氫釜鏁颁负" + list.size());
+                                                LogUtil.e(list.size() + "澶у皬");
                                                 mAdapter.clearAllData();
                                                 mAdapter.addData(list);
 //                                                adapter.setData(list);
@@ -116,7 +115,7 @@ public class SearchFriendActivity extends SlideBaseActivity implements View.OnCl
 
                                 @Override
                                 public void onError(int i, String s) {
-                                        LogUtil.e("查询出错!" + s + i);
+                                        LogUtil.e("鏌ヨ鍑洪敊!" + s + i);
                                 }
                         }
                 );
@@ -142,3 +141,4 @@ public class SearchFriendActivity extends SlideBaseActivity implements View.OnCl
 
         }
 }
+

@@ -1,8 +1,8 @@
-package com.example.live;
+﻿package com.example.live;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.live.ui.MainActivity;
@@ -21,3 +21,4 @@ public class TestActivity extends AppCompatActivity {
         startActivity(intent);
     }
 }
+

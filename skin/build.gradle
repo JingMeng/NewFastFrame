@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+    namespace 'com.example.skin'
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 //    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
@@ -18,5 +19,7 @@ android {
         }
     }
 }
+
+
 
 

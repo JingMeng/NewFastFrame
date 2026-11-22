@@ -1,7 +1,7 @@
-package com.example.live.ui.fragment;
+﻿package com.example.live.ui.fragment;
 
 import android.content.Intent;
-import android.support.v4.widget.SwipeRefreshLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.View;
 
 import com.example.commonlibrary.BaseFragment;
@@ -22,9 +22,8 @@ import com.example.live.util.LiveUtil;
 import javax.inject.Inject;
 
 /**
- * 项目名称:    NewFastFrame
- * 创建人:        陈锦军
- * 创建时间:    2017/9/14      21:00
+ * 椤圭洰鍚嶇О:    NewFastFrame
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/9/14      21:00
  * QQ:             1981367757
  */
 
@@ -117,3 +116,4 @@ public class ListLiveFragment extends BaseFragment<ListLiveBean,ListLivePresente
         presenter.getCategoryItemData(false,true,slug);
     }
 }
+

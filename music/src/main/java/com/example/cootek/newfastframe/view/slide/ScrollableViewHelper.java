@@ -1,6 +1,6 @@
-package com.example.cootek.newfastframe.view.slide;
+﻿package com.example.cootek.newfastframe.view.slide;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ScrollView;
@@ -61,3 +61,4 @@ public class ScrollableViewHelper {
         }
     }
 }
+

@@ -1,6 +1,6 @@
-package com.example.chat.view.fab;
+﻿package com.example.chat.view.fab;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.View;
 import android.widget.AbsListView;
 

@@ -1,8 +1,8 @@
-package com.example.cootek.newfastframe.ui.fragment;
+﻿package com.example.cootek.newfastframe.ui.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
@@ -16,9 +16,8 @@ import com.komi.slider.SliderUtils;
 import com.komi.slider.position.SliderPosition;
 
 /**
- * 项目名称:    NewFastFrame
- * 创建人:        陈锦军
- * 创建时间:    2017/11/8      15:16
+ * 椤圭洰鍚嶇О:    NewFastFrame
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/11/8      15:16
  * QQ:             1981367757
  */
 
@@ -40,7 +39,7 @@ public abstract class SlideMusicBaseActivity<T, P extends BasePresenter> extends
         mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-//                                如果水平方向的偏移量大于竖直方向的偏移量，就消化该事件,
+//                                濡傛灉姘村钩鏂瑰悜鐨勫亸绉婚噺澶т簬绔栫洿鏂瑰悜鐨勫亸绉婚噺锛屽氨娑堝寲璇ヤ簨浠?
                 return Math.abs(distanceX) > Math.abs(distanceY) || super.onScroll(e1, e2, distanceX, distanceY);
             }
         });
@@ -89,3 +88,4 @@ public abstract class SlideMusicBaseActivity<T, P extends BasePresenter> extends
         return super.dispatchTouchEvent(ev);
     }
 }
+

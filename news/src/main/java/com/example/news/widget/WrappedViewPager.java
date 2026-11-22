@@ -1,14 +1,13 @@
-package com.example.news.widget;
+﻿package com.example.news.widget;
 
 import android.content.Context;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 /**
- * 项目名称:    NewFastFrame
- * 创建人:        陈锦军
- * 创建时间:    2017/9/26      16:49
+ * 椤圭洰鍚嶇О:    NewFastFrame
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/9/26      16:49
  * QQ:             1981367757
  */
 
@@ -40,3 +39,4 @@ public class WrappedViewPager extends ViewPager {
         return false;
     }
 }
+

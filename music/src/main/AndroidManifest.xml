@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.cootek.newfastframe">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -18,7 +17,7 @@
 
         <activity
             android:name=".ui.MainActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask" / android:exported="true">
         <service
             android:name=".MusicService"
             android:process=":main" />
@@ -29,10 +28,10 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".ui.SongListActivity" />
-        <activity android:name=".ui.DownLoadActivity" />
+        <activity android:name=".ui.SongListActivity" / android:exported="true">
+        <activity android:name=".ui.DownLoadActivity" / android:exported="true">
 
-        <activity android:name=".ui.MusicRepositoryActivity" />
+        <activity android:name=".ui.MusicRepositoryActivity" / android:exported="true">
 
         <receiver android:name=".receiver.MusicInfoReceiver">
             <intent-filter>
@@ -43,10 +42,10 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".ui.LocalMusicListActivity" />
-        <activity android:name=".ui.SingerInfoActivity" />
-        <activity android:name=".ui.SettingActivity" />
-        <activity android:name=".ui.LocalMusicActivity"/>
+        <activity android:name=".ui.LocalMusicListActivity" / android:exported="true">
+        <activity android:name=".ui.SingerInfoActivity" / android:exported="true">
+        <activity android:name=".ui.SettingActivity" / android:exported="true">
+        <activity android:name=".ui.LocalMusicActivity"/ android:exported="true">
 
         <meta-data
             android:name="com.example.cootek.newfastframe.VideoApplication"

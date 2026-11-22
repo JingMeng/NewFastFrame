@@ -1,7 +1,7 @@
-package com.example.news.mvp.news.othernew;
+﻿package com.example.news.mvp.news.othernew;
 
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.View;
 
 import com.example.commonlibrary.BaseFragment;
@@ -29,9 +29,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 /**
- * 项目名称:    NewFastFrame
- * 创建人:        陈锦军
- * 创建时间:    2017/9/24      17:02
+ * 椤圭洰鍚嶇О:    NewFastFrame
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/9/24      17:02
  * QQ:             1981367757
  */
 
@@ -97,7 +96,7 @@ public class OtherNewsListFragment extends BaseFragment<List<NewInfoBean>,OtherN
                 }else if (NewsUtil.PHOTO_SET.equals(newInfoBean.getSkipType())){
                     OtherNewPhotoSetActivity.start(getContext(),newInfoBean.getPhotosetID());
                 }else {
-                    ToastUtils.showShortToast("其他");
+                    ToastUtils.showShortToast("鍏朵粬");
                     OtherNewsDetailActivity.start(getContext(),newInfoBean.getPostid());
                 }
             }
@@ -154,3 +153,4 @@ public class OtherNewsListFragment extends BaseFragment<List<NewInfoBean>,OtherN
         }
     }
 }
+

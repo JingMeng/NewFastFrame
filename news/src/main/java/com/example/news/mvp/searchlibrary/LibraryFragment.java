@@ -1,9 +1,9 @@
-package com.example.news.mvp.searchlibrary;
+﻿package com.example.news.mvp.searchlibrary;
 
 import android.content.Intent;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -35,9 +35,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 /**
- * 项目名称:    NewFastFrame
- * 创建人:        陈锦军
- * 创建时间:    2017/9/17      17:41
+ * 椤圭洰鍚嶇О:    NewFastFrame
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/9/17      17:41
  * QQ:             1981367757
  */
 
@@ -123,7 +122,7 @@ public class LibraryFragment extends BaseFragment<List<SearchLibraryBean>, Libra
             }
         });
 //        ToolBarOption toolBarOption = new ToolBarOption();
-//        toolBarOption.setTitle("搜索");
+//        toolBarOption.setTitle("鎼滅储");
 //        setToolBar(toolBarOption);
         typeDisplay.setLayoutManager(typeManager = new WrappedGridLayoutManager(getContext(), 3));
         placeDisplay.setLayoutManager(placeManager = new WrappedGridLayoutManager(getContext(), 3));
@@ -209,7 +208,7 @@ public class LibraryFragment extends BaseFragment<List<SearchLibraryBean>, Libra
     public void loadMore() {
         if (!isClassSearch) {
             if (TextUtils.isEmpty(input.getText().toString().trim())) {
-                ToastUtils.showShortToast("内容不能为空哦");
+                ToastUtils.showShortToast("鍐呭涓嶈兘涓虹┖鍝?);
             } else {
                 presenter.searchBook(false, false, input.getText().toString().trim());
             }
@@ -228,7 +227,7 @@ public class LibraryFragment extends BaseFragment<List<SearchLibraryBean>, Libra
                 loadMoreFooterView.setStatus(LoadMoreFooterView.Status.GONE);
             }
             if (TextUtils.isEmpty(input.getText().toString().trim())) {
-                ToastUtils.showShortToast("内容不能为空哦");
+                ToastUtils.showShortToast("鍐呭涓嶈兘涓虹┖鍝?);
             } else {
                 presenter.searchBook(false, true, input.getText().toString().trim());
             }
@@ -243,7 +242,7 @@ public class LibraryFragment extends BaseFragment<List<SearchLibraryBean>, Libra
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btn_fragment_library_right_confirm) {
-            ToastUtils.showShortToast("确定");
+            ToastUtils.showShortToast("纭畾");
             drawerLayout.closeDrawer(GravityCompat.END);
             refresh.setRefreshing(true);
             isClassSearch = true;
@@ -253,7 +252,7 @@ public class LibraryFragment extends BaseFragment<List<SearchLibraryBean>, Libra
                     , classAdapter.getData(preClassPosition));
         } else {
             if (TextUtils.isEmpty(input.getText().toString().trim())) {
-                ToastUtils.showShortToast("内容不能为空哦");
+                ToastUtils.showShortToast("鍐呭涓嶈兘涓虹┖鍝?);
             } else {
                 isClassSearch = false;
                 refresh.setRefreshing(true);
@@ -280,3 +279,4 @@ public class LibraryFragment extends BaseFragment<List<SearchLibraryBean>, Libra
     }
 
 }
+

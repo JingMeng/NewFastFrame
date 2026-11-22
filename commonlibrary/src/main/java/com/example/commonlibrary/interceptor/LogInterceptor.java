@@ -1,6 +1,6 @@
-package com.example.commonlibrary.interceptor;
+﻿package com.example.commonlibrary.interceptor;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.example.commonlibrary.net.OkHttpGlobalHandler;
 import com.example.commonlibrary.utils.CommonLogger;
@@ -33,11 +33,10 @@ import okio.Buffer;
 public class LogInterceptor implements Interceptor {
 
     public enum Level {
-        NONE,       //不打印log
-        BASIC,      //只打印 请求首行 和 响应首行
-        HEADERS,    //打印请求和响应的所有 Header
-        BODY        //所有数据全部打印
-    }
+        NONE,       //涓嶆墦鍗發og
+        BASIC,      //鍙墦鍗?璇锋眰棣栬 鍜?鍝嶅簲棣栬
+        HEADERS,    //鎵撳嵃璇锋眰鍜屽搷搴旂殑鎵€鏈?Header
+        BODY        //鎵€鏈夋暟鎹叏閮ㄦ墦鍗?    }
 
 
     private OkHttpGlobalHandler handler;
@@ -66,11 +65,10 @@ public class LogInterceptor implements Interceptor {
             return chain.proceed(request);
         }
 
-        //请求日志拦截
+        //璇锋眰鏃ュ織鎷︽埅
         logForRequest(request, chain.connection());
 
-        //执行请求，计算请求时间
-        long startNs = System.nanoTime();
+        //鎵ц璇锋眰锛岃绠楄姹傛椂闂?        long startNs = System.nanoTime();
         Response response;
         try {
             response = chain.proceed(request);
@@ -82,7 +80,7 @@ public class LogInterceptor implements Interceptor {
         if (handler != null) {
 //            handler.onResultResponse()
         }
-        //响应日志拦截
+        //鍝嶅簲鏃ュ織鎷︽埅
         return logForResponse(response, tookMs, chain);
     }
 
@@ -149,7 +147,7 @@ public class LogInterceptor implements Interceptor {
         boolean logHeaders = (printLevel == Level.BODY || printLevel == Level.HEADERS);
 
         try {
-            log("<-- " + clone.code() + ' ' + clone.message() + ' ' + clone.request().url() + " (" + tookMs + "ms）");
+            log("<-- " + clone.code() + ' ' + clone.message() + ' ' + clone.request().url() + " (" + tookMs + "ms锛?);
             if (logHeaders) {
                 Headers headers = clone.headers();
                 for (int i = 0, count = headers.size(); i < count; i++) {
@@ -223,3 +221,4 @@ public class LogInterceptor implements Interceptor {
         }
     }
 }
+

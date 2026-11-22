@@ -1,7 +1,7 @@
-package com.example.cootek.newfastframe.ui;
+﻿package com.example.cootek.newfastframe.ui;
 
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -138,7 +138,7 @@ public class SongListActivity extends MusicBaseActivity<Object, SongListPresente
     @Override
     protected void initData() {
         ToolBarOption toolBarOption = new ToolBarOption();
-        toolBarOption.setTitle("歌曲列表");
+        toolBarOption.setTitle("姝屾洸鍒楄〃");
         toolBarOption.setNeedNavigation(true);
         setToolBar(toolBarOption);
         DaggerSongListActivityComponent.builder().mainComponent(VideoApplication.getMainComponent())
@@ -170,17 +170,17 @@ public class SongListActivity extends MusicBaseActivity<Object, SongListPresente
                     playBean.setSongName(bean.getSonginfo().getTitle());
                     playBean.setArtistName(bean.getSonginfo().getAuthor());
                     playBean.setAlbumUrl(bean.getSonginfo().getPic_premium());
-                    CommonLogger.e("这里数据" + playBean.getAlbumUrl());
+                    CommonLogger.e("杩欓噷鏁版嵁" + playBean.getAlbumUrl());
                     playBean.setSongUrl(bean.getBitrate().getFile_link());
                     playBean.setLrcUrl(bean.getSonginfo().getLrclink());
                     playBean.setTingId(bean.getSonginfo().getTing_uid());
                     list.add(playBean);
                 }
                 if (list.size() > 0) {
-                    CommonLogger.e("播放地址:" + downLoadMusicBean.getBitrate().getFile_link());
+                    CommonLogger.e("鎾斁鍦板潃:" + downLoadMusicBean.getBitrate().getFile_link());
                     MusicManager.getInstance().play(list, position, MusicService.MODE_NORMAL);
                 }
-                Toast.makeText(SongListActivity.this, "这里播放音乐", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SongListActivity.this, "杩欓噷鎾斁闊充箰", Toast.LENGTH_SHORT).show();
             }
         });
         refreshLayout.setOnRefreshListener(this);
@@ -221,7 +221,7 @@ public class SongListActivity extends MusicBaseActivity<Object, SongListPresente
 
     @Override
     public void loadMore() {
-        CommonLogger.e("加载更多阿拉啦");
+        CommonLogger.e("鍔犺浇鏇村闃挎媺鍟?);
         loadMoreFooterView.setStatus(LoadMoreFooterView.Status.LOADING);
         getData(false, false);
     }
@@ -248,3 +248,4 @@ public class SongListActivity extends MusicBaseActivity<Object, SongListPresente
         }
     }
 }
+

@@ -1,9 +1,8 @@
-package com.example.chat.ui;
+﻿package com.example.chat.ui;
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2016/11/27      17:31
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2016/11/27      17:31
  * QQ:             1981367757
  */
 
@@ -14,10 +13,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -69,23 +68,21 @@ import mabeijianxi.camera.model.MediaRecorderConfig;
 
 
 /**
- * 编辑说说的界面
- */
+ * 缂栬緫璇磋鐨勭晫闈? */
 public class EditShareMessageActivity extends SlideBaseActivity<List<SharedMessage>,ShareMessagePresenter> implements View.OnClickListener, ShareMessageContacts.View<List<SharedMessage>>, AdapterView.OnItemClickListener, OnSwipeMenuItemClickListener {
         /**
-         * 编辑内容
+         * 缂栬緫鍐呭
          */
         private EditText edit;
         /**
-         * 定位
+         * 瀹氫綅
          */
         private TextView location;
 
 
-        //        点击选择可以看该说说的用户
-        private TextView visibility;
+        //        鐐瑰嚮閫夋嫨鍙互鐪嬭璇磋鐨勭敤鎴?        private TextView visibility;
         /**
-         * 默认选择所有人可见
+         * 榛樿閫夋嫨鎵€鏈変汉鍙
          */
         private int selectedVisibilityPosition = 1;
         private List<String> selectedVisibleUsers;
@@ -98,7 +95,7 @@ public class EditShareMessageActivity extends SlideBaseActivity<List<SharedMessa
         private ArrayList<ImageItem> selectedImageList = new ArrayList<>();
         private ImageView video;
         /**
-         * 视频存储路径
+         * 瑙嗛瀛樺偍璺緞
          */
         private String mPath;
         private String videoScreenshot;
@@ -170,15 +167,15 @@ public class EditShareMessageActivity extends SlideBaseActivity<List<SharedMessa
                 mPath = intent.getStringExtra(MediaRecorderActivity.VIDEO_URI);
                 videoScreenshot = intent.getStringExtra(MediaRecorderActivity.VIDEO_SCREENSHOT);
                 if (videoScreenshot != null && !videoScreenshot.equals("")) {
-                        LogUtil.e("截图不为空");
+                        LogUtil.e("鎴浘涓嶄负绌?);
                         display.setVisibility(View.GONE);
                         video.setVisibility(View.VISIBLE);
                         Bitmap bitmap = BitmapFactory.decodeFile(videoScreenshot);
                         video.setImageBitmap(bitmap);
                 } else {
-                        LogUtil.e("截图为空");
+                        LogUtil.e("鎴浘涓虹┖");
                         if (isVideo) {
-                                LogUtil.e("视频取消拉");
+                                LogUtil.e("瑙嗛鍙栨秷鎷?);
                                 finish();
                         } else {
                                 LogUtil.e("false");
@@ -210,10 +207,10 @@ public class EditShareMessageActivity extends SlideBaseActivity<List<SharedMessa
         @Override
         protected void onResume() {
                 super.onResume();
-                LogUtil.e("1122onResume:" + "初始化");
+                LogUtil.e("1122onResume:" + "鍒濆鍖?);
                 if (!isFirstCreate) {
                         if (from != null && from.equals("video") && videoScreenshot == null) {
-                                LogUtil.e("这是取消视频的操作");
+                                LogUtil.e("杩欐槸鍙栨秷瑙嗛鐨勬搷浣?);
                                 finish();
                                 return;
                         }
@@ -249,11 +246,10 @@ public class EditShareMessageActivity extends SlideBaseActivity<List<SharedMessa
                 if (LocationManager.getInstance().getLocationList() != null) {
                         location.setText(LocationManager.getInstance().getLocationList().get(0));
                 }
-//                这里初始化图片选择器
-                from = getIntent().getStringExtra("destination");
+//                杩欓噷鍒濆鍖栧浘鐗囬€夋嫨鍣?                from = getIntent().getStringExtra("destination");
                 if (from != null) {
                         if (from.equals("video")) {
-                                LogUtil.e("这是视频说说");
+                                LogUtil.e("杩欐槸瑙嗛璇磋");
                                 isVideo = true;
                                 MediaRecorderConfig config = new MediaRecorderConfig.Buidler()
                                         .doH264Compress(true)
@@ -291,11 +287,11 @@ public class EditShareMessageActivity extends SlideBaseActivity<List<SharedMessa
                                 }
                         } else if (from.equals("image")) {
                                 display.setVisibility(View.VISIBLE);
-                                LogUtil.e("这是图片说说");
+                                LogUtil.e("杩欐槸鍥剧墖璇磋");
                                 initCommonImageLoader();
                                 initImageAdapter();
                         } else {
-                                LogUtil.e("这是文本说说");
+                                LogUtil.e("杩欐槸鏂囨湰璇磋");
                                 display.setVisibility(View.GONE);
                         }
                 }
@@ -306,7 +302,7 @@ public class EditShareMessageActivity extends SlideBaseActivity<List<SharedMessa
 
 
         private void initBottomVisibilityData() {
-                LogUtil.e("初始化底部数据");
+                LogUtil.e("鍒濆鍖栧簳閮ㄦ暟鎹?);
                 selectedFriend.setLayoutManager(new LinearLayoutManager(this));
                 selectedFriend.setItemAnimator(new DefaultItemAnimator());
                 selectedFriend.addItemDecoration(new ListViewDecoration(this));
@@ -317,7 +313,7 @@ public class EditShareMessageActivity extends SlideBaseActivity<List<SharedMessa
                                 SwipeMenuItem deleteItem = new SwipeMenuItem(EditShareMessageActivity.this);
                                 int width = getResources().getDimensionPixelSize(R.dimen.recent_top_height);
                                 deleteItem.setBackgroundDrawable(new ColorDrawable(Color.rgb(0xF9,
-                                        0x3F, 0x25))).setText("删除").setTextColor(Color.WHITE).setHeight(ViewGroup.LayoutParams.MATCH_PARENT).setWidth(width);
+                                        0x3F, 0x25))).setText("鍒犻櫎").setTextColor(Color.WHITE).setHeight(ViewGroup.LayoutParams.MATCH_PARENT).setWidth(width);
                                 swipeRightMenu.addMenuItem(deleteItem);
                         }
                 });
@@ -333,12 +329,12 @@ public class EditShareMessageActivity extends SlideBaseActivity<List<SharedMessa
                         selectedFriend.setVisibility(View.GONE);
                 } else if (selectedVisibilityPosition == 2) {
                         title.setVisibility(View.VISIBLE);
-                        title.setText("可见的如下:");
+                        title.setText("鍙鐨勫涓?");
                         selectedFriend.setVisibility(View.VISIBLE);
                         mAdapter.clearAllData();
                         mAdapter.addData(selectedVisibleUsers);
                 } else if (selectedVisibilityPosition == 3) {
-                        title.setText("不可见的如下:");
+                        title.setText("涓嶅彲瑙佺殑濡備笅:");
                         title.setVisibility(View.VISIBLE);
                         selectedFriend.setVisibility(View.VISIBLE);
                         mAdapter.clearAllData();
@@ -359,13 +355,13 @@ public class EditShareMessageActivity extends SlideBaseActivity<List<SharedMessa
                     @Override
                     public void onItemChildClick(int position, View view, int id) {
                         if (id == R.id.iv_grid_picture_item_display) {
-                            LogUtil.e("点击item的position" + position);
+                            LogUtil.e("鐐瑰嚮item鐨刾osition" + position);
                             if (position == adapter.getData().size() - 1) {
-//                                        进入选择图片界面
+//                                        杩涘叆閫夋嫨鍥剧墖鐣岄潰
                                 Intent intent = new Intent(EditShareMessageActivity.this, SelectedPictureActivity.class);
                                 startActivityForResult(intent, Constant.REQUEST_CODE_SELECT_PICTURE);
                             } else {
-                                LogUtil.e("进入预览界面");
+                                LogUtil.e("杩涘叆棰勮鐣岄潰");
                                 Intent intent = new Intent(EditShareMessageActivity.this, BasePreViewActivity.class);
                                 intent.putExtra(CommonImageLoader.CURRENT_POSITION, position);
                                 intent.putExtra(CommonImageLoader.PREVIEW_FROM, CommonImageLoader.PREVIEW_DELETE);
@@ -386,7 +382,7 @@ public class EditShareMessageActivity extends SlideBaseActivity<List<SharedMessa
 
         private void initPictureContentInfo() {
                 Glide.with(this).load(mPictureBean.getUrl()).into(urlAvatar);
-                urlTitle.setText("一张美女图片");
+                urlTitle.setText("涓€寮犵編濂冲浘鐗?);
         }
 
         private void initHappyInfo() {
@@ -406,16 +402,15 @@ public class EditShareMessageActivity extends SlideBaseActivity<List<SharedMessa
         private void initActionBar() {
                 ToolBarOption toolBarOption = new ToolBarOption();
                 toolBarOption.setAvatar(null);
-                toolBarOption.setTitle("心情");
+                toolBarOption.setTitle("蹇冩儏");
                 toolBarOption.setNeedNavigation(true);
-                toolBarOption.setRightText("发送");
+                toolBarOption.setRightText("鍙戦€?);
                 toolBarOption.setRightResId(R.drawable.ic_send_blue_grey_900_24dp);
                 toolBarOption.setRightListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                                //                                发送操作
-                                if (edit.getText().toString().trim().equals("")) {
-                                        ToastUtils.showShortToast("发送的内容不能为空");
+                                //                                鍙戦€佹搷浣?                                if (edit.getText().toString().trim().equals("")) {
+                                        ToastUtils.showShortToast("鍙戦€佺殑鍐呭涓嶈兘涓虹┖");
                                         return;
                                 }
                                 int visibleType;
@@ -424,7 +419,7 @@ public class EditShareMessageActivity extends SlideBaseActivity<List<SharedMessa
                                 } else {
                                         visibleType = Constant.SHARE_MESSAGE_VISIBLE_TYPE_PUBLIC;
 
-                                        showLoadDialog("正在发表说说..........");
+                                        showLoadDialog("姝ｅ湪鍙戣〃璇磋..........");
                                         MsgManager.getInstance().createSharedMessage(mHappyBean, mHappyContentBean, mWinXinBean, mPictureBean, location.getText().toString().trim(), mPath, videoScreenshot, edit.getText().toString().trim(), selectedImageList, invisibleUsers, visibleType, new OnCreateSharedMessageListener() {
                                                 @Override
                                                 public void onSuccess(final SharedMessage message) {
@@ -434,7 +429,7 @@ public class EditShareMessageActivity extends SlideBaseActivity<List<SharedMessa
                                                 @Override
                                                 public void onFailed(int errorId, String errorMsg) {
                                                         dismissBaseDialog();
-                                                        LogUtil.e("总体上传图片失败");
+                                                        LogUtil.e("鎬讳綋涓婁紶鍥剧墖澶辫触");
                                                         LogUtil.e(errorMsg + errorId);
                                                 }
                                         });
@@ -460,18 +455,16 @@ public class EditShareMessageActivity extends SlideBaseActivity<List<SharedMessa
         @Override
         protected void onActivityResult(int requestCode, int resultCode, Intent data) {
                 if (resultCode == Activity.RESULT_CANCELED && requestCode == Constant.REQUEST_CODE_SELECT_VISIBILITY) {
-                        LogUtil.e("取消选择好友，更新可见界面文本");
+                        LogUtil.e("鍙栨秷閫夋嫨濂藉弸锛屾洿鏂板彲瑙佺晫闈㈡枃鏈?);
                         selectedVisibilityPosition = 1;
-                        visibility.setText("对所有人都可见");
+                        visibility.setText("瀵规墍鏈変汉閮藉彲瑙?);
                         updateBottomData();
                         return;
                 }
                 if (resultCode == Activity.RESULT_OK) {
-//                        这里进行图片选择后URL消息的回调处理
-                        switch (requestCode) {
+//                        杩欓噷杩涜鍥剧墖閫夋嫨鍚嶶RL娑堟伅鐨勫洖璋冨鐞?                        switch (requestCode) {
                                 case Constant.REQUEST_CODE_SELECT_VISIBILITY:
-//                                        选择可见性
-                                        if (data != null) {
+//                                        閫夋嫨鍙鎬?                                        if (data != null) {
                                                 if (selectedVisibleUsers != null && selectedVisibleUsers.size() > 0) {
                                                         selectedVisibleUsers.clear();
                                                 }
@@ -497,7 +490,7 @@ public class EditShareMessageActivity extends SlideBaseActivity<List<SharedMessa
                                         if (selectedVisibleUsers != null) {
                                                 for (String uid :
                                                         invisibleUsers) {
-                                                        LogUtil.e("不可见用户ID" + uid + "\n");
+                                                        LogUtil.e("涓嶅彲瑙佺敤鎴稩D" + uid + "\n");
                                                 }
                                         }
                                         updateBottomData();
@@ -523,12 +516,12 @@ public class EditShareMessageActivity extends SlideBaseActivity<List<SharedMessa
         public void onClick(View v) {
                 int i = v.getId();
                 if (i == R.id.rl_edit_share_message_visibility_container) {
-                        mBaseDialog.setDialogContentView(R.layout.select_visibility_layout).setTitle("谁可见").setBottomLayoutVisible(true).setLeftButton("取消", new View.OnClickListener() {
+                        mBaseDialog.setDialogContentView(R.layout.select_visibility_layout).setTitle("璋佸彲瑙?).setBottomLayoutVisible(true).setLeftButton("鍙栨秷", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                         cancelBaseDialog();
                                 }
-                        }).setRightButton("确定", new View.OnClickListener() {
+                        }).setRightButton("纭畾", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                         selectedVisibleUsers = null;
@@ -538,28 +531,28 @@ public class EditShareMessageActivity extends SlideBaseActivity<List<SharedMessa
                                         int i1 = radioGroup.getCheckedRadioButtonId();
                                         if (i1 == R.id.rb_visibility_private) {
                                                 selectedVisibilityPosition = 0;
-                                                visibility.setText("仅对自己可见");
+                                                visibility.setText("浠呭鑷繁鍙");
                                                 updateBottomData();
 
                                         } else if (i1 == R.id.rb_visibility_public) {
                                                 selectedVisibilityPosition = 1;
-                                                visibility.setText("对所有人都可见");
+                                                visibility.setText("瀵规墍鏈変汉閮藉彲瑙?);
                                                 updateBottomData();
 
                                         } else if (i1 == R.id.rb_visibility_part) {
                                                 selectedVisibilityPosition = 2;
-                                                visibility.setText("对部分人可见");
+                                                visibility.setText("瀵归儴鍒嗕汉鍙");
                                                 Intent partVisibility = new Intent(EditShareMessageActivity.this, SelectedFriendsActivity.class);
                                                 partVisibility.putExtra("from", "select_visibility");
-                                                partVisibility.putExtra("title", "对谁可见");
+                                                partVisibility.putExtra("title", "瀵硅皝鍙");
                                                 startActivityForResult(partVisibility, Constant.REQUEST_CODE_SELECT_VISIBILITY);
 
                                         } else if (i1 == R.id.rb_visibility_exclude_part) {
                                                 selectedVisibilityPosition = 3;
-                                                visibility.setText("对部分人不可见");
+                                                visibility.setText("瀵归儴鍒嗕汉涓嶅彲瑙?);
                                                 Intent intent = new Intent(EditShareMessageActivity.this, SelectedFriendsActivity.class);
                                                 intent.putExtra("from", "select_visibility");
-                                                intent.putExtra("title", "对谁不可见");
+                                                intent.putExtra("title", "瀵硅皝涓嶅彲瑙?);
                                                 startActivityForResult(intent, Constant.REQUEST_CODE_SELECT_VISIBILITY);
 
                                         }
@@ -568,7 +561,7 @@ public class EditShareMessageActivity extends SlideBaseActivity<List<SharedMessa
                         ((RadioGroup) mBaseDialog.getMiddleLayout().findViewById(R.id.rg_select_visibility_container)).check(getCheckIdFromPosition(selectedVisibilityPosition));
 
                 } else if (i == R.id.iv_edit_share_message_video) {
-                        LogUtil.e("点击了播放录制视频");
+                        LogUtil.e("鐐瑰嚮浜嗘挱鏀惧綍鍒惰棰?);
                         Intent intent = new Intent(this, VideoPlayActivity.class);
                         intent.putExtra("path", mPath);
                         startActivity(intent);
@@ -580,8 +573,8 @@ public class EditShareMessageActivity extends SlideBaseActivity<List<SharedMessa
                                 addressList = new ArrayList<>();
                         }
                         addressList.addAll(LocationManager.getInstance().getLocationList());
-                        addressList.add("不显示");
-                        showChooseDialog("选择位置", addressList, this);
+                        addressList.add("涓嶆樉绀?);
+                        showChooseDialog("閫夋嫨浣嶇疆", addressList, this);
 
                 } else if (i == R.id.cv_edit_share_message_url_container) {
                         Intent happyContentIntent = new Intent(this, HappyContentDisplayActivity.class);
@@ -617,11 +610,10 @@ public class EditShareMessageActivity extends SlideBaseActivity<List<SharedMessa
         @Override
         public void updateShareMessageAdded(SharedMessage shareMessage) {
                 dismissBaseDialog();
-                LogUtil.e("成功发送");
-                ToastUtils.showShortToast("成功发送");
-                LogUtil.e("这里的说说ID" + shareMessage.getObjectId());
-//                这里把本地存储的视频或图片的URL存到内存中
-                if (shareMessage.getMsgType().equals(Constant.MSG_TYPE_SHARE_MESSAGE_IMAGE)) {
+                LogUtil.e("鎴愬姛鍙戦€?);
+                ToastUtils.showShortToast("鎴愬姛鍙戦€?);
+                LogUtil.e("杩欓噷鐨勮璇碔D" + shareMessage.getObjectId());
+//                杩欓噷鎶婃湰鍦板瓨鍌ㄧ殑瑙嗛鎴栧浘鐗囩殑URL瀛樺埌鍐呭瓨涓?                if (shareMessage.getMsgType().equals(Constant.MSG_TYPE_SHARE_MESSAGE_IMAGE)) {
                         List<String> urlList = new ArrayList<>();
                         for (ImageItem imageItem :
                                 selectedImageList) {
@@ -634,7 +626,7 @@ public class EditShareMessageActivity extends SlideBaseActivity<List<SharedMessa
                         urlList.add(mPath);
                         MessageCacheManager.getInstance().saveShareMessageCache(shareMessage.getObjectId(), urlList);
                 } else if (shareMessage.getMsgType().equals(Constant.MSG_TYPE_SHARE_MESSAGE_LINK)) {
-                        LogUtil.e("这里是发送链接的消息");
+                        LogUtil.e("杩欓噷鏄彂閫侀摼鎺ョ殑娑堟伅");
                         Intent intent = new Intent(this, MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.putExtra("url_share_message", shareMessage);
@@ -702,3 +694,4 @@ public class EditShareMessageActivity extends SlideBaseActivity<List<SharedMessa
 
         }
 }
+

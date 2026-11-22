@@ -1,7 +1,7 @@
-package com.example.chat.adapter;
+﻿package com.example.chat.adapter;
 
 import android.content.Context;
-import android.support.v4.view.PagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,9 +22,8 @@ import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2016/11/29      16:06
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2016/11/29      16:06
  * QQ:             1981367757
  */
 public class ImagePageAdapter extends PagerAdapter {
@@ -34,11 +33,11 @@ public class ImagePageAdapter extends PagerAdapter {
     private List<ImageItem> data;
     private Context mContext;
     /**
-     * 屏幕宽度
+     * 灞忓箷瀹藉害
      */
     private int screenWidth;
     /**
-     * 屏幕高度
+     * 灞忓箷楂樺害
      */
     private int screenHeight;
 //        private CommonImageLoader mCommonImageLoader;
@@ -68,11 +67,11 @@ public class ImagePageAdapter extends PagerAdapter {
         View view = LayoutInflater.from(mContext).inflate(R.layout.base_pre_view_item_layout, null);
         PhotoView photoView = (PhotoView) view.findViewById(R.id.pv_base_pre_view_item_display);
         ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.pb_base_pre_view_item_load);
-        LogUtil.e("执行到这里,可以了");
+        LogUtil.e("鎵ц鍒拌繖閲?鍙互浜?);
         photoView.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
             @Override
             public void onPhotoTap(View view, float x, float y) {
-                LogUtil.e("点击操作photoView");
+                LogUtil.e("鐐瑰嚮鎿嶄綔photoView");
                 if (mOnPhotoViewClickListener != null) {
                     mOnPhotoViewClickListener.onPhotoViewClick(view, position);
                 }
@@ -109,3 +108,4 @@ public class ImagePageAdapter extends PagerAdapter {
         container.removeView((ViewGroup) object);
     }
 }
+

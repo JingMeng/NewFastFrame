@@ -1,9 +1,9 @@
-package com.example.cootek.newfastframe.ui;
+﻿package com.example.cootek.newfastframe.ui;
 
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentTransaction;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,7 +98,7 @@ public abstract class MusicBaseActivity<T, P extends BasePresenter> extends Base
 
 
     /**
-     * @param show 显示或关闭底部播放控制栏
+     * @param show 鏄剧ず鎴栧叧闂簳閮ㄦ挱鏀炬帶鍒舵爮
      */
     protected void showBottomFragment(boolean show) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -134,3 +134,4 @@ public abstract class MusicBaseActivity<T, P extends BasePresenter> extends Base
 
 
 }
+

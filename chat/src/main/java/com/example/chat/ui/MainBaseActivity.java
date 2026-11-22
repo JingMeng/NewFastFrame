@@ -1,8 +1,8 @@
-package com.example.chat.ui;
+﻿package com.example.chat.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -19,9 +19,8 @@ import java.util.List;
 
 
 /**
- * 项目名称:    HappyChat
- * 创建人:        陈锦军
- * 创建时间:    2016/9/13      11:46
+ * 椤圭洰鍚嶇О:    HappyChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2016/9/13      11:46
  * QQ:             1981367757
  */
 public abstract class MainBaseActivity<T,P extends BasePresenter> extends BaseActivity<T,P> {
@@ -41,7 +40,7 @@ public abstract class MainBaseActivity<T,P extends BasePresenter> extends BaseAc
 
         private void checkLogin() {
                 if (UserManager.getInstance().getCurrentUser() == null) {
-                        ToastUtils.showShortToast("你的帐号已在其他设备登陆,请重新登录!");
+                        ToastUtils.showShortToast("浣犵殑甯愬彿宸插湪鍏朵粬璁惧鐧婚檰,璇烽噸鏂扮櫥褰?");
                         Intent intent = new Intent(this, LoginActivity.class);
                         startActivity(intent);
                         finish();
@@ -51,12 +50,12 @@ public abstract class MainBaseActivity<T,P extends BasePresenter> extends BaseAc
 
         public void showEditDialog(String title, List<String> names, final OnEditDataCompletedListener listener) {
                 if (names != null && names.size() > 0) {
-                        mBaseDialog.setTitle(title).setEditViewsName(names).setLeftButton("取消", new View.OnClickListener() {
+                        mBaseDialog.setTitle(title).setEditViewsName(names).setLeftButton("鍙栨秷", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                         cancelBaseDialog();
                                 }
-                        }).setRightButton("确定", new View.OnClickListener() {
+                        }).setRightButton("纭畾", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                         if (listener != null) {
@@ -65,8 +64,8 @@ public abstract class MainBaseActivity<T,P extends BasePresenter> extends BaseAc
                                                 for (int i = 0; i < size; i++) {
                                                         String result = ((EditText) ((LinearLayout) mBaseDialog.getMiddleLayout().getChildAt(i)).getChildAt(1)).getText().toString().trim();
                                                         if (result.equals("")) {
-                                                                ToastUtils.showShortToast("1输入内容不能为空");
-                                                                LogUtil.e("输入框不能为空");
+                                                                ToastUtils.showShortToast("1杈撳叆鍐呭涓嶈兘涓虹┖");
+                                                                LogUtil.e("杈撳叆妗嗕笉鑳戒负绌?);
                                                                 return;
                                                         }
                                                         data.add(result);
@@ -80,3 +79,4 @@ public abstract class MainBaseActivity<T,P extends BasePresenter> extends BaseAc
         }
 
 }
+

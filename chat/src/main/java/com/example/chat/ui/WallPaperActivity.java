@@ -1,7 +1,7 @@
-package com.example.chat.ui;
+﻿package com.example.chat.ui;
 
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 import com.example.chat.R;
@@ -19,9 +19,8 @@ import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2017/2/26      20:59
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/2/26      20:59
  * QQ:             1981367757
  */
 
@@ -60,7 +59,7 @@ public class WallPaperActivity extends SlideBaseActivity {
         @Override
         public void initData() {
                 from = getIntent().getStringExtra("from");
-                showLoadDialog("1正在加载背景图片.........");
+                showLoadDialog("1姝ｅ湪鍔犺浇鑳屾櫙鍥剧墖.........");
                 if (from.equals("title_wallpaper")) {
                         MsgManager.getInstance().getAllDefaultTitleWallPaperFromServer(new FindListener<String>() {
                                 @Override
@@ -72,7 +71,7 @@ public class WallPaperActivity extends SlideBaseActivity {
                                 @Override
                                 public void onError(int i, String s) {
                                         dismissLoadDialog();
-                                        LogUtil.e("加载背景图片信息失败" + s + i);
+                                        LogUtil.e("鍔犺浇鑳屾櫙鍥剧墖淇℃伅澶辫触" + s + i);
                                 }
                         });
                 } else {
@@ -86,7 +85,7 @@ public class WallPaperActivity extends SlideBaseActivity {
                                 @Override
                                 public void onError(int i, String s) {
                                         dismissLoadDialog();
-                                        LogUtil.e("加载背景图片信息失败" + s + i);
+                                        LogUtil.e("鍔犺浇鑳屾櫙鍥剧墖淇℃伅澶辫触" + s + i);
                                 }
                         });
                 }
@@ -125,8 +124,8 @@ public class WallPaperActivity extends SlideBaseActivity {
 
         private void initActionBar() {
                 ToolBarOption toolBarOption = new ToolBarOption();
-                toolBarOption.setRightText("完成");
-                toolBarOption.setTitle("选择背景图片");
+                toolBarOption.setRightText("瀹屾垚");
+                toolBarOption.setTitle("閫夋嫨鑳屾櫙鍥剧墖");
                 toolBarOption.setAvatar(UserManager.getInstance().getCurrentUser().getAvatar());
                 toolBarOption.setNeedNavigation(true);
                 toolBarOption.setRightListener(new View.OnClickListener() {
@@ -138,7 +137,7 @@ public class WallPaperActivity extends SlideBaseActivity {
                                                 UserManager.getInstance().updateUserInfo("titleWallPaper", selectedImage, new UpdateListener() {
                                                         @Override
                                                         public void onSuccess() {
-                                                                LogUtil.e("更改标题背景成功");
+                                                                LogUtil.e("鏇存敼鏍囬鑳屾櫙鎴愬姛");
                                                                 UserManager.getInstance().getCurrentUser().setTitleWallPaper(selectedImage);
                                                                 setResult(RESULT_OK);
                                                                 finish();
@@ -146,7 +145,7 @@ public class WallPaperActivity extends SlideBaseActivity {
 
                                                         @Override
                                                         public void onFailure(int i, String s) {
-                                                                LogUtil.e("上传背景图片到服务器上失败" + s + i);
+                                                                LogUtil.e("涓婁紶鑳屾櫙鍥剧墖鍒版湇鍔″櫒涓婂け璐? + s + i);
                                                         }
                                                 });
                                         }
@@ -162,7 +161,7 @@ public class WallPaperActivity extends SlideBaseActivity {
 
                                                         @Override
                                                         public void onFailure(int i, String s) {
-                                                                LogUtil.e("上传背景图片到服务器上失败" + s + i);
+                                                                LogUtil.e("涓婁紶鑳屾櫙鍥剧墖鍒版湇鍔″櫒涓婂け璐? + s + i);
                                                         }
                                                 });
                                         }
@@ -178,3 +177,4 @@ public class WallPaperActivity extends SlideBaseActivity {
 
         }
 }
+

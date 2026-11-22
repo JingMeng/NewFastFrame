@@ -5,6 +5,7 @@ if (rootProject.ext.isAlone) {
 }
 
 android {
+    namespace 'com.example.news'
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 //    buildToolsVersion rootProject.ext.android.buildToolsVersion
     defaultConfig {
@@ -16,10 +17,9 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 //        ndk {
-//            // 设置支持的SO库架构
-//            abiFilters 'armeabi', 'armeabi-v7a'//, 'x86', 'x86_64', 'arm64-v8a'
+//            // ????????O?????//            abiFilters 'armeabi', 'armeabi-v7a'//, 'x86', 'x86_64', 'arm64-v8a'
 //        }
         if (!rootProject.ext.isAlone) {
             javaCompileOptions {
@@ -106,4 +106,7 @@ android {
     }
     buildToolsVersion '26.0.2'
 }
+
+
+
 

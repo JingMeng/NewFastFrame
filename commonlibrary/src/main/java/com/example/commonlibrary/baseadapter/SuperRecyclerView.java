@@ -1,14 +1,14 @@
-package com.example.commonlibrary.baseadapter;
+﻿package com.example.commonlibrary.baseadapter;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.Nullable;
 import android.support.v4.view.MotionEventCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -165,7 +165,7 @@ public class SuperRecyclerView extends SwipeMenuRecyclerView {
         if (mStatus == STATUS_DEFAULT && refreshing) {
             this.mIsAutoRefreshing = true;
             setStatus(STATUS_SWIPING_TO_REFRESH);
-//            TLog.e(SuperRecyclerView.class, "自动刷新");
+//            TLog.e(SuperRecyclerView.class, "鑷姩鍒锋柊");
             startScrollDefaultStatusToRefreshingStatus();
         } else if (mStatus == STATUS_REFRESHING && !refreshing) {
             this.mIsAutoRefreshing = false;
@@ -195,7 +195,7 @@ public class SuperRecyclerView extends SwipeMenuRecyclerView {
 //            mRefreshHeaderContainer.post(new Runnable() {
 //                @Override
 //                public void run() {
-//                        TLog.e(SuperRecyclerView.class,"高度为？？"+mRefreshHeaderContainer.getMeasuredHeight());
+//                        TLog.e(SuperRecyclerView.class,"楂樺害涓猴紵锛?+mRefreshHeaderContainer.getMeasuredHeight());
 //                }
 //            });
         }
@@ -426,7 +426,7 @@ public class SuperRecyclerView extends SwipeMenuRecyclerView {
                 break;
 
                 case MotionEvent.ACTION_MOVE: {
-//                TLog.e(SuperRecyclerView.class, "截获到滚动事件");
+//                TLog.e(SuperRecyclerView.class, "鎴幏鍒版粴鍔ㄤ簨浠?);
                     final int index = MotionEventCompat.findPointerIndex(e, mActivePointerId);
                     if (index < 0) {
                         Log.e(TAG, "Error processing scroll; pointer index for id " + index + " not found. Did any MotionEvents get skipped?");
@@ -452,7 +452,7 @@ public class SuperRecyclerView extends SwipeMenuRecyclerView {
 
                         if (dy > 0 && mStatus == STATUS_DEFAULT) {
                             setStatus(STATUS_SWIPING_TO_REFRESH);
-//                        TLog.e(SuperRecyclerView.class, "滚动刷新");
+//                        TLog.e(SuperRecyclerView.class, "婊氬姩鍒锋柊");
                             mRefreshTrigger.onStart(false, refreshHeaderViewHeight, mRefreshFinalMoveOffset);
                         } else if (dy < 0) {
                             if (mStatus == STATUS_SWIPING_TO_REFRESH && refreshHeaderContainerHeight <= 0) {
@@ -467,7 +467,7 @@ public class SuperRecyclerView extends SwipeMenuRecyclerView {
                             if (refreshHeaderContainerHeight >= refreshHeaderViewHeight) {
                                 setStatus(STATUS_RELEASE_TO_REFRESH);
                             } else {
-//                            TLog.e(SuperRecyclerView.class, "这里开始下拉刷新");
+//                            TLog.e(SuperRecyclerView.class, "杩欓噷寮€濮嬩笅鎷夊埛鏂?);
                                 setStatus(STATUS_SWIPING_TO_REFRESH);
                             }
                             fingerMove(dy);
@@ -570,9 +570,9 @@ public class SuperRecyclerView extends SwipeMenuRecyclerView {
 
     private void move(int dy) {
         if (dy != 0) {
-//            TLog.e(SuperRecyclerView.class, "核心刷新" + dy);
+//            TLog.e(SuperRecyclerView.class, "鏍稿績鍒锋柊" + dy);
             int height = mRefreshHeaderContainer.getMeasuredHeight() + dy;
-//            TLog.e(SuperRecyclerView.class, "核心刷新偏移:" + dy + "刷新高度" + height);
+//            TLog.e(SuperRecyclerView.class, "鏍稿績鍒锋柊鍋忕Щ:" + dy + "鍒锋柊楂樺害" + height);
             setRefreshHeaderContainerHeight(height);
             mRefreshTrigger.onMove(false, false, height);
         }
@@ -584,7 +584,7 @@ public class SuperRecyclerView extends SwipeMenuRecyclerView {
     }
 
     private void startScrollDefaultStatusToRefreshingStatus() {
-//        TLog.e(SuperRecyclerView.class, "自动刷新");
+//        TLog.e(SuperRecyclerView.class, "鑷姩鍒锋柊");
         mRefreshTrigger.onStart(true, mRefreshHeaderView.getMeasuredHeight(), mRefreshFinalMoveOffset);
 
         int targetHeight = mRefreshHeaderView.getMeasuredHeight();
@@ -786,3 +786,4 @@ public class SuperRecyclerView extends SwipeMenuRecyclerView {
 
     }
 }
+

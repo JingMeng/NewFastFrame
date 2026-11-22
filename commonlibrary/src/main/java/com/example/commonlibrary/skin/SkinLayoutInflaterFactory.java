@@ -1,10 +1,10 @@
-package com.example.commonlibrary.skin;
+﻿package com.example.commonlibrary.skin;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.support.v4.view.LayoutInflaterFactory;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -50,7 +50,7 @@ public class SkinLayoutInflaterFactory implements LayoutInflaterFactory {
 
     @Override
     public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
-//        获取是否应用换肤操作
+//        鑾峰彇鏄惁搴旂敤鎹㈣偆鎿嶄綔
 
 
 //        String tag = attrs.getAttributeValue(SkinUtil.NAME_PLACE, "tag");
@@ -84,8 +84,7 @@ public class SkinLayoutInflaterFactory implements LayoutInflaterFactory {
                         createSkinFromAttrName(BACKGROUND, backgroundResId, view);
                     }
                 } else if (supportAttrsName.contains(attrName)) {
-                    //                只有引用类型才可以换肤
-                    CommonLogger.e("value：" + attrValue + " attrName：" + attrName);
+                    //                鍙湁寮曠敤绫诲瀷鎵嶅彲浠ユ崲鑲?                    CommonLogger.e("value锛? + attrValue + " attrName锛? + attrName);
                     if (attrValue.startsWith("?") || attrValue.startsWith("@")) {
                         int id = Integer.parseInt(attrValue.substring(1));
                         if (id != 0) {
@@ -95,7 +94,7 @@ public class SkinLayoutInflaterFactory implements LayoutInflaterFactory {
                 }
             } catch (Resources.NotFoundException | NumberFormatException e) {
                 e.printStackTrace();
-                CommonLogger.e("哈哈" + e.getMessage() + e.getCause().toString());
+                CommonLogger.e("鍝堝搱" + e.getMessage() + e.getCause().toString());
             }
             if (viewSkinItemMap.get(view) != null) {
                 viewSkinItemMap.get(view).apply();
@@ -148,3 +147,4 @@ public class SkinLayoutInflaterFactory implements LayoutInflaterFactory {
 
 
 }
+

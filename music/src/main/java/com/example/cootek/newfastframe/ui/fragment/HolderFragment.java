@@ -1,6 +1,6 @@
-package com.example.cootek.newfastframe.ui.fragment;
+﻿package com.example.cootek.newfastframe.ui.fragment;
 
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -70,9 +70,9 @@ public class HolderFragment extends BaseFragment implements View.OnClickListener
     protected void initData() {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
         List<String> titleList = new ArrayList<>();
-        titleList.add("听");
-        titleList.add("看");
-        titleList.add("唱");
+        titleList.add("鍚?);
+        titleList.add("鐪?);
+        titleList.add("鍞?);
         List<BaseFragment> fragments = new ArrayList<>();
         fragments.add(ListenerFragment.newInstance());
         fragments.add(RankFragment.newInstance());
@@ -127,3 +127,4 @@ public class HolderFragment extends BaseFragment implements View.OnClickListener
         ViewHelper.setAlpha(expend, (1-delta));
     }
 }
+

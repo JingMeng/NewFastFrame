@@ -1,4 +1,4 @@
-package com.example.chat.ui.fragment;
+﻿package com.example.chat.ui.fragment;
 
 import android.app.Service;
 import android.content.ComponentName;
@@ -9,9 +9,9 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.os.IBinder;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -53,15 +53,14 @@ import io.reactivex.functions.Consumer;
 
 
 /**
- * 项目名称:    HappyChat
- * 创建人:        陈锦军
- * 创建时间:    2016/9/13      12:18
+ * 椤圭洰鍚嶇О:    HappyChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2016/9/13      12:18
  * QQ:             1981367757
  */
 
 
 /**
- * 最近会话列表fragment
+ * 鏈€杩戜細璇濆垪琛╢ragment
  */
 public class RecentFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, OnNetWorkChangedListener {
         private ConversationListAdapter mAdapter;
@@ -91,7 +90,7 @@ public class RecentFragment extends BaseFragment implements SwipeRefreshLayout.O
 
         @Override
         public void initView() {
-                LogUtil.e("12RecentFragment：initView");
+                LogUtil.e("12RecentFragment锛歩nitView");
                 display = (SwipeMenuRecyclerView) findViewById(R.id.rcv_recent_display);
                 mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh_recent_container);
                 display.setLayoutManager(mLinearLayoutManager = new LinearLayoutManager(getActivity()));
@@ -103,14 +102,13 @@ public class RecentFragment extends BaseFragment implements SwipeRefreshLayout.O
                         public void onCreateMenu(SwipeMenu swipeLeftMenu, SwipeMenu swipeRightMenu, int viewType) {
                                 int width = getActivity().getResources().getDimensionPixelSize(R.dimen.recent_top_height);
                                 int height = ViewGroup.LayoutParams.MATCH_PARENT;
-//                                 添加左右侧菜单
-                                {
+//                                 娣诲姞宸﹀彸渚ц彍鍗?                                {
                                         SwipeMenuItem topItem = new SwipeMenuItem(getActivity());
                                         topItem.setBackgroundDrawable(new ColorDrawable(Color.rgb(0xC9, 0xC9,
-                                                0xCE))).setText("置顶").setTextColor(Color.WHITE).setWidth(width).setHeight(height);
+                                                0xCE))).setText("缃《").setTextColor(Color.WHITE).setWidth(width).setHeight(height);
                                         SwipeMenuItem deleteItem = new SwipeMenuItem(getActivity());
                                         deleteItem.setBackgroundDrawable(new ColorDrawable(Color.rgb(0xF9,
-                                                0x3F, 0x25))).setText("删除").setTextColor(Color.WHITE).setHeight(height).setWidth(width);
+                                                0x3F, 0x25))).setText("鍒犻櫎").setTextColor(Color.WHITE).setHeight(height).setWidth(width);
                                         swipeRightMenu.addMenuItem(topItem);
                                         swipeRightMenu.addMenuItem(deleteItem);
                                 }
@@ -147,7 +145,7 @@ public class RecentFragment extends BaseFragment implements SwipeRefreshLayout.O
 
         @Override
         public void initData() {
-                LogUtil.e("RecentFragment：initData");
+                LogUtil.e("RecentFragment锛歩nitData");
                 if (mLinearLayoutManager.findViewByPosition(0) != null) {
                         mLinearLayoutManager.findViewByPosition(0).setVisibility(View.GONE);
                 }
@@ -163,10 +161,10 @@ public class RecentFragment extends BaseFragment implements SwipeRefreshLayout.O
                 Subscription mSubscription = (Subscription) RxBusManager.getInstance().registerEvent(GroupInfoEvent.class, new Consumer<GroupInfoEvent>() {
                         @Override
                         public void accept(GroupInfoEvent groupInfoEvent) {
-//                                刷新过来的，更新下群结构消息
+//                                鍒锋柊杩囨潵鐨勶紝鏇存柊涓嬬兢缁撴瀯娑堟伅
                                 if (groupInfoEvent.getType()==GroupInfoEvent.TYPE_GROUP_NUMBER){
                                                 String content=groupInfoEvent.getContent();
-                                                LogUtil.e("recent接收到被提出群的消息");
+                                                LogUtil.e("recent鎺ユ敹鍒拌鎻愬嚭缇ょ殑娑堟伅");
                                                 RecentMsg recentMsg=new RecentMsg();
                                                 recentMsg.setBelongId(content);
                                         if (mAdapter.getData().contains(recentMsg)) {
@@ -178,7 +176,7 @@ public class RecentFragment extends BaseFragment implements SwipeRefreshLayout.O
                 }, new Consumer<Throwable>() {
                         @Override
                         public void accept(Throwable throwable) {
-                                LogUtil.e("rxbus传递出现异常");
+                                LogUtil.e("rxbus浼犻€掑嚭鐜板紓甯?);
                                 if (throwable != null) {
                                         LogUtil.e(throwable.getMessage());
                                 }
@@ -204,7 +202,7 @@ public class RecentFragment extends BaseFragment implements SwipeRefreshLayout.O
         public void onHiddenChanged(boolean hidden) {
                 super.onHiddenChanged(hidden);
                 if (!hidden) {
-                        ((MainActivity) getActivity()).initActionBar("聊天");
+                        ((MainActivity) getActivity()).initActionBar("鑱婂ぉ");
                         mAdapter.clearAllData();
                         mAdapter.addData(ChatDB.create().getAllRecentMsg());
                 }
@@ -214,8 +212,8 @@ public class RecentFragment extends BaseFragment implements SwipeRefreshLayout.O
 
         @Override
         public void onRefresh() {
-//                这里进行更新操作
-                LogUtil.e("主界面刷新拉");
+//                杩欓噷杩涜鏇存柊鎿嶄綔
+                LogUtil.e("涓荤晫闈㈠埛鏂版媺");
                 mAdapter.clearAllData();
                 mAdapter.addData(ChatDB.create().getAllRecentMsg());
                 if (mSwipeRefreshLayout.isRefreshing()) {
@@ -232,7 +230,7 @@ public class RecentFragment extends BaseFragment implements SwipeRefreshLayout.O
                         getActivity().unregisterReceiver(netWorkChangedReceiver);
                 }
                 RxBusManager.getInstance().unSubscrible(this);
-                LogUtil.e("这里停止实时检测服务拉");
+                LogUtil.e("杩欓噷鍋滄瀹炴椂妫€娴嬫湇鍔℃媺");
                 if (connection != null) {
                         getActivity().unbindService(connection);
                         connection = null;
@@ -241,12 +239,12 @@ public class RecentFragment extends BaseFragment implements SwipeRefreshLayout.O
 
 
         /**
-         * 由主activity调用更新数据
+         * 鐢变富activity璋冪敤鏇存柊鏁版嵁
          */
         public void updateRecentData(String id) {
                 RecentMsg recentMsg;
                 recentMsg = ChatDB.create().getRecentMsg(id);
-                LogUtil.e("最近消息如下1");
+                LogUtil.e("鏈€杩戞秷鎭涓?");
                 if (recentMsg != null) {
                         LogUtil.e(recentMsg);
                         mAdapter.addData(recentMsg);
@@ -255,17 +253,17 @@ public class RecentFragment extends BaseFragment implements SwipeRefreshLayout.O
 
         @Override
         public void OnNetWorkChanged(boolean isConnected, int type) {
-                LogUtil.e("1网络状态改变");
+                LogUtil.e("1缃戠粶鐘舵€佹敼鍙?);
                 if (type == ConnectivityManager.TYPE_WIFI) {
-                        LogUtil.e("当前的状态为" + isConnected + "   111当前的连接类型为wifi");
+                        LogUtil.e("褰撳墠鐨勭姸鎬佷负" + isConnected + "   111褰撳墠鐨勮繛鎺ョ被鍨嬩负wifi");
                 } else {
-                        LogUtil.e("当前的状态为" + isConnected + "   当前的连接类型移动网络");
+                        LogUtil.e("褰撳墠鐨勭姸鎬佷负" + isConnected + "   褰撳墠鐨勮繛鎺ョ被鍨嬬Щ鍔ㄧ綉缁?);
                 }
                 if (isConnected) {
 
-//                        查询好友信息
+//                        鏌ヨ濂藉弸淇℃伅
 
-//                        这里拉取网络中断这段时间内的信息
+//                        杩欓噷鎷夊彇缃戠粶涓柇杩欐鏃堕棿鍐呯殑淇℃伅
 //                        queryGroupChatMessage();
                         MsgManager.getInstance().queryGroupChatMessage(MessageCacheManager.getInstance().getAllGroupId(), new FindListener<GroupChatMessage>() {
                                 @Override
@@ -297,7 +295,7 @@ public class RecentFragment extends BaseFragment implements SwipeRefreshLayout.O
 
                                         @Override
                                         public void onServiceDisconnected(ComponentName name) {
-                                                LogUtil.e("服务绑定拉");
+                                                LogUtil.e("鏈嶅姟缁戝畾鎷?);
 
                                         }
                                 };
@@ -307,9 +305,9 @@ public class RecentFragment extends BaseFragment implements SwipeRefreshLayout.O
                                 }
                                 getActivity().bindService(intent, connection, Service.BIND_AUTO_CREATE);
                         } else {
-                                LogUtil.e("已经绑定了");
+                                LogUtil.e("宸茬粡缁戝畾浜?);
                                 if (binder != null) {
-                                        LogUtil.e("网络又连接通时，开始实时监听");
+                                        LogUtil.e("缃戠粶鍙堣繛鎺ラ€氭椂锛屽紑濮嬪疄鏃剁洃鍚?);
                                         binder.startListener();
                                 }
                         }
@@ -323,13 +321,12 @@ public class RecentFragment extends BaseFragment implements SwipeRefreshLayout.O
 //                                userList) {
 //                                BmobQuery<User> query = new BmobQuery<>();
 //                                String lastTime = MessageCacheManager.getInstance().getUserDataLastUpdateTime(uid);
-////                                        第一次断网查询用户数据
-//                                try {
+////                                        绗竴娆℃柇缃戞煡璇㈢敤鎴锋暟鎹?//                                try {
 //                                        query.addWhereGreaterThan("updatedAt", new BmobDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(lastTime)));
 //                                        query.addWhereEqualTo("objectId", uid);
 //                                } catch (ParseException e) {
 //                                        e.printStackTrace();
-//                                        LogUtil.e("解析时间错误");
+//                                        LogUtil.e("瑙ｆ瀽鏃堕棿閿欒");
 //                                }
 //                                query.findObjects(CustomApplication.getInstance(), new FindListener<User>() {
 //                                        @Override
@@ -344,7 +341,7 @@ public class RecentFragment extends BaseFragment implements SwipeRefreshLayout.O
 //
 //                                        @Override
 //                                        public void onError(int i, String s) {
-//                                                LogUtil.e("断网期间内查询用户失败" + s + i);
+//                                                LogUtil.e("鏂綉鏈熼棿鍐呮煡璇㈢敤鎴峰け璐? + s + i);
 //                                        }
 //                                });
 //                        }
@@ -369,8 +366,8 @@ public class RecentFragment extends BaseFragment implements SwipeRefreshLayout.O
 //                                query.findObjects(CustomApplication.getInstance(), new FindCallback() {
 //                                        @Override
 //                                        public void onSuccess(JSONArray jsonArray) {
-//                                                LogUtil.e("群消息解析");
-//                                                LogUtil.e("jsonArray：" + jsonArray.toString());
+//                                                LogUtil.e("缇ゆ秷鎭В鏋?);
+//                                                LogUtil.e("jsonArray锛? + jsonArray.toString());
 //                                                for (int i = 0; i < jsonArray.length(); i++) {
 //                                                        try {
 //                                                                JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -391,7 +388,7 @@ public class RecentFragment extends BaseFragment implements SwipeRefreshLayout.O
 //
 //                                        @Override
 //                                        public void onFailure(int i, String s) {
-//                                                LogUtil.e("查询断网期间的群消息失败：" + s + i);
+//                                                LogUtil.e("鏌ヨ鏂綉鏈熼棿鐨勭兢娑堟伅澶辫触锛? + s + i);
 //                                        }
 //                                });
 //                        }
@@ -412,11 +409,11 @@ public class RecentFragment extends BaseFragment implements SwipeRefreshLayout.O
 
 
         public void notifyGroupTableMsgCome(String groupId) {
-                LogUtil.e("这里通知服务监听群消息");
+                LogUtil.e("杩欓噷閫氱煡鏈嶅姟鐩戝惉缇ゆ秷鎭?);
                 if (binder != null) {
                         binder.addGroup(groupId);
                 } else {
-                        LogUtil.e("binder 是空的，监听不了群消息");
+                        LogUtil.e("binder 鏄┖鐨勶紝鐩戝惉涓嶄簡缇ゆ秷鎭?);
                 }
         }
 
@@ -424,20 +421,20 @@ public class RecentFragment extends BaseFragment implements SwipeRefreshLayout.O
         public void notifySharedMessageChanged(String objectId, boolean isAdd) {
                 if (binder != null) {
                         if (isAdd) {
-                                LogUtil.e("通知实时监听说说消息拉拉");
+                                LogUtil.e("閫氱煡瀹炴椂鐩戝惉璇磋娑堟伅鎷夋媺");
                                 binder.addShareMessage(objectId);
                         } else {
-                                LogUtil.e("移除实时监听说说消息拉拉");
+                                LogUtil.e("绉婚櫎瀹炴椂鐩戝惉璇磋娑堟伅鎷夋媺");
                                 binder.removeShareMessage(objectId);
                         }
                 } else {
-                        LogUtil.e("binder为空");
+                        LogUtil.e("binder涓虹┖");
                 }
         }
 
         public void notifyUserAdd(String id) {
                 if (binder != null) {
-                        LogUtil.e("实时监听新增的用户信息");
+                        LogUtil.e("瀹炴椂鐩戝惉鏂板鐨勭敤鎴蜂俊鎭?);
                         binder.addUser(id);
                 }
         }
@@ -451,26 +448,24 @@ public class RecentFragment extends BaseFragment implements SwipeRefreshLayout.O
         private class MySwipeItemClickListener implements OnSwipeMenuItemClickListener {
                 @Override
                 public void onItemClick(Closeable closeable, int adapterPosition, int menuPosition, int direction) {
-//                        删除操作
+//                        鍒犻櫎鎿嶄綔
                         if (direction == SwipeMenuRecyclerView.RIGHT_DIRECTION) {
                                 if (menuPosition == 0) {
-                                        ToastUtils.showShortToast("置顶操作");
-//                                        置顶操作
+                                        ToastUtils.showShortToast("缃《鎿嶄綔");
+//                                        缃《鎿嶄綔
                                 } else if (menuPosition == 1) {
-//                                        删除操作，1、最近会话删除
-                                        RecentMsg msg = mAdapter.getData(adapterPosition);
-                                        LogUtil.e("将要删除的最近会话的消息：" + msg.getLastMsgContent());
+//                                        鍒犻櫎鎿嶄綔锛?銆佹渶杩戜細璇濆垹闄?                                        RecentMsg msg = mAdapter.getData(adapterPosition);
+                                        LogUtil.e("灏嗚鍒犻櫎鐨勬渶杩戜細璇濈殑娑堟伅锛? + msg.getLastMsgContent());
                                         ChatDB.create().deleteRecentMsg(msg.getBelongId(), msg.getTime());
-//                                        删除操作，2、聊天消息删除
-                                        if (MessageCacheManager.getInstance().getGroupTableMessage(msg.getBelongId()) == null) {
+//                                        鍒犻櫎鎿嶄綔锛?銆佽亰澶╂秷鎭垹闄?                                        if (MessageCacheManager.getInstance().getGroupTableMessage(msg.getBelongId()) == null) {
                                                 ChatDB.create().deleteAllChatMessage(msg.getBelongId());
                                         } else {
                                                 ChatDB.create().deleteAllGroupChatMessage(msg.getBelongId());
                                         }
-//                                        数据中删除
-                                        mAdapter.removeData(adapterPosition);
+//                                        鏁版嵁涓垹闄?                                        mAdapter.removeData(adapterPosition);
                                 }
                         }
                 }
         }
 }
+

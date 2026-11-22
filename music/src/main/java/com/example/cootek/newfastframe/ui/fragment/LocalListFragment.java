@@ -1,7 +1,7 @@
-package com.example.cootek.newfastframe.ui.fragment;
+﻿package com.example.cootek.newfastframe.ui.fragment;
 
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.Toast;
 
@@ -70,7 +70,7 @@ public class LocalListFragment extends BaseFragment<List<MusicPlayBean>, MainPre
 
     @Override
     protected void initView() {
-        CommonLogger.e("初始化MainFragment");
+        CommonLogger.e("鍒濆鍖朚ainFragment");
         display = (SuperRecyclerView) findViewById(R.id.srcv_fragment_main_display);
         refresh = (SwipeRefreshLayout) findViewById(R.id.refresh_fragment_main_refresh);
         display.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -95,7 +95,7 @@ public class LocalListFragment extends BaseFragment<List<MusicPlayBean>, MainPre
 
             @Override
             public boolean onItemLongClick(int position, View view) {
-                CommonLogger.e("长按");
+                CommonLogger.e("闀挎寜");
                 if (SkinManager.getInstance().isLocal()) {
                     SkinManager.getInstance().loadSkinResource(SkinUtil.getSkinFilePath("hello.skin"), new LoadSkinListener() {
                         @Override
@@ -140,3 +140,4 @@ public class LocalListFragment extends BaseFragment<List<MusicPlayBean>, MainPre
         refresh.setRefreshing(false);
     }
 }
+

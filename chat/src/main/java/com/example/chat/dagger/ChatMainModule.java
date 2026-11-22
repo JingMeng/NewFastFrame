@@ -1,6 +1,6 @@
-package com.example.chat.dagger;
+﻿package com.example.chat.dagger;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.example.chat.ChatInterceptor;
 import com.example.chat.MainRepositoryManager;
@@ -21,9 +21,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * 项目名称:    NewFastFrame
- * 创建人:        陈锦军
- * 创建时间:    2017/10/9      15:36
+ * 椤圭洰鍚嶇О:    NewFastFrame
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/10/9      15:36
  * QQ:             1981367757
  */
 @Module
@@ -65,3 +64,4 @@ public class ChatMainModule {
         return new ChatInterceptor();
     }
 }
+

@@ -1,4 +1,4 @@
-package com.example.cootek.newfastframe;
+﻿package com.example.cootek.newfastframe;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -24,7 +24,7 @@ import android.os.PowerManager;
 import android.os.Process;
 import android.os.RemoteException;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat;
@@ -61,7 +61,7 @@ import java.util.TreeSet;
 
 
 /**
- * Created by 陈锦军 on 2017/8/7.
+ * Created by 闄堥敠鍐?on 2017/8/7.
  */
 
 public class MusicService extends Service {
@@ -113,16 +113,15 @@ public class MusicService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-//        发送前台通知
-        CommonLogger.e("服务的onCreate1");
+//        鍙戦€佸墠鍙伴€氱煡
+        CommonLogger.e("鏈嶅姟鐨刼nCreate1");
         notificationManagerCompat = NotificationManagerCompat.from(this);
         daoSession = VideoApplication.getMainComponent().getDaoSession();
         handlerThread = new HandlerThread("music_handler_thread", Process.THREAD_PRIORITY_BACKGROUND);
         handlerThread.start();
         musicServiceHandler = new MusicServiceHandler(handlerThread.getLooper(), this);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-//            桌面锁屏的会话回调
-            setUpMediaSession();
+//            妗岄潰閿佸睆鐨勪細璇濆洖璋?            setUpMediaSession();
         AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         audioManager.registerMediaButtonEventReceiver(new ComponentName(getPackageName(),
                 MediaButtonIntentReceiver.class.getName()));
@@ -141,8 +140,7 @@ public class MusicService extends Service {
             mPlaylist.addAll(list);
         }
         if (mPlaylist.size() > 0) {
-            final int pos = mPreferences.getInt(MusicUtil.POSITION, 0); //记录了上次退出时播放曲目在播放队列中的位置
-            if (pos < 0 || pos >= mPlaylist.size()) {
+            final int pos = mPreferences.getInt(MusicUtil.POSITION, 0); //璁板綍浜嗕笂娆￠€€鍑烘椂鎾斁鏇茬洰鍦ㄦ挱鏀鹃槦鍒椾腑鐨勪綅缃?            if (pos < 0 || pos >= mPlaylist.size()) {
                 mPlaylist.clear();
                 return;
             }
@@ -152,7 +150,7 @@ public class MusicService extends Service {
             seek(seekpos >= 0 && seekpos < duration() ? seekpos : 0);
             mode = mPreferences.getInt(MusicUtil.PLAY_MODE, 0);
             if (mode == MODE_SHUFFLE) {
-//                取出历史播放列表
+//                鍙栧嚭鍘嗗彶鎾斁鍒楄〃
                 mHistory.clear();
                 List<MusicHistoryInfo> historyInfos = daoSession.getMusicHistoryInfoDao().queryBuilder().where(MusicHistoryInfoDao.Properties.Position.le(mPlaylist.size())).build().list();
                 for (MusicHistoryInfo info :
@@ -164,7 +162,7 @@ public class MusicService extends Service {
     }
 
     private long duration() {
-        CommonLogger.e("获取歌曲的时长");
+        CommonLogger.e("鑾峰彇姝屾洸鐨勬椂闀?);
         return wrappedMediaPlayer.duration();
     }
 
@@ -186,7 +184,7 @@ public class MusicService extends Service {
             intent.putExtra("buffer_update", wrappedMediaPlayer.getSecondProgress());
         }
         sendBroadcast(intent);
-        CommonLogger.e("已经发送广播");
+        CommonLogger.e("宸茬粡鍙戦€佸箍鎾?);
         switch (action) {
             case META_CHANGED:
             case REFRESH_DATA:
@@ -213,11 +211,11 @@ public class MusicService extends Service {
     }
 
     private void updateMediaSession(String action) {
-        CommonLogger.e("updateMediaSession：" + action);
+        CommonLogger.e("updateMediaSession锛? + action);
         final int playState = isPlaying
                 ? PlaybackStateCompat.STATE_PLAYING
                 : PlaybackStateCompat.STATE_PAUSED;
-        if (action.equals(PLAYSTATE_CHANGED)) { //播放状态改变时
+        if (action.equals(PLAYSTATE_CHANGED)) { //鎾斁鐘舵€佹敼鍙樻椂
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 mediaSessionCompat.setPlaybackState(new PlaybackStateCompat.Builder()
                         .setState(playState, position(), 1.0f)
@@ -225,14 +223,12 @@ public class MusicService extends Service {
                                 PlaybackStateCompat.ACTION_SKIP_TO_NEXT | PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS)
                         .build());
             }
-        } else if (action.equals(META_CHANGED)) { //当前播放歌曲的信息或者播放队列改变
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        } else if (action.equals(META_CHANGED)) { //褰撳墠鎾斁姝屾洸鐨勪俊鎭垨鑰呮挱鏀鹃槦鍒楁敼鍙?            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 if (getCurrentMusicPlayInfo() != null) {
                     if (getCurrentMusicPlayInfo().isLocal()) {
                         refreshMediaSession(playState, BitmapFactory.decodeResource(getResources(), R.drawable.icon_album_default));
                     } else {
-//                        这里不能用Glide加载，在into方法中会出现判主线程的判断从而出错
-                        String path = mPreferences.getString(String.valueOf(getAudioId()), null);
+//                        杩欓噷涓嶈兘鐢℅lide鍔犺浇锛屽湪into鏂规硶涓細鍑虹幇鍒や富绾跨▼鐨勫垽鏂粠鑰屽嚭閿?                        String path = mPreferences.getString(String.valueOf(getAudioId()), null);
                         if (path == null || !new File(path).exists()) {
                             loadAlbum(new AlbumCallBack() {
                                 @Override
@@ -245,7 +241,7 @@ public class MusicService extends Service {
                                 refreshMediaSession(playState, BitmapFactory.decodeStream(new FileInputStream(new File(path))));
                             } catch (FileNotFoundException e) {
                                 e.printStackTrace();
-                                CommonLogger.e("文件没有被找到" + e.getMessage());
+                                CommonLogger.e("鏂囦欢娌℃湁琚壘鍒? + e.getMessage());
                             }
                         }
                     }
@@ -278,8 +274,7 @@ public class MusicService extends Service {
 
 
     /**
-     * 获取歌曲所属类型
-     *
+     * 鑾峰彇姝屾洸鎵€灞炵被鍨?     *
      * @return GenreName
      */
     private String getGenreName() {
@@ -308,7 +303,7 @@ public class MusicService extends Service {
     }
 
     private long[] getQueue() {
-        CommonLogger.e("获取现在的播放的队列");
+        CommonLogger.e("鑾峰彇鐜板湪鐨勬挱鏀剧殑闃熷垪");
         synchronized (this) {
             final int len = mPlaylist.size();
             final long[] list = new long[len];
@@ -320,7 +315,7 @@ public class MusicService extends Service {
     }
 
     private int getQueuePosition() {
-        CommonLogger.e("获取现在播放队列的位置");
+        CommonLogger.e("鑾峰彇鐜板湪鎾斁闃熷垪鐨勪綅缃?);
         synchronized (this) {
             return playPosition;
         }
@@ -329,8 +324,7 @@ public class MusicService extends Service {
     private void saveQueue(boolean isAll) {
         final SharedPreferences.Editor editor = mPreferences.edit();
         if (isAll) {
-//            清除旧数据，保持新数据
-            if (mode == MODE_SHUFFLE) {
+//            娓呴櫎鏃ф暟鎹紝淇濇寔鏂版暟鎹?            if (mode == MODE_SHUFFLE) {
                 List<MusicHistoryInfo> list = new ArrayList<>();
                 for (int i = 0; i < mHistory.size(); i++) {
                     MusicHistoryInfo musicHistoryInfo = new MusicHistoryInfo(mHistory.get(i));
@@ -428,8 +422,7 @@ public class MusicService extends Service {
         stop(false);
         prepareNext(force);
         if (nextPlayPosition < 0) {
-//            没有下一首
-//            设置停止状态并通知
+//            娌℃湁涓嬩竴棣?//            璁剧疆鍋滄鐘舵€佸苟閫氱煡
             setIsSupposedToBePlaying(false, true);
         } else {
             play();
@@ -454,15 +447,13 @@ public class MusicService extends Service {
 
 
     /**
-     * 获取播放列表中的前一首歌曲
-     *
-     * @param removeFromHistory 是否从历史中删除最近一个播放记录
-     * @return 位置
+     * 鑾峰彇鎾斁鍒楄〃涓殑鍓嶄竴棣栨瓕鏇?     *
+     * @param removeFromHistory 鏄惁浠庡巻鍙蹭腑鍒犻櫎鏈€杩戜竴涓挱鏀捐褰?     * @return 浣嶇疆
      */
     public int getPreviousPlayPosition(boolean removeFromHistory) {
-        CommonLogger.e("获取播放列表中的前一首歌曲");
+        CommonLogger.e("鑾峰彇鎾斁鍒楄〃涓殑鍓嶄竴棣栨瓕鏇?);
         synchronized (this) {
-            if (mode == MODE_SHUFFLE) { //普通随机模式,从历史中获取
+            if (mode == MODE_SHUFFLE) { //鏅€氶殢鏈烘ā寮?浠庡巻鍙蹭腑鑾峰彇
                 final int size = mHistory.size();
                 if (size == 0) {
                     return -1;
@@ -493,14 +484,14 @@ public class MusicService extends Service {
 
 
     private void stop(boolean died) {
-        CommonLogger.e("停止播放");
+        CommonLogger.e("鍋滄鎾斁");
         if (wrappedMediaPlayer.isInitialized()) {
             wrappedMediaPlayer.stop();
         }
         if (died) {
             setIsSupposedToBePlaying(false, false);
         } else {
-            CommonLogger.e("停止前台");
+            CommonLogger.e("鍋滄鍓嶅彴");
             stopForeground(false);
         }
 
@@ -508,29 +499,28 @@ public class MusicService extends Service {
 
 
     /**
-     * 是否重新获取下一首歌的位置,当播放前一首歌的时候，就不需要重新获取下一首歌的位置了
+     * 鏄惁閲嶆柊鑾峰彇涓嬩竴棣栨瓕鐨勪綅缃?褰撴挱鏀惧墠涓€棣栨瓕鐨勬椂鍊欙紝灏变笉闇€瑕侀噸鏂拌幏鍙栦笅涓€棣栨瓕鐨勪綅缃簡
      */
     private void play() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
             mediaSessionCompat.setActive(true);
         if (wrappedMediaPlayer.isInitialized()) {
-            CommonLogger.e("开始播放");
+            CommonLogger.e("寮€濮嬫挱鏀?);
             wrappedMediaPlayer.start();
-            CommonLogger.e("这里通过移除减弱的声音的消息和发送增加声音的消息来调整到正常的音量");
+            CommonLogger.e("杩欓噷閫氳繃绉婚櫎鍑忓急鐨勫０闊崇殑娑堟伅鍜屽彂閫佸鍔犲０闊崇殑娑堟伅鏉ヨ皟鏁村埌姝ｅ父鐨勯煶閲?);
             musicServiceHandler.removeMessages(FADEDOWN);
-            musicServiceHandler.sendEmptyMessage(FADEUP); //组件调到正常音量
-            CommonLogger.e("设置播放状态,并通知播放状态的改变");
+            musicServiceHandler.sendEmptyMessage(FADEUP); //缁勪欢璋冨埌姝ｅ父闊抽噺
+            CommonLogger.e("璁剧疆鎾斁鐘舵€?骞堕€氱煡鎾斁鐘舵€佺殑鏀瑰彉");
             setIsSupposedToBePlaying(true, true);
             notifyChange(META_CHANGED);
         } else {
-            CommonLogger.e("播放的时候资源还没有准备或出错");
+            CommonLogger.e("鎾斁鐨勬椂鍊欒祫婧愯繕娌℃湁鍑嗗鎴栧嚭閿?);
         }
     }
 
 
     /**
-     * 更新通知栏
-     */
+     * 鏇存柊閫氱煡鏍?     */
     private void updateNotification() {
         if (!isPlaying()) {
             stopForeground(false);
@@ -634,7 +624,7 @@ public class MusicService extends Service {
         if (notificationPostTime == 0) {
             notificationPostTime = System.currentTimeMillis();
         }
-        android.support.v4.app.NotificationCompat.Builder builder = new NotificationCompat.Builder(getBaseContext())
+        androidx.core.app.NotificationCompat.Builder builder = new NotificationCompat.Builder(getBaseContext())
                 .setLargeIcon(bitmap)
                 .setSmallIcon(R.drawable.ic_music_note_white_24dp)
                 .setContentIntent(getMainIntent())
@@ -678,7 +668,7 @@ public class MusicService extends Service {
     }
 
     private String getArtistName() {
-        CommonLogger.e("获取歌手名");
+        CommonLogger.e("鑾峰彇姝屾墜鍚?);
         synchronized (this) {
             if (getCurrentMusicPlayInfo() != null) {
                 return getCurrentMusicPlayInfo().getArtistName();
@@ -688,7 +678,7 @@ public class MusicService extends Service {
     }
 
     private String getAlbumName() {
-        CommonLogger.e("获取专辑名");
+        CommonLogger.e("鑾峰彇涓撹緫鍚?);
         synchronized (this) {
             if (getCurrentMusicPlayInfo() != null) {
                 return getCurrentMusicPlayInfo().getAlbumName();
@@ -710,7 +700,7 @@ public class MusicService extends Service {
 
 
     private void pause() {
-        CommonLogger.e("暂停");
+        CommonLogger.e("鏆傚仠");
         synchronized (this) {
             musicServiceHandler.removeMessages(FADEUP);
             musicServiceHandler.sendEmptyMessage(FADEDOWN);
@@ -720,14 +710,14 @@ public class MusicService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        CommonLogger.e("服务的onStartCommand");
+        CommonLogger.e("鏈嶅姟鐨刼nStartCommand");
         mStartId = startId;
         if (intent != null) {
             String action = intent.getAction();
             String value = intent.getStringExtra(COMMAND);
             if (action != null) {
                 switch (action) {
-//                    媒体按钮
+//                    濯掍綋鎸夐挳
                     case MEDIA_BUTTON_ACTION:
                         switch (value) {
                             case MEDIA_BUTTON_PAUSE:
@@ -759,7 +749,7 @@ public class MusicService extends Service {
                         }
                         break;
                     case PREVIOUS_ACTION:
-                        ToastUtils.showShortToast("前一首");
+                        ToastUtils.showShortToast("鍓嶄竴棣?);
                         previous();
                         break;
                     case NEXT_ACTION:
@@ -802,7 +792,7 @@ public class MusicService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        CommonLogger.e("1服务的onBind");
+        CommonLogger.e("1鏈嶅姟鐨刼nBind");
         reloadQueue();
         return bind;
     }
@@ -932,8 +922,7 @@ public class MusicService extends Service {
     private void setPlayMode(int mode) {
         if (this.mode != mode) {
             this.mode = mode;
-//            重新选择下一首歌曲
-            setNextMusicPlayInfo();
+//            閲嶆柊閫夋嫨涓嬩竴棣栨瓕鏇?            setNextMusicPlayInfo();
         }
     }
 
@@ -953,7 +942,7 @@ public class MusicService extends Service {
                     stop(true);
                 } else {
                     mPlaylist.remove(position);
-//                    更新下一首歌资源
+//                    鏇存柊涓嬩竴棣栨瓕璧勬簮
                     setNextMusicPlayInfo();
                 }
             } else {
@@ -974,8 +963,8 @@ public class MusicService extends Service {
 
     private void open(List<MusicPlayBean> list, int position) {
         if (!list.equals(mPlaylist)) {
-            addToPlayList(list, -1); //添加到播放列表,并清空原播放列表
-            CommonLogger.e("清空之前的播放队列后通知队列的改变");
+            addToPlayList(list, -1); //娣诲姞鍒版挱鏀惧垪琛?骞舵竻绌哄師鎾斁鍒楄〃
+            CommonLogger.e("娓呯┖涔嬪墠鐨勬挱鏀鹃槦鍒楀悗閫氱煡闃熷垪鐨勬敼鍙?);
         }
         if (position >= 0) {
             playPosition = position;
@@ -988,11 +977,10 @@ public class MusicService extends Service {
 
 
     /**
-     * 添加所有的item到播放队列中
+     * 娣诲姞鎵€鏈夌殑item鍒版挱鏀鹃槦鍒椾腑
      *
-     * @param list     播放列表
-     * @param position -1表示清除之前的播放列表
-     */
+     * @param list     鎾斁鍒楄〃
+     * @param position -1琛ㄧず娓呴櫎涔嬪墠鐨勬挱鏀惧垪琛?     */
     private void addToPlayList(List<MusicPlayBean> list, int position) {
         final int size = list.size();
         if (position < 0) {
@@ -1008,21 +996,19 @@ public class MusicService extends Service {
     }
 
     /**
-     * 根据path更新Cursor,和准备播放资源
-     *
-     * @param path   本地路径或网络路径
-     * @param lrcUrl url
-     * @return 成功与否
+     * 鏍规嵁path鏇存柊Cursor,鍜屽噯澶囨挱鏀捐祫婧?     *
+     * @param path   鏈湴璺緞鎴栫綉缁滆矾寰?     * @param lrcUrl url
+     * @return 鎴愬姛涓庡惁
      */
     private boolean openFile(String path, String lrcUrl, long songId) {
-        CommonLogger.e("打开文件的路径" + path);
+        CommonLogger.e("鎵撳紑鏂囦欢鐨勮矾寰? + path);
         synchronized (this) {
             if (path == null) {
                 return false;
             }
             wrappedMediaPlayer.setDataSource(path, lrcUrl, songId);
             if (wrappedMediaPlayer.isInitialized()) {
-//                只要有一次成功，重置可失败的次数
+//                鍙鏈変竴娆℃垚鍔燂紝閲嶇疆鍙け璐ョ殑娆℃暟
                 mOpenFailedCounter = 0;
                 return true;
             }
@@ -1074,14 +1060,13 @@ public class MusicService extends Service {
 
 
     /**
-     * 获取并准备现在的曲目资源和下一首资源
-     */
+     * 鑾峰彇骞跺噯澶囩幇鍦ㄧ殑鏇茬洰璧勬簮鍜屼笅涓€棣栬祫婧?     */
     private void openCurrentAndNext() {
         openCurrentAndMaybeNext(true);
     }
 
     private void openCurrentAndMaybeNext(boolean openNext) {
-        CommonLogger.e("获取并准备现在的曲目资源和下一首资源");
+        CommonLogger.e("鑾峰彇骞跺噯澶囩幇鍦ㄧ殑鏇茬洰璧勬簮鍜屼笅涓€棣栬祫婧?);
         synchronized (this) {
             if (mPlaylist.size() == 0) {
                 return;
@@ -1093,19 +1078,17 @@ public class MusicService extends Service {
                     if (openFile(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI + "/" + musicPlayBean.getSongId(), musicPlayBean.getLrcUrl(), musicPlayBean.getSongId())) {
                         break;
                     }
-                    CommonLogger.e("上面打开文件失败，进行下面的操作");
+                    CommonLogger.e("涓婇潰鎵撳紑鏂囦欢澶辫触锛岃繘琛屼笅闈㈢殑鎿嶄綔");
                     if (mOpenFailedCounter++ < 10 && mPlaylist.size() > 1) {
-                        CommonLogger.e("更新下一首歌曲的Cursor");
-//                    切换下一首
-                        int position = getNextPosition(true);
+                        CommonLogger.e("鏇存柊涓嬩竴棣栨瓕鏇茬殑Cursor");
+//                    鍒囨崲涓嬩竴棣?                        int position = getNextPosition(true);
                         if (position < 0) {
                             shutdown = true;
                             break;
                         }
                         playPosition = position;
                     } else {
-//                    多次重复失败，重置关闭
-                        mOpenFailedCounter = 0;
+//                    澶氭閲嶅澶辫触锛岄噸缃叧闂?                        mOpenFailedCounter = 0;
                         shutdown = true;
                         break;
                     }
@@ -1133,7 +1116,7 @@ public class MusicService extends Service {
                 if (content != null) {
                     FileUtil.writeToFile(MusicUtil.getLyricPath(songId), content);
                 } else {
-                    CommonLogger.e("内容为空?");
+                    CommonLogger.e("鍐呭涓虹┖?");
                 }
             }
         }.execute(url);
@@ -1144,7 +1127,7 @@ public class MusicService extends Service {
     }
 
     private void setNextMusicPlayInfo(int nextPosition) {
-        CommonLogger.e("设置下一首的资源");
+        CommonLogger.e("璁剧疆涓嬩竴棣栫殑璧勬簮");
         nextPlayPosition = nextPosition;
         if (nextPlayPosition >= 0 && mPlaylist != null && nextPlayPosition < mPlaylist.size()) {
             MusicPlayBean nextBean = mPlaylist.get(nextPosition);
@@ -1157,28 +1140,27 @@ public class MusicService extends Service {
     }
 
     /**
-     * 根据选择的播放顺序类型来决定下一首播放的位置
+     * 鏍规嵁閫夋嫨鐨勬挱鏀鹃『搴忕被鍨嬫潵鍐冲畾涓嬩竴棣栨挱鏀剧殑浣嶇疆
      *
-     * @param force 是否强制获取下一个播放位置
-     * @return 播放位置
+     * @param force 鏄惁寮哄埗鑾峰彇涓嬩竴涓挱鏀句綅缃?     * @return 鎾斁浣嶇疆
      */
     private int getNextPosition(boolean force) {
-        CommonLogger.e("获取下一首歌曲的位置" + force);
+        CommonLogger.e("鑾峰彇涓嬩竴棣栨瓕鏇茬殑浣嶇疆" + force);
         if (mPlaylist == null || mPlaylist.size() == 0) {
             return -1;
         }
         if (mode == MODE_LOOP) {
-//            循环播放
+//            寰幆鎾斁
             return playPosition;
         } else if (mode == MODE_SHUFFLE) {
-//            随机选择模式
+//            闅忔満閫夋嫨妯″紡
             final int numTracks = mPlaylist.size();
-            final int[] trackNumPlays = new int[numTracks]; //用来记录每首歌播放的次数
+            final int[] trackNumPlays = new int[numTracks]; //鐢ㄦ潵璁板綍姣忛姝屾挱鏀剧殑娆℃暟
             for (int i = 0; i < numTracks; i++) {
                 trackNumPlays[i] = 0;
             }
             final int numHistory = mHistory.size();
-            for (int i = 0; i < numHistory; i++) { //遍历历史记录,记录每首歌播放的次数
+            for (int i = 0; i < numHistory; i++) { //閬嶅巻鍘嗗彶璁板綍,璁板綍姣忛姝屾挱鏀剧殑娆℃暟
                 final int idx = mHistory.get(i);
                 if (idx >= 0 && idx < numTracks) {
                     trackNumPlays[idx]++;
@@ -1187,9 +1169,8 @@ public class MusicService extends Service {
             if (playPosition >= 0 && playPosition < numTracks) {
                 trackNumPlays[playPosition]++;
             }
-            int minNumPlays = Integer.MAX_VALUE; //所有歌曲中播放次数最少的数目
-            int numTracksWithMinNumPlays = 0; //播放次数一样最少的歌曲的数目
-            for (int trackNumPlay : trackNumPlays) {
+            int minNumPlays = Integer.MAX_VALUE; //鎵€鏈夋瓕鏇蹭腑鎾斁娆℃暟鏈€灏戠殑鏁扮洰
+            int numTracksWithMinNumPlays = 0; //鎾斁娆℃暟涓€鏍锋渶灏戠殑姝屾洸鐨勬暟鐩?            for (int trackNumPlay : trackNumPlays) {
                 if (trackNumPlay < minNumPlays) {
                     minNumPlays = trackNumPlay;
                     numTracksWithMinNumPlays = 1;
@@ -1197,10 +1178,9 @@ public class MusicService extends Service {
                     numTracksWithMinNumPlays++;
                 }
             }
-//            在相同播放次数最少的歌曲中随机选择
+//            鍦ㄧ浉鍚屾挱鏀炬鏁版渶灏戠殑姝屾洸涓殢鏈洪€夋嫨
             int skip = mShuffler.nextInt(numTracksWithMinNumPlays);
-            for (int i = 0; i < trackNumPlays.length; i++) {//遍历,根据随机数字选取对应的歌曲
-                if (trackNumPlays[i] == minNumPlays) {
+            for (int i = 0; i < trackNumPlays.length; i++) {//閬嶅巻,鏍规嵁闅忔満鏁板瓧閫夊彇瀵瑰簲鐨勬瓕鏇?                if (trackNumPlays[i] == minNumPlays) {
                     if (skip == 0) {
                         return i;
                     } else {
@@ -1210,8 +1190,7 @@ public class MusicService extends Service {
             }
             return -1;
         } else {
-//            正常的顺序播放
-            if (playPosition >= mPlaylist.size() - 1) {
+//            姝ｅ父鐨勯『搴忔挱鏀?            if (playPosition >= mPlaylist.size() - 1) {
                 return 0;
             } else {
                 return playPosition + 1;
@@ -1230,7 +1209,7 @@ public class MusicService extends Service {
         WrappedMediaPlayer(MusicService musicService) {
             musicServiceWeakReference = new WeakReference<>(musicService);
             mediaPlayer = new MediaPlayer();
-//            设置低耗电模式
+//            璁剧疆浣庤€楃數妯″紡
             mediaPlayer.setWakeMode(musicServiceWeakReference.get(), PowerManager.PARTIAL_WAKE_LOCK);
         }
 
@@ -1241,7 +1220,7 @@ public class MusicService extends Service {
 
 
         void setNextDataSource(String path, String lrcUrl, long songId) {
-            CommonLogger.e("设置下一首歌的资源" + path);
+            CommonLogger.e("璁剧疆涓嬩竴棣栨瓕鐨勮祫婧? + path);
             if (path == null) {
                 return;
             }
@@ -1249,7 +1228,7 @@ public class MusicService extends Service {
                 mediaPlayer.setNextMediaPlayer(null);
             } catch (Exception e) {
                 e.printStackTrace();
-                CommonLogger.e("设置下一个播放器出错" + e.getMessage());
+                CommonLogger.e("璁剧疆涓嬩竴涓挱鏀惧櫒鍑洪敊" + e.getMessage());
             }
             if (nextMediaPlayer != null) {
                 nextMediaPlayer.release();
@@ -1266,7 +1245,7 @@ public class MusicService extends Service {
         }
 
         private boolean realSetDataSource(MediaPlayer mediaPlayer, String path, String lrcUrl, long songId) {
-            CommonLogger.e("设置播放的资源路径" + path);
+            CommonLogger.e("璁剧疆鎾斁鐨勮祫婧愯矾寰? + path);
             if (path == null) {
                 return false;
             }
@@ -1287,10 +1266,10 @@ public class MusicService extends Service {
                 mediaPlayer.prepare();
             } catch (IOException e) {
                 e.printStackTrace();
-                CommonLogger.e("准备播放资源的时候出错" + e.getMessage());
+                CommonLogger.e("鍑嗗鎾斁璧勬簮鐨勬椂鍊欏嚭閿? + e.getMessage());
                 return false;
             } catch (IllegalStateException e) {
-                CommonLogger.e("准备播放资源的时候出错12" + e.getMessage());
+                CommonLogger.e("鍑嗗鎾斁璧勬簮鐨勬椂鍊欏嚭閿?2" + e.getMessage());
             }
             mediaPlayer.setOnCompletionListener(this);
             mediaPlayer.setOnErrorListener(this);
@@ -1299,8 +1278,7 @@ public class MusicService extends Service {
 
         @Override
         public boolean onError(MediaPlayer mp, int what, int extra) {
-//            这里返回true,防止直接调用onCompletion方法，导致不断切换下一首
-            CommonLogger.e("12播放声音出错" + what + "  " + extra);
+//            杩欓噷杩斿洖true,闃叉鐩存帴璋冪敤onCompletion鏂规硶锛屽鑷翠笉鏂垏鎹笅涓€棣?            CommonLogger.e("12鎾斁澹伴煶鍑洪敊" + what + "  " + extra);
             switch (what) {
                 case MediaPlayer.MEDIA_ERROR_SERVER_DIED:
                     break;
@@ -1315,7 +1293,7 @@ public class MusicService extends Service {
             if (mp == mediaPlayer && nextMediaPlayer != null) {
                 prepareNext(false);
                 notifyChange(META_CHANGED);
-                CommonLogger.e("播放完,这里会继续播放下一首吗");
+                CommonLogger.e("鎾斁瀹?杩欓噷浼氱户缁挱鏀句笅涓€棣栧悧");
             }
         }
 
@@ -1332,7 +1310,7 @@ public class MusicService extends Service {
         }
 
         void start() {
-            CommonLogger.e("播放真正开始啦啦");
+            CommonLogger.e("鎾斁鐪熸寮€濮嬪暒鍟?);
             if (mediaPlayer!=null) {
                 mediaPlayer.start();
             }
@@ -1353,7 +1331,7 @@ public class MusicService extends Service {
 
 
         void pause() {
-            CommonLogger.e("真正停止");
+            CommonLogger.e("鐪熸鍋滄");
             mediaPlayer.pause();
             setIsSupposedToBePlaying(false, true);
         }
@@ -1370,11 +1348,10 @@ public class MusicService extends Service {
 
         @Override
         public void onBufferingUpdate(MediaPlayer mp, int percent) {
-            CommonLogger.e("这里缓存");
+            CommonLogger.e("杩欓噷缂撳瓨");
             if (mp == mediaPlayer) {
-//                只获取现在播放的加载进度条,因为播放一首时会提前加载下一首
-                secondProgress = (int) (percent * (mp.getDuration()) / 100.0);
-                CommonLogger.e("加载缓存进度" + secondProgress);
+//                鍙幏鍙栫幇鍦ㄦ挱鏀剧殑鍔犺浇杩涘害鏉?鍥犱负鎾斁涓€棣栨椂浼氭彁鍓嶅姞杞戒笅涓€棣?                secondProgress = (int) (percent * (mp.getDuration()) / 100.0);
+                CommonLogger.e("鍔犺浇缂撳瓨杩涘害" + secondProgress);
                 notifyChange(BUFFER_UPDATE_CHANGED);
             }
         }
@@ -1395,15 +1372,14 @@ public class MusicService extends Service {
                 wrappedMediaPlayer.mediaPlayer = wrappedMediaPlayer.nextMediaPlayer;
                 wrappedMediaPlayer.nextMediaPlayer = null;
                 if (mode != MODE_SHUFFLE) {
-                    //                如果是随机需要添加到历史播放记录中
-                    mHistory.add(playPosition);
+                    //                濡傛灉鏄殢鏈洪渶瑕佹坊鍔犲埌鍘嗗彶鎾斁璁板綍涓?                    mHistory.add(playPosition);
                     if (mHistory.size() > MAX_HISTORY_SIZE) {
                         mHistory.remove(0);
                     }
                 }
                 playPosition = nextPlayPosition;
                 nextPlayPosition = getNextPosition(force);
-                CommonLogger.e("下一首位置" + nextPlayPosition);
+                CommonLogger.e("涓嬩竴棣栦綅缃? + nextPlayPosition);
                 setNextMusicPlayInfo(nextPlayPosition);
                 play();
             }
@@ -1412,7 +1388,7 @@ public class MusicService extends Service {
 
 
     private String getSongName() {
-        CommonLogger.e("获取歌名");
+        CommonLogger.e("鑾峰彇姝屽悕");
         synchronized (this) {
             if (getCurrentMusicPlayInfo() != null) {
                 return getCurrentMusicPlayInfo().getSongName();
@@ -1424,9 +1400,9 @@ public class MusicService extends Service {
     private long getAudioId() {
         CommonLogger.e("getAudioId");
         MusicPlayBean musicPlayInfo = getCurrentMusicPlayInfo();
-        CommonLogger.e("这里到了吗");
+        CommonLogger.e("杩欓噷鍒颁簡鍚?);
         if (musicPlayInfo != null) {
-            CommonLogger.e("1这里到了吗");
+            CommonLogger.e("1杩欓噷鍒颁簡鍚?);
             return musicPlayInfo.getSongId();
         }
         return -1;
@@ -1464,7 +1440,7 @@ public class MusicService extends Service {
         }
 
         int nextInt(final int interval) {
-            CommonLogger.e("随机播放的时候获取下一首歌的位置" + interval);
+            CommonLogger.e("闅忔満鎾斁鐨勬椂鍊欒幏鍙栦笅涓€棣栨瓕鐨勪綅缃? + interval);
             int next;
             do {
                 next = mRandom.nextInt(interval);
@@ -1482,3 +1458,4 @@ public class MusicService extends Service {
         }
     }
 }
+

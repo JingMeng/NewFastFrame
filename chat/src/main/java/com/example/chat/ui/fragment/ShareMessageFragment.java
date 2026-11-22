@@ -1,4 +1,4 @@
-package com.example.chat.ui.fragment;
+﻿package com.example.chat.ui.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,10 +7,10 @@ import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Handler;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.RecyclerView;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,9 +79,8 @@ import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2016/11/27      16:47
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2016/11/27      16:47
  * QQ:             1981367757
  */
 
@@ -119,7 +118,7 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
-            ((MainActivity) getActivity()).initActionBar("朋友圈");
+            ((MainActivity) getActivity()).initActionBar("鏈嬪弸鍦?);
         }
     }
 
@@ -188,9 +187,8 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
                     mMenu.collapse();
                 }
                 LogUtil.e("container:onTouch");
-//                                这里进行点击关闭编辑框
-                if (bottomInput.getVisibility() == View.VISIBLE) {
-                    LogUtil.e("触摸界面点击关闭输入法");
+//                                杩欓噷杩涜鐐瑰嚮鍏抽棴缂栬緫妗?                if (bottomInput.getVisibility() == View.VISIBLE) {
+                    LogUtil.e("瑙︽懜鐣岄潰鐐瑰嚮鍏抽棴杈撳叆娉?);
                     dealBottomView(false);
                     return true;
                 }
@@ -200,14 +198,13 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
         refresh.setOnRefreshListener(mOnRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                //                                数据量比较小，进行延时,2秒后再进行加载
-                new Handler().postDelayed(new Runnable() {
+                //                                鏁版嵁閲忔瘮杈冨皬锛岃繘琛屽欢鏃?2绉掑悗鍐嶈繘琛屽姞杞?                new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         SharedMessage shareMessage = mAdapter.getData(0);
-                        LogUtil.e("下拉加载的前一个说说消息为1");
+                        LogUtil.e("涓嬫媺鍔犺浇鐨勫墠涓€涓璇存秷鎭负1");
                         if (shareMessage == null) {
-                            LogUtil.e("首次加载数据");
+                            LogUtil.e("棣栨鍔犺浇鏁版嵁");
                             loadData(true, "0000-00-00 01:00:00");
                         } else {
                             LogUtil.e(shareMessage);
@@ -221,12 +218,12 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-//                                这里进行重发，如果在滚动的时候就不进行数据的加载和视图的显示
+//                                杩欓噷杩涜閲嶅彂锛屽鏋滃湪婊氬姩鐨勬椂鍊欏氨涓嶈繘琛屾暟鎹殑鍔犺浇鍜岃鍥剧殑鏄剧ず
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    LogUtil.e("休闲的时候进行加载");
+                    LogUtil.e("浼戦棽鐨勬椂鍊欒繘琛屽姞杞?);
                     Glide.with(getActivity()).resumeRequests();
                 } else {
-                    LogUtil.e("滚动的时候不进行加载");
+                    LogUtil.e("婊氬姩鐨勬椂鍊欎笉杩涜鍔犺浇");
                     Glide.with(getActivity()).pauseRequests();
                 }
             }
@@ -237,8 +234,8 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
     private int getListOffset() {
         int offset = 0;
         if (currentCommentPosition == -1) {
-            ToastUtils.showShortToast("点击评论");
-            LogUtil.e("点击评论111");
+            ToastUtils.showShortToast("鐐瑰嚮璇勮");
+            LogUtil.e("鐐瑰嚮璇勮111");
             int firstVisiblePosition = mLinearLayoutManager.findFirstVisibleItemPosition();
             View view = mLinearLayoutManager.getChildAt(currentPosition - firstVisiblePosition);
             offset += view.getHeight();
@@ -269,20 +266,20 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
                     }
                     break;
                 case Constant.REQUEST_CODE_SELECT_TITLE_WALLPAPER:
-                    LogUtil.e("改变背景成功后重绘11111");
+                    LogUtil.e("鏀瑰彉鑳屾櫙鎴愬姛鍚庨噸缁?1111");
                     updateHeaderView();
                     break;
                 case Constant.REQUEST_CODE_SELECT_PICTURE:
-//                                        这里进入编辑图片界面
+//                                        杩欓噷杩涘叆缂栬緫鍥剧墖鐣岄潰
                     if (CommonImageLoader.getInstance().getSelectedImages().get(0) != null) {
                         String path = CommonImageLoader.getInstance().getSelectedImages().get(0).getPath();
                         cropPhoto(path);
                     }
                     break;
                 case Constant.REQUEST_CODE_CROP:
-                    LogUtil.e("裁剪完成");
+                    LogUtil.e("瑁佸壀瀹屾垚");
                     try {
-                        showLoading("正在上传背景，请稍候........");
+                        showLoading("姝ｅ湪涓婁紶鑳屾櫙锛岃绋嶅€?.......");
                         final BmobFile bmobFile = new BmobFile(new File(new URI(PhotoUtil.buildUri(getActivity()).toString())));
                         bmobFile.uploadblock(BaseApplication.getInstance(), new UploadFileListener() {
                             @Override
@@ -291,7 +288,7 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
                                     @Override
                                     public void onSuccess() {
                                         hideLoading();
-                                        LogUtil.e("更新用户背景成功");
+                                        LogUtil.e("鏇存柊鐢ㄦ埛鑳屾櫙鎴愬姛");
                                         UserManager.getInstance().getCurrentUser().setTitleWallPaper(bmobFile.getFileUrl(BaseApplication.getInstance()));
                                         updateHeaderView();
                                     }
@@ -299,7 +296,7 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
                                     @Override
                                     public void onFailure(int i, String s) {
                                         hideLoading();
-                                        LogUtil.e("更新用户背景失败" + s + i);
+                                        LogUtil.e("鏇存柊鐢ㄦ埛鑳屾櫙澶辫触" + s + i);
                                     }
                                 });
                             }
@@ -307,7 +304,7 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
                             @Override
                             public void onFailure(int i, String s) {
                                 hideLoading();
-                                LogUtil.e("加载失败");
+                                LogUtil.e("鍔犺浇澶辫触");
                             }
                         });
                     } catch (URISyntaxException e) {
@@ -374,15 +371,15 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
     protected void updateView() {
         long deltaTime = BaseApplication.getAppComponent()
                 .getSharedPreferences().getLong(ChatUtil.DELTA_TIME, -1L);
-        LogUtil.e("这里通过缓存的时间差值来计算出服务器上的时间");
+        LogUtil.e("杩欓噷閫氳繃缂撳瓨鐨勬椂闂村樊鍊兼潵璁＄畻鍑烘湇鍔″櫒涓婄殑鏃堕棿");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         long realServerTime = System.currentTimeMillis() - deltaTime;
         simpleDate = simpleDateFormat.format(new Date(realServerTime));
-        LogUtil.e("得到的时间格式为:" + simpleDate);
+        LogUtil.e("寰楀埌鐨勬椂闂存牸寮忎负:" + simpleDate);
 //                        display.setRefreshing(true);
         refresh.setRefreshing(true);
         mOnRefreshListener.onRefresh();
-        LogUtil.e("说说界面隐藏了，这里取消监听 ");
+        LogUtil.e("璇磋鐣岄潰闅愯棌浜嗭紝杩欓噷鍙栨秷鐩戝惉 ");
         if (mAdapter.getData().size() > 0) {
             for (SharedMessage sharedMessage :
                     mAdapter.getData()) {
@@ -408,11 +405,11 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
         bg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogUtil.e("点击背景图片");
+                LogUtil.e("鐐瑰嚮鑳屾櫙鍥剧墖");
                 List<String> list = new ArrayList<>();
-                list.add("相册");
-                list.add("系统");
-                showChooseDialog("挑选背景图", list, new AdapterView.OnItemClickListener() {
+                list.add("鐩稿唽");
+                list.add("绯荤粺");
+                showChooseDialog("鎸戦€夎儗鏅浘", list, new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         hideBaseDialog();
@@ -451,28 +448,28 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
     @Override
     public void updateShareMessageDeleted(String id) {
         SharedMessage sharedMessage = mAdapter.getSharedMessageById(id);
-        LogUtil.e("将要删除的说说消息数据格式");
+        LogUtil.e("灏嗚鍒犻櫎鐨勮璇存秷鎭暟鎹牸寮?);
         if (sharedMessage != null) {
             LogUtil.e(sharedMessage);
             mAdapter.getData().remove(sharedMessage);
             mAdapter.notifyDataSetChanged();
-//                这里通知删除
+//                杩欓噷閫氱煡鍒犻櫎
             ((MainActivity) getActivity()).notifySharedMessageChanged(sharedMessage.getObjectId(), false);
         } else {
-            LogUtil.e("该说说已删除");
+            LogUtil.e("璇ヨ璇村凡鍒犻櫎");
         }
     }
 
 
-//        由于更新需要的点赞数据在数据库中获取，所以这里只需要notifyDataSetChanged下就行了
+//        鐢变簬鏇存柊闇€瑕佺殑鐐硅禐鏁版嵁鍦ㄦ暟鎹簱涓幏鍙栵紝鎵€浠ヨ繖閲屽彧闇€瑕乶otifyDataSetChanged涓嬪氨琛屼簡
 
     @Override
     public void updateLikerAdd(String id) {
         if (!mAdapter.getSharedMessageById(id).getLikerList().contains(UserManager.getInstance().getCurrentUserObjectId())) {
-            LogUtil.e("还未点赞，这里添加点赞");
+            LogUtil.e("杩樻湭鐐硅禐锛岃繖閲屾坊鍔犵偣璧?);
             mAdapter.getSharedMessageById(id).getLikerList().add(UserManager.getInstance().getCurrentUserObjectId());
         } else {
-            LogUtil.e("已经点赞，这里添加点赞失败,可能的原因是因为实时已经检测到拉");
+            LogUtil.e("宸茬粡鐐硅禐锛岃繖閲屾坊鍔犵偣璧炲け璐?鍙兘鐨勫師鍥犳槸鍥犱负瀹炴椂宸茬粡妫€娴嬪埌鎷?);
         }
         mAdapter.notifyDataSetChanged();
     }
@@ -480,24 +477,24 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
     @Override
     public void updateLikerDeleted(String id) {
         if (mAdapter.getSharedMessageById(id).getLikerList().contains(UserManager.getInstance().getCurrentUserObjectId())) {
-            LogUtil.e("已有点赞，这里删除点赞");
+            LogUtil.e("宸叉湁鐐硅禐锛岃繖閲屽垹闄ょ偣璧?);
             mAdapter.getSharedMessageById(id).getLikerList().remove(UserManager.getInstance().getCurrentUserObjectId());
         } else {
-            LogUtil.e("没有点赞，这里删除点赞失败，可能的原因是因为实时已经检测到啦");
+            LogUtil.e("娌℃湁鐐硅禐锛岃繖閲屽垹闄ょ偣璧炲け璐ワ紝鍙兘鐨勫師鍥犳槸鍥犱负瀹炴椂宸茬粡妫€娴嬪埌鍟?);
         }
         mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void updateCommentAdded(String id, String content, int position) {
-        LogUtil.e("更新添加评论操作，这里就不更新了，因为在实时检测的时候已经更新拉");
+        LogUtil.e("鏇存柊娣诲姞璇勮鎿嶄綔锛岃繖閲屽氨涓嶆洿鏂颁簡锛屽洜涓哄湪瀹炴椂妫€娴嬬殑鏃跺€欏凡缁忔洿鏂版媺");
         dealBottomView(false);
         mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void updateCommentDeleted(String id, String content, int position) {
-        LogUtil.e("更新删除评论操作，这里就不更新了，因为在实时检测的时候已经更新啦啦啦");
+        LogUtil.e("鏇存柊鍒犻櫎璇勮鎿嶄綔锛岃繖閲屽氨涓嶆洿鏂颁簡锛屽洜涓哄湪瀹炴椂妫€娴嬬殑鏃跺€欏凡缁忔洿鏂板暒鍟﹀暒");
         mAdapter.notifyDataSetChanged();
     }
 
@@ -523,7 +520,7 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
 
     @Override
     public void onImageAvatarClick(String uid) {
-        LogUtil.e("点击用户头像回调");
+        LogUtil.e("鐐瑰嚮鐢ㄦ埛澶村儚鍥炶皟");
         Intent intent = new Intent(getActivity(), UserDetailActivity.class);
         if (uid.equals(UserManager.getInstance().getCurrentUserObjectId())) {
             intent.putExtra("from", "me");
@@ -536,7 +533,7 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
 
     @Override
     public void onNameClick(String uid) {
-        LogUtil.e("点击用户姓名回调");
+        LogUtil.e("鐐瑰嚮鐢ㄦ埛濮撳悕鍥炶皟");
         Intent intent = new Intent(getActivity(), UserDetailActivity.class);
         if (uid.equals(UserManager.getInstance().getCurrentUserObjectId())) {
             intent.putExtra("from", "me");
@@ -554,9 +551,9 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
 
     @Override
     public void onCommentBtnClick(View view, String id, int shareMessagePosition, final boolean isLike) {
-        LogUtil.e("点击评论按钮");
-        LogUtil.e("是否已点赞" + isLike);
-        LogUtil.e("位置" + shareMessagePosition);
+        LogUtil.e("鐐瑰嚮璇勮鎸夐挳");
+        LogUtil.e("鏄惁宸茬偣璧? + isLike);
+        LogUtil.e("浣嶇疆" + shareMessagePosition);
         currentId = id;
         currentPosition = shareMessagePosition;
         if (mCommentPopupWindow == null) {
@@ -565,20 +562,20 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
                 @Override
                 public void onItemClick(View view, int position, boolean isLiker) {
                     if (position == 0) {
-                        LogUtil.e("处理赞的操作");
+                        LogUtil.e("澶勭悊璧炵殑鎿嶄綔");
                         if (isLiker) {
-                            LogUtil.e("这里取消点赞操作");
-                            LogUtil.e("删除点赞是的ID" + currentId);
+                            LogUtil.e("杩欓噷鍙栨秷鐐硅禐鎿嶄綔");
+                            LogUtil.e("鍒犻櫎鐐硅禐鏄殑ID" + currentId);
                             presenter.deleteLiker(currentId);
                         } else {
-                            LogUtil.e("这里添加点赞操作");
-                            LogUtil.e("position为多少" + position);
-                            LogUtil.e("添加点赞时的ID" + currentId);
+                            LogUtil.e("杩欓噷娣诲姞鐐硅禐鎿嶄綔");
+                            LogUtil.e("position涓哄灏? + position);
+                            LogUtil.e("娣诲姞鐐硅禐鏃剁殑ID" + currentId);
                             presenter.addLiker(currentId);
                         }
                     } else if (position == 1) {
-                        LogUtil.e("处理评论的操作");
-//                                                进行位移
+                        LogUtil.e("澶勭悊璇勮鐨勬搷浣?);
+//                                                杩涜浣嶇Щ
                         currentCommentPosition = -1;
                         replyUid = null;
                         commentItemOffset = 0;
@@ -588,9 +585,9 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
             });
         }
         if (isLike) {
-            mCommentPopupWindow.setLikerName("取消");
+            mCommentPopupWindow.setLikerName("鍙栨秷");
         } else {
-            mCommentPopupWindow.setLikerName("赞");
+            mCommentPopupWindow.setLikerName("璧?);
         }
         mCommentPopupWindow.showPopupWindow(view);
     }
@@ -601,7 +598,7 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
 
     @Override
     public void onCommentItemClick(View view, String id, int shareMessagePosition, int position, String replyUser) {
-        LogUtil.e("位置" + shareMessagePosition);
+        LogUtil.e("浣嶇疆" + shareMessagePosition);
         currentPosition = shareMessagePosition;
         currentCommentPosition = position;
         ViewParent viewParent = view.getParent();
@@ -637,18 +634,18 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
 
     private void showCommentDialog(final String id, final int position) {
         List<String> list = new ArrayList<>();
-        list.add("复制");
+        list.add("澶嶅埗");
         if (CommonUtils.content2List(mAdapter.getSharedMessageById(id).getCommentMsgList().get(position)).get(0).equals(UserManager.getInstance().getCurrentUser().getObjectId())) {
-            list.add("删除");
+            list.add("鍒犻櫎");
         }
-        ((BaseActivity) getActivity()).showChooseDialog("操作", list, new AdapterView.OnItemClickListener() {
+        ((BaseActivity) getActivity()).showChooseDialog("鎿嶄綔", list, new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position1, long id1) {
                 ((BaseActivity) getActivity()).dismissBaseDialog();
                 if (position1 == 0) {
-                    LogUtil.e("复制操作");
+                    LogUtil.e("澶嶅埗鎿嶄綔");
                 } else {
-                    LogUtil.e("删除操作");
+                    LogUtil.e("鍒犻櫎鎿嶄綔");
                     presenter.deleteComment(id, position);
                 }
             }
@@ -671,13 +668,13 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
 
         Intent happyContentIntent = new Intent(getActivity(), HappyContentDisplayActivity.class);
         if (shareMessage.getUrlList().size() == 0) {
-//                     笑话
+//                     绗戣瘽
             happyContentIntent.putExtra("content", shareMessage.getUrlTitle());
             startActivity(happyContentIntent);
         } else if (shareMessage.getUrlList().size() == 1) {
-//                        趣图
+//                        瓒ｅ浘
             if (shareMessage.getUrlTitle() == null) {
-//                                美女图片
+//                                缇庡コ鍥剧墖
                 List<ImageItem> list = new ArrayList<>();
                 ImageItem imageItem = new ImageItem();
                 imageItem.setPath(shareMessage.getUrlList().get(0));
@@ -689,8 +686,7 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
                 startActivity(happyContentIntent);
             }
         } else {
-//                        微信精选
-            WeiXinNewsActivity.start(getActivity(), shareMessage.getUrlList().get(0), shareMessage.getUrlList().get(1));
+//                        寰俊绮鹃€?            WeiXinNewsActivity.start(getActivity(), shareMessage.getUrlList().get(0), shareMessage.getUrlList().get(1));
         }
     }
 
@@ -708,8 +704,8 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
 
     @Override
     public void onDeleteShareMessageClick(final String id) {
-        LogUtil.e("删除");
-        ((BaseActivity) (getActivity())).showBaseDialog("提示", "确定要删除该说说消息吗?", "取消", "确定", new View.OnClickListener() {
+        LogUtil.e("鍒犻櫎");
+        ((BaseActivity) (getActivity())).showBaseDialog("鎻愮ず", "纭畾瑕佸垹闄よ璇磋娑堟伅鍚?", "鍙栨秷", "纭畾", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((BaseActivity) getActivity()).cancelBaseDialog();
@@ -725,7 +721,7 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
 
     @Override
     public void onPhotoItemClick(final View view, final String id, final int position, final String url) {
-        LogUtil.e("点击图片");
+        LogUtil.e("鐐瑰嚮鍥剧墖");
         List<String> cache = MessageCacheManager.getInstance().getShareMessageCache(id);
         if (!url.contains("$")) {
             List<ImageItem> list = new ArrayList<>();
@@ -748,19 +744,19 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
             BasePreViewActivity.startBasePreview(getActivity(), list, position);
         } else {
             if (cache == null || cache.size() == 0) {
-                LogUtil.e("这是视频和封面混合的URL列表");
+                LogUtil.e("杩欐槸瑙嗛鍜屽皝闈㈡贩鍚堢殑URL鍒楄〃");
                 List<String> urlList = CommonUtils.content2List(url);
                 if (urlList != null && urlList.size() > 0) {
                     String videoUrl = null;
                     String imageUrl = null;
-                    LogUtil.e("视频URL列表");
+                    LogUtil.e("瑙嗛URL鍒楄〃");
                     for (String str : urlList
                             ) {
                         if (str.contains(".jpg") || str.contains(".png") || str.contains(".jpeg")) {
-                            LogUtil.e("封面图片URL" + str);
+                            LogUtil.e("灏侀潰鍥剧墖URL" + str);
                             imageUrl = str;
                         } else {
-                            LogUtil.e("视频URL" + str);
+                            LogUtil.e("瑙嗛URL" + str);
                             videoUrl = str;
                         }
                     }
@@ -774,7 +770,7 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
                     }
                 }
             } else {
-                LogUtil.e("有缓存证明是自己的视频说说，这里就是用缓存");
+                LogUtil.e("鏈夌紦瀛樿瘉鏄庢槸鑷繁鐨勮棰戣璇达紝杩欓噷灏辨槸鐢ㄧ紦瀛?);
                 String videoUrl = cache.get(1);
                 Intent intent = new Intent(getActivity(), VideoPlayActivity.class);
                 intent.putExtra("path", videoUrl);
@@ -790,7 +786,7 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
         if (i == R.id.iv_share_fragment_send) {
             String content = input.getText().toString().trim();
             if (content.equals("") || content.contains("$") || content.contains("&")) {
-                LogUtil.e("评论内容不能为空或包含特殊符号，比如$或者&");
+                LogUtil.e("璇勮鍐呭涓嶈兘涓虹┖鎴栧寘鍚壒娈婄鍙凤紝姣斿$鎴栬€?");
             } else {
                 String wrappedContent;
                 if (replyUid != null) {
@@ -853,17 +849,17 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
 
     @Override
     public void onDeleteShareMessage(String id) {
-        LogUtil.e("实时检测到删除说说消息到啦");
-        LogUtil.e("消息为：" + id);
+        LogUtil.e("瀹炴椂妫€娴嬪埌鍒犻櫎璇磋娑堟伅鍒板暒");
+        LogUtil.e("娑堟伅涓猴細" + id);
         SharedMessage sharedMessage = mAdapter.getSharedMessageById(id);
-        LogUtil.e("将要移除的说说消息格式");
+        LogUtil.e("灏嗚绉婚櫎鐨勮璇存秷鎭牸寮?);
         if (sharedMessage != null) {
             LogUtil.e(sharedMessage);
             mAdapter.getData().remove(sharedMessage);
             mAdapter.notifyDataSetChanged();
             ((MainActivity) getActivity()).notifySharedMessageChanged(id, false);
         } else {
-            LogUtil.e("删除消息竟然为空，怎么回事?????");
+            LogUtil.e("鍒犻櫎娑堟伅绔熺劧涓虹┖锛屾€庝箞鍥炰簨?????");
         }
     }
 
@@ -898,7 +894,7 @@ public class ShareMessageFragment extends BaseFragment<List<SharedMessage>,Share
         if (mAdapter != null && size > 0) {
             loadData(false, mAdapter.getData(size - 1).getCreatedAt());
         } else {
-            LogUtil.e("获取更多的时候data为空");
+            LogUtil.e("鑾峰彇鏇村鐨勬椂鍊檇ata涓虹┖");
         }
     }
 }

@@ -1,14 +1,13 @@
-package com.example.chat.manager;
+﻿package com.example.chat.manager;
 
 /**
- * 项目名称:    HappyChat
- * 创建人:        陈锦军
- * 创建时间:    2016/9/11      17:31
+ * 椤圭洰鍚嶇О:    HappyChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2016/9/11      17:31
  * QQ:             1981367757
  */
 
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.example.chat.base.Constant;
 import com.example.chat.bean.CustomInstallation;
@@ -38,13 +37,12 @@ import cn.bmob.v3.listener.PushListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 /**
- * 用户管理类
- * 与用户操作有关的操作类：登录、退出、获取好友列表、获取当前的登录用户,删除好友，添加好友等
+ * 鐢ㄦ埛绠＄悊绫? * 涓庣敤鎴锋搷浣滄湁鍏崇殑鎿嶄綔绫伙細鐧诲綍銆侀€€鍑恒€佽幏鍙栧ソ鍙嬪垪琛ㄣ€佽幏鍙栧綋鍓嶇殑鐧诲綍鐢ㄦ埛,鍒犻櫎濂藉弸锛屾坊鍔犲ソ鍙嬬瓑
  */
 public class UserManager {
         private static final String COLUMN_NAME_CONTACTS = "contacts";
         private static final String COLUMN_NAME_BLACKLIST = "black";
-        //        用于同步
+        //        鐢ㄤ簬鍚屾
         private static final Object INSTANCE_LOCK = new Object();
         private static UserManager INSTANCE;
 
@@ -61,11 +59,10 @@ public class UserManager {
 
 
         /**
-         * 如果没有自定义用户实体类extend BmobUser
-         * 默认返回BmobUser类型的用户实体
-         * 获取当前用户
+         * 濡傛灉娌℃湁鑷畾涔夌敤鎴峰疄浣撶被extend BmobUser
+         * 榛樿杩斿洖BmobUser绫诲瀷鐨勭敤鎴峰疄浣?         * 鑾峰彇褰撳墠鐢ㄦ埛
          *
-         * @return 当前用户
+         * @return 褰撳墠鐢ㄦ埛
          */
         public User getCurrentUser() {
                 return BmobUser.getCurrentUser(BaseApplication.getInstance(), User.class);
@@ -73,9 +70,9 @@ public class UserManager {
 
 
         /**
-         * 获取当前的好友列表并回调在callback
+         * 鑾峰彇褰撳墠鐨勫ソ鍙嬪垪琛ㄥ苟鍥炶皟鍦╟allback
          *
-         * @param callback 回调
+         * @param callback 鍥炶皟
          */
         public void queryAndSaveCurrentContactsList(final FindListener<User> callback) {
                 BmobQuery<User> query = new BmobQuery<>();
@@ -87,8 +84,8 @@ public class UserManager {
                                 public void onSuccess(final List<User> friend) {
                                         if (friend != null && friend.size() > 0) {
                                                 if (!ChatDB.create().addOrUpdateContacts(friend)) {
-                                                        LogUtil.e("在数据库中更新好友失败");
-                                                        callback.onError(0, "在数据库中更新好友失败");
+                                                        LogUtil.e("鍦ㄦ暟鎹簱涓洿鏂板ソ鍙嬪け璐?);
+                                                        callback.onError(0, "鍦ㄦ暟鎹簱涓洿鏂板ソ鍙嬪け璐?);
                                                         return;
                                                 }
                                                 queryBlackList(new FindListener<User>() {
@@ -96,12 +93,12 @@ public class UserManager {
                                                                        public void onSuccess(List<User> list) {
                                                                                if (list != null && list.size() > 0) {
                                                                                        if (ChatDB.create().updateFriendsBlackStatus(list)) {
-                                                                                               LogUtil.e("批量更新黑名单成功");
+                                                                                               LogUtil.e("鎵归噺鏇存柊榛戝悕鍗曟垚鍔?);
                                                                                                List<User> friends = ChatDB.create().getContactsWithoutBlack();
                                                                                                callback.onSuccess(friends);
                                                                                        } else {
-                                                                                               LogUtil.e("批量更新黑名单失败");
-                                                                                               callback.onError(0, "在数据库中批量更新黑名单失败");
+                                                                                               LogUtil.e("鎵归噺鏇存柊榛戝悕鍗曞け璐?);
+                                                                                               callback.onError(0, "鍦ㄦ暟鎹簱涓壒閲忔洿鏂伴粦鍚嶅崟澶辫触");
                                                                                        }
                                                                                } else {
                                                                                        callback.onSuccess(friend);
@@ -110,8 +107,8 @@ public class UserManager {
 
                                                                        @Override
                                                                        public void onError(int i, String s) {
-                                                                               LogUtil.e("在服务器上查询黑名单失败" + s + i);
-                                                                               callback.onError(0, "在服务器上查询黑名单失败");
+                                                                               LogUtil.e("鍦ㄦ湇鍔″櫒涓婃煡璇㈤粦鍚嶅崟澶辫触" + s + i);
+                                                                               callback.onError(0, "鍦ㄦ湇鍔″櫒涓婃煡璇㈤粦鍚嶅崟澶辫触");
 
                                                                        }
                                                                }
@@ -123,7 +120,7 @@ public class UserManager {
 
                                 @Override
                                 public void onError(int i, String s) {
-                                        LogUtil.e("在服务器上查询好友失败" + s + i);
+                                        LogUtil.e("鍦ㄦ湇鍔″櫒涓婃煡璇㈠ソ鍙嬪け璐? + s + i);
                                         callback.onError(i, s);
                                 }
                         }
@@ -132,9 +129,8 @@ public class UserManager {
         }
 
         /**
-         * 查询黑名单用户
-         *
-         * @param callback 回调
+         * 鏌ヨ榛戝悕鍗曠敤鎴?         *
+         * @param callback 鍥炶皟
          */
         private void queryBlackList(final FindListener<User> callback) {
                 BmobQuery<User> query = new BmobQuery<>();
@@ -155,9 +151,9 @@ public class UserManager {
         }
 
         /**
-         * 获取本用户ID
+         * 鑾峰彇鏈敤鎴稩D
          *
-         * @return 用户ID
+         * @return 鐢ㄦ埛ID
          */
         public String getCurrentUserObjectId() {
                 return getCurrentUser().getObjectId();
@@ -165,10 +161,9 @@ public class UserManager {
 
 
         /**
-         * 根据用户名查询用户
-         *
-         * @param name     根据用户名在服务器上查询用户
-         * @param listener 回调
+         * 鏍规嵁鐢ㄦ埛鍚嶆煡璇㈢敤鎴?         *
+         * @param name     鏍规嵁鐢ㄦ埛鍚嶅湪鏈嶅姟鍣ㄤ笂鏌ヨ鐢ㄦ埛
+         * @param listener 鍥炶皟
          */
         public void queryUsers(String name, FindListener<User> listener) {
                 BmobQuery<User> query = new BmobQuery<>();
@@ -179,10 +174,10 @@ public class UserManager {
 
 
         /**
-         * 下线操作
+         * 涓嬬嚎鎿嶄綔
          */
         public void logout() {
-                LogUtil.e("下线啦啦啦112233");
+                LogUtil.e("涓嬬嚎鍟﹀暒鍟?12233");
                 UserCacheManager.getInstance().setLogin(false);
                 MessageCacheManager.getInstance().setLogin(false);
                 UserCacheManager.getInstance().clear();
@@ -193,46 +188,46 @@ public class UserManager {
         }
 
         /**
-         * 添加用户为好友(1、在服务器上添加关联，添加如数据库)
+         * 娣诲姞鐢ㄦ埛涓哄ソ鍙?1銆佸湪鏈嶅姟鍣ㄤ笂娣诲姞鍏宠仈锛屾坊鍔犲鏁版嵁搴?
          *
-         * @param targetId                  对方ID
-         * @param currentId                 本用户ID
-         * @param addFriendCallBackListener 回调
+         * @param targetId                  瀵规柟ID
+         * @param currentId                 鏈敤鎴稩D
+         * @param addFriendCallBackListener 鍥炶皟
          */
         public void addNewFriend(final String targetId, final String currentId, @NonNull final AddFriendCallBackListener addFriendCallBackListener) {
                 findUserById(targetId, new FindListener<User>() {
                                 @Override
                                 public void onSuccess(final List<User> list) {
                                         if (list != null && list.size() > 0) {
-                                                LogUtil.e("在服务器上查询好友成功");
+                                                LogUtil.e("鍦ㄦ湇鍔″櫒涓婃煡璇㈠ソ鍙嬫垚鍔?);
                                                 saveNewFriendToServer(list.get(0), currentId, new UpdateListener() {
                                                                 @Override
                                                                 public void onSuccess() {
-                                                                        LogUtil.e("在服务器上关联好友成功");
+                                                                        LogUtil.e("鍦ㄦ湇鍔″櫒涓婂叧鑱斿ソ鍙嬫垚鍔?);
                                                                         if (ChatDB.create(currentId).addOrUpdateContacts(list.get(0)) > 0) {
-//                                                                        保存好好友后发送同意类型的消息
+//                                                                        淇濆瓨濂藉ソ鍙嬪悗鍙戦€佸悓鎰忕被鍨嬬殑娑堟伅
                                                                                 addFriendCallBackListener.onSuccess(list.get(0));
                                                                         } else {
-                                                                                addFriendCallBackListener.onFailed(new BmobException("数据库保存好友失败"));
+                                                                                addFriendCallBackListener.onFailed(new BmobException("鏁版嵁搴撲繚瀛樺ソ鍙嬪け璐?));
                                                                         }
                                                                 }
 
                                                                 @Override
                                                                 public void onFailure(int i, String s) {
-                                                                        LogUtil.e("在服务器上关联好友失败");
+                                                                        LogUtil.e("鍦ㄦ湇鍔″櫒涓婂叧鑱斿ソ鍙嬪け璐?);
                                                                         addFriendCallBackListener.onFailed(new BmobException(s));
 
                                                                 }
                                                         }
                                                 );
                                         } else {
-                                                addFriendCallBackListener.onFailed(new BmobException("在服务器上灭有查到该用户"));
+                                                addFriendCallBackListener.onFailed(new BmobException("鍦ㄦ湇鍔″櫒涓婄伃鏈夋煡鍒拌鐢ㄦ埛"));
                                         }
                                 }
 
                                 @Override
                                 public void onError(int i, String s) {
-                                        LogUtil.e("在服务器上查询用户失败" + s + i);
+                                        LogUtil.e("鍦ㄦ湇鍔″櫒涓婃煡璇㈢敤鎴峰け璐? + s + i);
                                         addFriendCallBackListener.onFailed(new BmobException(s));
 
                                 }
@@ -241,11 +236,11 @@ public class UserManager {
         }
 
         /**
-         * 在服务器上关联该好友
+         * 鍦ㄦ湇鍔″櫒涓婂叧鑱旇濂藉弸
          *
-         * @param user           用户实体
-         * @param currentId      现在的登录用户ID
-         * @param updateListener 跟新回调
+         * @param user           鐢ㄦ埛瀹炰綋
+         * @param currentId      鐜板湪鐨勭櫥褰曠敤鎴稩D
+         * @param updateListener 璺熸柊鍥炶皟
          */
         private void saveNewFriendToServer(User user, String currentId, UpdateListener updateListener) {
                 if (getCurrentUser() != null && currentId.equals(getCurrentUserObjectId())) {
@@ -257,21 +252,21 @@ public class UserManager {
                         currentUser.update(BaseApplication.getInstance(), updateListener
                         );
                 } else {
-                        LogUtil.e("toId：" + currentId);
+                        LogUtil.e("toId锛? + currentId);
                         if (getCurrentUser() != null) {
-                                LogUtil.e("现在的UID：" + getCurrentUserObjectId());
+                                LogUtil.e("鐜板湪鐨刄ID锛? + getCurrentUserObjectId());
                         }
-//                        不是当前用户的情况下
-                        LogUtil.e("不是当前的用户，不在服务器上关联该好友");
-                        updateListener.onFailure(0, "不是当前的用户，不在服务器上关联该好友");
+//                        涓嶆槸褰撳墠鐢ㄦ埛鐨勬儏鍐典笅
+                        LogUtil.e("涓嶆槸褰撳墠鐨勭敤鎴凤紝涓嶅湪鏈嶅姟鍣ㄤ笂鍏宠仈璇ュソ鍙?);
+                        updateListener.onFailure(0, "涓嶆槸褰撳墠鐨勭敤鎴凤紝涓嶅湪鏈嶅姟鍣ㄤ笂鍏宠仈璇ュソ鍙?);
                 }
         }
 
         /**
-         * 根据用户ID获取用户信息
+         * 鏍规嵁鐢ㄦ埛ID鑾峰彇鐢ㄦ埛淇℃伅
          *
-         * @param uid          用户ID
-         * @param findListener 回调
+         * @param uid          鐢ㄦ埛ID
+         * @param findListener 鍥炶皟
          */
         private void findUserById(String uid, FindListener<User> findListener) {
                 BmobQuery<User> query = new BmobQuery<>();
@@ -280,20 +275,18 @@ public class UserManager {
         }
 
         /**
-         * 更新好友的黑名单状态
-         *
-         * @param username 好友用户名
-         * @param isBlack  是否是黑名单
+         * 鏇存柊濂藉弸鐨勯粦鍚嶅崟鐘舵€?         *
+         * @param username 濂藉弸鐢ㄦ埛鍚?         * @param isBlack  鏄惁鏄粦鍚嶅崟
          */
         private long updateFriendBlackStatus(String username, boolean isBlack) {
                 return ChatDB.create().updateFriendBlackStatus(username, isBlack);
         }
 
         /**
-         * 添加为黑名单
+         * 娣诲姞涓洪粦鍚嶅崟
          *
-         * @param user                     用户实体
-         * @param addBlackCallBackListener 回调
+         * @param user                     鐢ㄦ埛瀹炰綋
+         * @param addBlackCallBackListener 鍥炶皟
          */
         public void addToBlack(final User user, final AddBlackCallBackListener addBlackCallBackListener) {
                 addBlackRelation(user, new UpdateListener() {
@@ -304,14 +297,14 @@ public class UserManager {
                                         if (result1 > 0 && result2 > 0) {
                                                 addBlackCallBackListener.onSuccess(user);
                                         } else {
-                                                addBlackCallBackListener.onFailed(new BmobException("在数据库更新用户黑名单状态失败或者是删除最近会话失败"));
+                                                addBlackCallBackListener.onFailed(new BmobException("鍦ㄦ暟鎹簱鏇存柊鐢ㄦ埛榛戝悕鍗曠姸鎬佸け璐ユ垨鑰呮槸鍒犻櫎鏈€杩戜細璇濆け璐?));
                                         }
-//                                        LogUtil.e("在服务器上关联该用户为黑名单失败");
+//                                        LogUtil.e("鍦ㄦ湇鍔″櫒涓婂叧鑱旇鐢ㄦ埛涓洪粦鍚嶅崟澶辫触");
                                 }
 
                                 @Override
                                 public void onFailure(int i, String s) {
-                                        LogUtil.e("在服务器上关联该用户为黑名单失败");
+                                        LogUtil.e("鍦ㄦ湇鍔″櫒涓婂叧鑱旇鐢ㄦ埛涓洪粦鍚嶅崟澶辫触");
                                         addBlackCallBackListener.onFailed(new BmobException(s));
                                 }
                         }
@@ -330,10 +323,9 @@ public class UserManager {
         }
 
         /**
-         * 取消黑名单回调
-         *
-         * @param user     用户实体
-         * @param listener 回调
+         * 鍙栨秷榛戝悕鍗曞洖璋?         *
+         * @param user     鐢ㄦ埛瀹炰綋
+         * @param listener 鍥炶皟
          */
         public void cancelBlack(final User user, final CancelBlackCallBlackListener listener) {
                 deleteBlackRelation(user, new UpdateListener() {
@@ -343,7 +335,7 @@ public class UserManager {
                                         if (result > 0) {
                                                 listener.onSuccess(user);
                                         } else {
-                                                listener.onFailed(new BmobException("在数据库中更新黑名单状态失败"));
+                                                listener.onFailed(new BmobException("鍦ㄦ暟鎹簱涓洿鏂伴粦鍚嶅崟鐘舵€佸け璐?));
                                         }
                                 }
 
@@ -376,13 +368,13 @@ public class UserManager {
                                         installation.update(BaseApplication.getInstance(), new UpdateListener() {
                                                 @Override
                                                 public void onSuccess() {
-                                                        LogUtil.e("绑定设备表中UID成功");
+                                                        LogUtil.e("缁戝畾璁惧琛ㄤ腑UID鎴愬姛");
                                                         listener.onSuccess();
                                                 }
 
                                                 @Override
                                                 public void onFailure(int i, String s) {
-                                                        LogUtil.e("绑定设备表中UID设备失败");
+                                                        LogUtil.e("缁戝畾璁惧琛ㄤ腑UID璁惧澶辫触");
                                                         listener.onFailure(i, s);
 
                                                 }
@@ -392,18 +384,18 @@ public class UserManager {
 
                         @Override
                         public void onError(int i, String s) {
-                                LogUtil.e("在服务器上查询设备失败" + s + i);
+                                LogUtil.e("鍦ㄦ湇鍔″櫒涓婃煡璇㈣澶囧け璐? + s + i);
                                 listener.onFailure(i, s);
                         }
                 });
         }
 
         /**
-         * 检查本设备表中的uid   ，如果有，就发送下线通知，操作成功后，再把uid更新到本地的设备表中
+         * 妫€鏌ユ湰璁惧琛ㄤ腑鐨剈id   锛屽鏋滄湁锛屽氨鍙戦€佷笅绾块€氱煡锛屾搷浣滄垚鍔熷悗锛屽啀鎶妘id鏇存柊鍒版湰鍦扮殑璁惧琛ㄤ腑
          */
         public void checkInstallation(final UpdateListener listener) {
                 BmobQuery<CustomInstallation> query = new BmobQuery<>();
-                LogUtil.e("checkInstallation UID：" + getCurrentUserObjectId());
+                LogUtil.e("checkInstallation UID锛? + getCurrentUserObjectId());
                 query.addWhereEqualTo("uid", getCurrentUserObjectId());
                 query.findObjects(BaseApplication.getInstance(), new FindListener<CustomInstallation>() {
                                 @Override
@@ -411,34 +403,34 @@ public class UserManager {
                                         if (list != null && list.size() > 0) {
                                                 CustomInstallation customInstallation = list.get(0);
                                                 if (customInstallation.getInstallationId().equals(CustomInstallation.getInstallationId(BaseApplication.getInstance()))) {
-                                                        LogUtil.e("由于绑定的是本设备表，不做操作所以");
+                                                        LogUtil.e("鐢变簬缁戝畾鐨勬槸鏈澶囪〃锛屼笉鍋氭搷浣滄墍浠?);
                                                         listener.onSuccess();
                                                 } else {
-//                                                        不管推送成功与否，都要更新设备表的UID
+//                                                        涓嶇鎺ㄩ€佹垚鍔熶笌鍚︼紝閮借鏇存柊璁惧琛ㄧ殑UID
                                                         MsgManager.getInstance().sendOfflineNotificationMsg(customInstallation, new PushListener() {
                                                                         @Override
                                                                         public void onSuccess() {
-                                                                                LogUtil.e("推送下线通知消息成功");
+                                                                                LogUtil.e("鎺ㄩ€佷笅绾块€氱煡娑堟伅鎴愬姛");
                                                                                 bindInstallation(listener);
                                                                         }
 
                                                                         @Override
                                                                         public void onFailure(int i, String s) {
-                                                                                LogUtil.e("推送下线通知消息失败" + s + i);
+                                                                                LogUtil.e("鎺ㄩ€佷笅绾块€氱煡娑堟伅澶辫触" + s + i);
                                                                                 bindInstallation(listener);
                                                                         }
                                                                 }
                                                         );
                                                 }
                                         } else {
-                                                LogUtil.e("查询不到本用户所对应的设备ID,这里新建一个设备表");
+                                                LogUtil.e("鏌ヨ涓嶅埌鏈敤鎴锋墍瀵瑰簲鐨勮澶嘔D,杩欓噷鏂板缓涓€涓澶囪〃");
                                                 bindInstallation(listener);
                                         }
                                 }
 
                                 @Override
                                 public void onError(int i, String s) {
-                                        LogUtil.e("查询本用户对应的设备表出错" + s + i);
+                                        LogUtil.e("鏌ヨ鏈敤鎴峰搴旂殑璁惧琛ㄥ嚭閿? + s + i);
                                         listener.onFailure(i, s);
                                 }
                         }
@@ -463,7 +455,7 @@ public class UserManager {
                                 user.setAvatar(content);
                                 break;
                         case "sex":
-                                if (content.equals("男")) {
+                                if (content.equals("鐢?)) {
                                         user.setSex(true);
                                 } else {
                                         user.setSex(false);
@@ -479,7 +471,7 @@ public class UserManager {
                                 user.setAddress(content);
                                 break;
                         case "location":
-                                LogUtil.e("定位location" + content);
+                                LogUtil.e("瀹氫綅location" + content);
                                 String result[] = content.split("&");
                                 user.setLocation(new BmobGeoPoint(Double.parseDouble(result[0]), Double.parseDouble(result[1])));
                                 break;
@@ -509,7 +501,7 @@ public class UserManager {
                                                 currentUser.setAvatar(content);
                                                 break;
                                         case "sex":
-                                                if (content.equals("男")) {
+                                                if (content.equals("鐢?)) {
                                                         currentUser.setSex(true);
                                                 } else {
                                                         currentUser.setSex(false);
@@ -525,7 +517,7 @@ public class UserManager {
                                                 currentUser.setAddress(content);
                                                 break;
                                         case "location":
-                                                LogUtil.e("定位location" + content);
+                                                LogUtil.e("瀹氫綅location" + content);
                                                 String result[] = content.split("&");
                                                 currentUser.setLocation(new BmobGeoPoint(Double.parseDouble(result[0]), Double.parseDouble(result[1])));
                                                 break;
@@ -565,13 +557,12 @@ public class UserManager {
                                 userList) {
                                 BmobQuery<User> query = new BmobQuery<>();
                                 String lastTime = MessageCacheManager.getInstance().getUserDataLastUpdateTime(uid);
-//                                        第一次断网查询用户数据
-                                try {
+//                                        绗竴娆℃柇缃戞煡璇㈢敤鎴锋暟鎹?                                try {
                                         query.addWhereGreaterThan("updatedAt", new BmobDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(lastTime)));
                                         query.addWhereEqualTo("objectId", uid);
                                 } catch (ParseException e) {
                                         e.printStackTrace();
-                                        LogUtil.e("解析时间错误");
+                                        LogUtil.e("瑙ｆ瀽鏃堕棿閿欒");
                                 }
                                 query.findObjects(BaseApplication.getInstance(), new FindListener<User>() {
                                         @Override
@@ -586,10 +577,11 @@ public class UserManager {
 
                                         @Override
                                         public void onError(int i, String s) {
-                                                LogUtil.e("断网期间内查询用户失败" + s + i);
+                                                LogUtil.e("鏂綉鏈熼棿鍐呮煡璇㈢敤鎴峰け璐? + s + i);
                                         }
                                 });
                         }
                 }
         }
 }
+

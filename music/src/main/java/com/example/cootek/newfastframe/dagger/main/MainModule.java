@@ -1,6 +1,6 @@
-package com.example.cootek.newfastframe.dagger.main;
+﻿package com.example.cootek.newfastframe.dagger.main;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.example.commonlibrary.bean.music.DaoSession;
 import com.example.commonlibrary.dagger.scope.PerApplication;
@@ -61,3 +61,4 @@ public class MainModule {
         return new MusicInterceptor();
     }
 }
+

@@ -1,11 +1,11 @@
-package com.example.cootek.newfastframe.ui;
+﻿package com.example.cootek.newfastframe.ui;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -68,7 +68,7 @@ public class SettingActivity extends MusicBaseActivity implements View.OnClickLi
         checkBox.setBackgroundColor(themeColor);
         ToolBarOption toolBarOption = new ToolBarOption();
         toolBarOption.setNeedNavigation(true);
-        toolBarOption.setTitle("设置");
+        toolBarOption.setTitle("璁剧疆");
         setToolBar(toolBarOption);
     }
 
@@ -104,7 +104,7 @@ public class SettingActivity extends MusicBaseActivity implements View.OnClickLi
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        ToastUtils.showShortToast("暂时用皮肤插件来实现");
+        ToastUtils.showShortToast("鏆傛椂鐢ㄧ毊鑲ゆ彃浠舵潵瀹炵幇");
 //        if (isChecked) {
 //            sharedPreferences.edit().putBoolean("isNight", true).apply();
 //            setTheme(R.style.CustomTheme_Night);
@@ -115,3 +115,4 @@ public class SettingActivity extends MusicBaseActivity implements View.OnClickLi
 //        }
     }
 }
+

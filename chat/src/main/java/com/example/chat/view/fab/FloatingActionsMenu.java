@@ -1,4 +1,4 @@
-package com.example.chat.view.fab;
+﻿package com.example.chat.view.fab;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -14,8 +14,8 @@ import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.ColorRes;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.ContextThemeWrapper;
 import android.view.TouchDelegate;
@@ -823,3 +823,4 @@ public class FloatingActionsMenu extends ViewGroup {
                 return Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
         }
 }
+

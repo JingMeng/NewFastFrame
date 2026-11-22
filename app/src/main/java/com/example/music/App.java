@@ -1,10 +1,10 @@
-package com.example.music;
+﻿package com.example.music;
 
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Environment;
 import android.os.StrictMode;
-import android.support.multidex.MultiDex;
+import androidx.multidex.MultiDex;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -27,18 +27,17 @@ public class App extends BaseApplication {
     public void onCreate() {
         super.onCreate();
 //        setStrictMode();
-//        // 设置是否开启热更新能力，默认为true
+//        // 璁剧疆鏄惁寮€鍚儹鏇存柊鑳藉姏锛岄粯璁や负true
 //        Beta.enableHotfix = true;
-//        // 设置是否自动下载补丁
+//        // 璁剧疆鏄惁鑷姩涓嬭浇琛ヤ竵
 //        Beta.canAutoDownloadPatch = true;
-//        // 设置是否提示用户重启
+//        // 璁剧疆鏄惁鎻愮ず鐢ㄦ埛閲嶅惎
 //        Beta.canNotifyUserRestart = true;
-//        // 设置是否自动合成补丁
+//        // 璁剧疆鏄惁鑷姩鍚堟垚琛ヤ竵
 //        Beta.canAutoPatch = true;
 //
 //        /**
-//         *  全量升级状态回调
-//         */
+//         *  鍏ㄩ噺鍗囩骇鐘舵€佸洖璋?//         */
 //        Beta.upgradeStateListener = new UpgradeStateListener() {
 //            @Override
 //            public void onUpgradeFailed(boolean b) {
@@ -52,7 +51,7 @@ public class App extends BaseApplication {
 //
 //            @Override
 //            public void onUpgradeNoVersion(boolean b) {
-//                Toast.makeText(getApplicationContext(), "最新版本", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "鏈€鏂扮増鏈?, Toast.LENGTH_SHORT).show();
 //            }
 //
 //            @Override
@@ -67,7 +66,7 @@ public class App extends BaseApplication {
 //        };
 //
 //        /**
-//         * 补丁回调接口，可以监听补丁接收、下载、合成的回调
+//         * 琛ヤ竵鍥炶皟鎺ュ彛锛屽彲浠ョ洃鍚ˉ涓佹帴鏀躲€佷笅杞姐€佸悎鎴愮殑鍥炶皟
 //         */
 //        Beta.betaPatchListener = new BetaPatchListener() {
 //            @Override
@@ -111,7 +110,7 @@ public class App extends BaseApplication {
 //        };
 //
 //        long start = System.currentTimeMillis();
-//        // 这里实现SDK初始化，appId替换成你的在Bugly平台申请的appId,调试时将第三个参数设置为true
+//        // 杩欓噷瀹炵幇SDK鍒濆鍖栵紝appId鏇挎崲鎴愪綘鐨勫湪Bugly骞冲彴鐢宠鐨刟ppId,璋冭瘯鏃跺皢绗笁涓弬鏁拌缃负true
 //        Bugly.init(this, "2e5309db50", true);
 //        long end = System.currentTimeMillis();
     }
@@ -122,7 +121,7 @@ public class App extends BaseApplication {
         // you must install multiDex whatever tinker is installed!
 //        MultiDex.install(base);
 
-        // 安装tinker
+        // 瀹夎tinker
 //        Beta.installTinker();
     }
 
@@ -133,3 +132,4 @@ public class App extends BaseApplication {
         StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog().build());
     }
 }
+

@@ -1,8 +1,8 @@
-package com.example.chat.ui.fragment;
+﻿package com.example.chat.ui.fragment;
 
 import android.content.Intent;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import android.view.View;
 
 import com.example.chat.ChatApplication;
@@ -30,9 +30,8 @@ import java.util.List;
 
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2017/1/7      18:26
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/1/7      18:26
  * QQ:             1981367757
  */
 public class HappyFragment extends BaseFragment<List<HappyBean>,HappyPresenter> implements HappyContacts.View<List<HappyBean>>, SwipeRefreshLayout.OnRefreshListener, OnLoadMoreListener {
@@ -175,3 +174,4 @@ public class HappyFragment extends BaseFragment<List<HappyBean>,HappyPresenter> 
                 loadMoreData(currentPage);
         }
 }
+

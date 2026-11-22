@@ -1,9 +1,9 @@
-package com.example.chat.view;
+﻿package com.example.chat.view;
 
 import android.content.Context;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,9 +21,8 @@ import static android.R.attr.id;
 
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2016/11/30      9:52
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2016/11/30      9:52
  * QQ:             1981367757
  */
 public abstract class ImageFolderPopupWindow extends PopupWindow {
@@ -123,3 +122,4 @@ public abstract class ImageFolderPopupWindow extends PopupWindow {
         }
 
 }
+

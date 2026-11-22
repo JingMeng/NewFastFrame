@@ -6,6 +6,7 @@ if (rootProject.ext.isAlone) {
 
 
 android {
+    namespace 'com.example.cootek.newfastframe'
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 //    buildToolsVersion rootProject.ext.android.buildToolsVersion
     defaultConfig {
@@ -17,7 +18,7 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         if (!rootProject.ext.isAlone) {
             javaCompileOptions {
@@ -36,8 +37,8 @@ android {
     }
     compileOptions {
 
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     sourceSets {
         main {
@@ -62,7 +63,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     implementation project(':commonlibrary')
-    //用作颜色选择器
     implementation ('com.afollestad.material-dialogs:commons:0.9.1.0'){
         exclude module: "support-v4"
         exclude module:"support-core-ui"
@@ -84,4 +84,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 //    compile files('libs/nineoldandroids-2.4.0.jar')
 }
+
+
+
 

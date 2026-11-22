@@ -1,9 +1,9 @@
-package com.example.news.mvp.news;
+﻿package com.example.news.mvp.news;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -37,9 +37,8 @@ import java.util.List;
 import javax.inject.Inject;
 
 /**
- * 项目名称:    NewFastFrame
- * 创建人:        陈锦军
- * 创建时间:    2017/9/16      16:26
+ * 椤圭洰鍚嶇О:    NewFastFrame
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2017/9/16      16:26
  * QQ:             1981367757
  */
 
@@ -230,3 +229,4 @@ public class NewsListFragment extends BaseFragment<NewListBean, NewsListPresente
         }
     }
 }
+

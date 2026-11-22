@@ -1,7 +1,7 @@
-
+﻿
 package com.example.commonlibrary.baseadapter.swipeview;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +16,11 @@ import java.util.List;
 public abstract class SwipeMenuAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
 
     /**
-     * Swipe menu creator。
-     */
+     * Swipe menu creator銆?     */
     private SwipeMenuCreator mSwipeMenuCreator;
 
     /**
-     * Swipe menu click listener。
-     */
+     * Swipe menu click listener銆?     */
     private OnSwipeMenuItemClickListener mSwipeMenuItemClickListener;
 
     /**

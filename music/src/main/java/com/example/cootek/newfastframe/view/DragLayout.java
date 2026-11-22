@@ -1,7 +1,7 @@
-package com.example.cootek.newfastframe.view;
+﻿package com.example.cootek.newfastframe.view;
 
 import android.content.Context;
-import android.support.v4.view.ViewCompat;
+import androidx.core.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
@@ -15,9 +15,8 @@ import com.nineoldandroids.view.ViewHelper;
 
 
 /**
- * 项目名称:    FilpperLayoutDemo
- * 创建人:        陈锦军
- * 创建时间:    2016/11/4      12:25
+ * 椤圭洰鍚嶇О:    FilpperLayoutDemo
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2016/11/4      12:25
  * QQ:             1981367757
  */
 
@@ -25,23 +24,21 @@ public class DragLayout extends ViewGroup {
 
 
     /**
-     * 正在拖拽
+     * 姝ｅ湪鎷栨嫿
      */
     public static final int DRAG_STATE_DRAGING = 1;
     /**
-     * 关闭状态
-     */
+     * 鍏抽棴鐘舵€?     */
     public static final int DRAG_STATE_CLOSE = 0;
     /**
-     * 打开状态
-     */
+     * 鎵撳紑鐘舵€?     */
     public static final int DRAG_STATE_OPEN = 2;
     /**
-     * 左遍的菜单布局
+     * 宸﹂亶鐨勮彍鍗曞竷灞€
      */
     private ViewGroup menu;
     /**
-     * 右边的主界面布局
+     * 鍙宠竟鐨勪富鐣岄潰甯冨眬
      */
     private ViewGroup content;
 
@@ -59,13 +56,12 @@ public class DragLayout extends ViewGroup {
     }
 
     /**
-     * 手势监听器
-     */
+     * 鎵嬪娍鐩戝惉鍣?     */
     private GestureDetector mGestureDetector;
 
 
     /**
-     * 拖拽子view的辅助类
+     * 鎷栨嫿瀛恦iew鐨勮緟鍔╃被
      */
     private ViewDragHelper mViewDragHelper;
 
@@ -88,12 +84,12 @@ public class DragLayout extends ViewGroup {
         mGestureDetector = new GestureDetector(context, new SimpleOnGestureListener() {
             @Override
             public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-//                                如果水平方向的偏移量大于竖直方向的偏移量，就消化该事件,
+//                                濡傛灉姘村钩鏂瑰悜鐨勫亸绉婚噺澶т簬绔栫洿鏂瑰悜鐨勫亸绉婚噺锛屽氨娑堝寲璇ヤ簨浠?
                 return Math.abs(distanceX) > Math.abs(distanceY) || super.onScroll(e1, e2, distanceX, distanceY);
 
             }
         });
-//                永远要记得，该工具实现的拖拉是基于控件位置的改变来实现的
+//                姘歌繙瑕佽寰楋紝璇ュ伐鍏峰疄鐜扮殑鎷栨媺鏄熀浜庢帶浠朵綅缃殑鏀瑰彉鏉ュ疄鐜扮殑
         mViewDragHelper = ViewDragHelper.create(this, new DragViewCallBack());
     }
 
@@ -124,13 +120,11 @@ public class DragLayout extends ViewGroup {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-//                如果符合条件直接截获事件由自己在onTouchEvent方法中处理
-//                如果在释放自动滑动的过程中点击，会导致停止动画
-        if (isIntercept()) {
+//                濡傛灉绗﹀悎鏉′欢鐩存帴鎴幏浜嬩欢鐢辫嚜宸卞湪onTouchEvent鏂规硶涓鐞?//                濡傛灉鍦ㄩ噴鏀捐嚜鍔ㄦ粦鍔ㄧ殑杩囩▼涓偣鍑伙紝浼氬鑷村仠姝㈠姩鐢?        if (isIntercept()) {
             return false;
         }
         boolean result = mViewDragHelper.shouldInterceptTouchEvent(ev) && mGestureDetector.onTouchEvent(ev);
-//                这里是为了防止在滑动的过程中,突然点击,导致被点击的页面停止滑动的的情况发生
+//                杩欓噷鏄负浜嗛槻姝㈠湪婊戝姩鐨勮繃绋嬩腑,绐佺劧鐐瑰嚮,瀵艰嚧琚偣鍑荤殑椤甸潰鍋滄婊戝姩鐨勭殑鎯呭喌鍙戠敓
 
         if (!result && mViewDragHelper.getViewDragState() == ViewDragHelper.STATE_DRAGGING && ev.getAction() == MotionEvent.ACTION_UP) {
             if (mode == LEFT_MODE) {
@@ -152,7 +146,7 @@ public class DragLayout extends ViewGroup {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-//                在这里直接交给viewDragHelper处理
+//                鍦ㄨ繖閲岀洿鎺ヤ氦缁檝iewDragHelper澶勭悊
         mViewDragHelper.processTouchEvent(event);
         return false;
     }
@@ -246,11 +240,11 @@ public class DragLayout extends ViewGroup {
 
     private class DragViewCallBack extends ViewDragHelper.Callback {
         /**
-         * 是否捕获子view
+         * 鏄惁鎹曡幏瀛恦iew
          *
-         * @param child     子view
-         * @param pointerId 被拖拽或真正做动画的子iewID
-         * @return 结果
+         * @param child     瀛恦iew
+         * @param pointerId 琚嫋鎷芥垨鐪熸鍋氬姩鐢荤殑瀛恑ewID
+         * @return 缁撴灉
          */
         @Override
         public boolean tryCaptureView(View child, int pointerId) {
@@ -258,13 +252,11 @@ public class DragLayout extends ViewGroup {
         }
 
         /**
-         * 这里进行边界检查,默认是距离父布局左边为0的，即不允许拖拽
+         * 杩欓噷杩涜杈圭晫妫€鏌?榛樿鏄窛绂荤埗甯冨眬宸﹁竟涓?鐨勶紝鍗充笉鍏佽鎷栨嫿
          *
-         * @param child 子view
-         * @param left  最新的子view控件的左边距离父布局的控件的左边
-         * @param dx    偏移量
-         * @return 适合的距离父布局左边的距离
-         */
+         * @param child 瀛恦iew
+         * @param left  鏈€鏂扮殑瀛恦iew鎺т欢鐨勫乏杈硅窛绂荤埗甯冨眬鐨勬帶浠剁殑宸﹁竟
+         * @param dx    鍋忕Щ閲?         * @return 閫傚悎鐨勮窛绂荤埗甯冨眬宸﹁竟鐨勮窛绂?         */
         @Override
         public int clampViewPositionHorizontal(View child, int left, int dx) {
             int result;
@@ -315,35 +307,30 @@ public class DragLayout extends ViewGroup {
         }
 
         /**
-         * 设置水平移动的范围
-         *
-         * @param child 子view
-         * @return 移动的最大距离
-         */
+         * 璁剧疆姘村钩绉诲姩鐨勮寖鍥?         *
+         * @param child 瀛恦iew
+         * @return 绉诲姩鐨勬渶澶ц窛绂?         */
         @Override
         public int getViewHorizontalDragRange(View child) {
             return width;
         }
 
         /**
-         * 被拖拽的子view释放的瞬间回调
-         *
-         * @param releasedChild 被拖拽的子view
-         * @param xvel          x轴上的速度
-         * @param yvel          y轴上的速度
+         * 琚嫋鎷界殑瀛恦iew閲婃斁鐨勭灛闂村洖璋?         *
+         * @param releasedChild 琚嫋鎷界殑瀛恦iew
+         * @param xvel          x杞翠笂鐨勯€熷害
+         * @param yvel          y杞翠笂鐨勯€熷害
          */
         @Override
         public void onViewReleased(View releasedChild, float xvel, float yvel) {
             if (xvel > 0) {
-//                                向右滑动的趋势
-                if (mode == LEFT_MODE) {
+//                                鍚戝彸婊戝姩鐨勮秼鍔?                if (mode == LEFT_MODE) {
                     openMenu();
                 } else {
                     closeMenu();
                 }
             } else if (xvel < 0) {
-//                                向左滑动的趋势
-                if (mode == LEFT_MODE) {
+//                                鍚戝乏婊戝姩鐨勮秼鍔?                if (mode == LEFT_MODE) {
                     closeMenu();
                 } else {
                     openMenu();
@@ -367,13 +354,11 @@ public class DragLayout extends ViewGroup {
 
 
         /**
-         * 子view拖拽过程中位置改变的回调
+         * 瀛恦iew鎷栨嫿杩囩▼涓綅缃敼鍙樼殑鍥炶皟
          *
-         * @param changedView 被拖拽的子view
-         * @param left        距离父布局左边的距离
-         * @param top         距离父布局上面的距离
-         * @param dx          x方向的偏移量
-         * @param dy          y方向的偏移量
+         * @param changedView 琚嫋鎷界殑瀛恦iew
+         * @param left        璺濈鐖跺竷灞€宸﹁竟鐨勮窛绂?         * @param top         璺濈鐖跺竷灞€涓婇潰鐨勮窛绂?         * @param dx          x鏂瑰悜鐨勫亸绉婚噺
+         * @param dy          y鏂瑰悜鐨勫亸绉婚噺
          */
         @Override
         public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
@@ -398,7 +383,7 @@ public class DragLayout extends ViewGroup {
                 menu.layout((int) desWidth, 0, (int) (desWidth + width), height);
 
             }
-//                        0~~1之间
+//                        0~~1涔嬮棿
             int dragState = getCurrentState();
             if (dragState == DRAG_STATE_OPEN) {
                 if (mListener != null) {
@@ -434,10 +419,8 @@ public class DragLayout extends ViewGroup {
     }
 
     /**
-     * 根据偏移量来判断目前的状态
-     *
-     * @return 状态
-     */
+     * 鏍规嵁鍋忕Щ閲忔潵鍒ゆ柇鐩墠鐨勭姸鎬?     *
+     * @return 鐘舵€?     */
     public int getCurrentState() {
         int marginLeft = content.getLeft();
         if (marginLeft == 0) {
@@ -450,18 +433,16 @@ public class DragLayout extends ViewGroup {
     }
 
     /**
-     * 关闭菜单
+     * 鍏抽棴鑿滃崟
      */
     public void closeMenu() {
         if (isUseAnimation) {
-//                        如果content内容界面的控件的左偏移量和动画最终的位置不一致就return true(也就是可以滑动的情况下),内部是采用Scroller进行计算的，所以需要重绘
-            if (mViewDragHelper.smoothSlideViewTo(content, 0, 0)) {
-//                                兼容版本,重绘会调用computeScroll()
+//                        濡傛灉content鍐呭鐣岄潰鐨勬帶浠剁殑宸﹀亸绉婚噺鍜屽姩鐢绘渶缁堢殑浣嶇疆涓嶄竴鑷村氨return true(涔熷氨鏄彲浠ユ粦鍔ㄧ殑鎯呭喌涓?,鍐呴儴鏄噰鐢⊿croller杩涜璁＄畻鐨勶紝鎵€浠ラ渶瑕侀噸缁?            if (mViewDragHelper.smoothSlideViewTo(content, 0, 0)) {
+//                                鍏煎鐗堟湰,閲嶇粯浼氳皟鐢╟omputeScroll()
                 ViewCompat.postInvalidateOnAnimation(this);
             }
         } else {
-//                        如果没有动画就直接设布局到终点
-            content.layout(0, 0, width, height);
+//                        濡傛灉娌℃湁鍔ㄧ敾灏辩洿鎺ヨ甯冨眬鍒扮粓鐐?            content.layout(0, 0, width, height);
             if (mListener != null) {
                 mListener.onCloseMenu();
             }
@@ -469,7 +450,7 @@ public class DragLayout extends ViewGroup {
     }
 
     /**
-     * 打开菜单
+     * 鎵撳紑鑿滃崟
      */
     public void openMenu() {
         int newRange = range;
@@ -481,7 +462,7 @@ public class DragLayout extends ViewGroup {
                 ViewCompat.postInvalidateOnAnimation(this);
             }
         } else {
-//                        没有使用动画
+//                        娌℃湁浣跨敤鍔ㄧ敾
             content.layout(newRange, 0, newRange + width, height);
             if (mListener != null) {
                 mListener.onOpenMenu();
@@ -493,10 +474,10 @@ public class DragLayout extends ViewGroup {
     @Override
     public void computeScroll() {
         super.computeScroll();
-//                调用该方法，内部进行view的动画效果的重绘,return true 表明还在进行中，false表明已经完成了,这里进行控件位置的移动
-        if (mViewDragHelper.continueSettling(true)) {
-//                        不断调用computeScroll
+//                璋冪敤璇ユ柟娉曪紝鍐呴儴杩涜view鐨勫姩鐢绘晥鏋滅殑閲嶇粯,return true 琛ㄦ槑杩樺湪杩涜涓紝false琛ㄦ槑宸茬粡瀹屾垚浜?杩欓噷杩涜鎺т欢浣嶇疆鐨勭Щ鍔?        if (mViewDragHelper.continueSettling(true)) {
+//                        涓嶆柇璋冪敤computeScroll
             ViewCompat.postInvalidateOnAnimation(this);
         }
     }
 }
+

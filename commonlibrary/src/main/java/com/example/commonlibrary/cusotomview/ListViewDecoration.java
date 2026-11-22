@@ -1,25 +1,24 @@
-package com.example.commonlibrary.cusotomview;
+﻿package com.example.commonlibrary.cusotomview;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 import com.example.commonlibrary.R;
 
 
 /**
- * 项目名称:    HappyChat
- * 创建人:        陈锦军
- * 创建时间:    2016/9/15      10:51
+ * 椤圭洰鍚嶇О:    HappyChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2016/9/15      10:51
  * QQ:             1981367757
  */
 
 
 /**
- * recyclerview的分隔线
+ * recyclerview鐨勫垎闅旂嚎
  */
 public class ListViewDecoration extends RecyclerView.ItemDecoration {
         private Drawable divider;
@@ -52,3 +51,4 @@ public class ListViewDecoration extends RecyclerView.ItemDecoration {
                 outRect.set(0, 0, 0, divider.getIntrinsicHeight());
         }
 }
+

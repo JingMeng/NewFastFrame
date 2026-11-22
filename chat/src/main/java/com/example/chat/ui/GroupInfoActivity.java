@@ -1,13 +1,13 @@
-package com.example.chat.ui;
+﻿package com.example.chat.ui;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -47,9 +47,8 @@ import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
 
 /**
- * 项目名称:    TestChat
- * 创建人:        陈锦军
- * 创建时间:    2016/12/31      18:01
+ * 椤圭洰鍚嶇О:    TestChat
+ * 鍒涘缓浜?        闄堥敠鍐? * 鍒涘缓鏃堕棿:    2016/12/31      18:01
  * QQ:             1981367757
  */
 
@@ -101,13 +100,13 @@ public class GroupInfoActivity extends SlideBaseActivity implements View.OnClick
                 groupNotification = (LinearLayout) findViewById(R.id.ll_group_info_group_notification);
                 groupRemind = (LinearLayout) findViewById(R.id.ll_group_info_remind);
                 exit = (Button) findViewById(R.id.btn_group_info_exit_group);
-                ((TextView) numberName.findViewById(R.id.tv_group_info_item_layout_title)).setText("群名片");
+                ((TextView) numberName.findViewById(R.id.tv_group_info_item_layout_title)).setText("缇ゅ悕鐗?);
                 numberNick = (TextView) numberName.findViewById(R.id.tv_group_info_item_layout_value);
-                ((TextView) numberCount.findViewById(R.id.tv_group_info_item_layout_title)).setText("群总人数");
-                ((TextView) groupNameLayout.findViewById(R.id.tv_group_info_item_layout_title)).setText("群名");
-                ((TextView) groupDescription.findViewById(R.id.tv_group_info_item_layout_title)).setText("群介绍");
-                ((TextView) groupNotification.findViewById(R.id.tv_group_info_item_layout_title)).setText("群通知");
-                ((TextView) groupRemind.findViewById(R.id.tv_group_info_item_layout_title)).setText("群消息提醒");
+                ((TextView) numberCount.findViewById(R.id.tv_group_info_item_layout_title)).setText("缇ゆ€讳汉鏁?);
+                ((TextView) groupNameLayout.findViewById(R.id.tv_group_info_item_layout_title)).setText("缇ゅ悕");
+                ((TextView) groupDescription.findViewById(R.id.tv_group_info_item_layout_title)).setText("缇や粙缁?);
+                ((TextView) groupNotification.findViewById(R.id.tv_group_info_item_layout_title)).setText("缇ら€氱煡");
+                ((TextView) groupRemind.findViewById(R.id.tv_group_info_item_layout_title)).setText("缇ゆ秷鎭彁閱?);
                 groupNumberCount = (TextView) numberCount.findViewById(R.id.tv_group_info_item_layout_value);
                 notification = (TextView) groupNotification.findViewById(R.id.tv_group_info_item_layout_value);
                 description = (TextView) groupDescription.findViewById(R.id.tv_group_info_item_layout_value);
@@ -153,7 +152,7 @@ public class GroupInfoActivity extends SlideBaseActivity implements View.OnClick
                 numberAvatar.setAdapter(mAdapter);
                 if (UserManager.getInstance().getCurrentUser().getObjectId().equals(mGroupTableMessage.getCreatorId())) {
                         isCreator = true;
-                        LogUtil.e("当前用户为群主，可以修改群头像");
+                        LogUtil.e("褰撳墠鐢ㄦ埛涓虹兢涓伙紝鍙互淇敼缇ゅご鍍?);
                         headerLayout.setClickable(true);
                         groupNotification.setClickable(true);
                         groupDescription.setClickable(true);
@@ -177,12 +176,12 @@ public class GroupInfoActivity extends SlideBaseActivity implements View.OnClick
                         @Override
                         public void run() {
                                 if (MessageCacheManager.getInstance().getAllGroupNumberInfo(mGroupTableMessage.getGroupId()) == null) {
-                                        showLoadDialog("正在加载群成员消息，请稍候............");
+                                        showLoadDialog("姝ｅ湪鍔犺浇缇ゆ垚鍛樻秷鎭紝璇风◢鍊?...........");
                                         MsgManager.getInstance().queryAllGroupNumber(mGroupTableMessage.getGroupId(), new FindListener<User>() {
                                                 @Override
                                                 public void onSuccess(final List<User> userList) {
                                                         if (userList != null && userList.size() > 0) {
-                                                                LogUtil.e("群成员信息");
+                                                                LogUtil.e("缇ゆ垚鍛樹俊鎭?);
                                                                 for (User user :
                                                                         userList) {
                                                                         LogUtil.e(user);
@@ -195,7 +194,7 @@ public class GroupInfoActivity extends SlideBaseActivity implements View.OnClick
                                                                                 if (list != null && list.size() > 0) {
                                                                                         groupInfoList = new ArrayList<>();
                                                                                         GroupNumberInfo groupNumberInfo;
-                                                                                        LogUtil.e("查询得到的成员群结构消息列表");
+                                                                                        LogUtil.e("鏌ヨ寰楀埌鐨勬垚鍛樼兢缁撴瀯娑堟伅鍒楄〃");
                                                                                         for (GroupTableMessage message :
                                                                                                 list) {
                                                                                                 LogUtil.e(message);
@@ -215,13 +214,13 @@ public class GroupInfoActivity extends SlideBaseActivity implements View.OnClick
                                                                                         mAdapter.addData(MessageCacheManager.getInstance().getAllGroupNumberInfo(mGroupTableMessage.getGroupId()));
                                                                                         mAdapter.notifyDataSetChanged();
                                                                                 } else {
-                                                                                        LogUtil.e("在服务器上没有查询到群结构消息");
+                                                                                        LogUtil.e("鍦ㄦ湇鍔″櫒涓婃病鏈夋煡璇㈠埌缇ょ粨鏋勬秷鎭?);
                                                                                 }
                                                                         }
 
                                                                         @Override
                                                                         public void onError(int i, String s) {
-                                                                                LogUtil.e("查询群成员的群资料失败" + s + i);
+                                                                                LogUtil.e("鏌ヨ缇ゆ垚鍛樼殑缇よ祫鏂欏け璐? + s + i);
                                                                                 dismissLoadDialog();
                                                                         }
                                                                 });
@@ -231,7 +230,7 @@ public class GroupInfoActivity extends SlideBaseActivity implements View.OnClick
                                                 @Override
                                                 public void onError(int i, String s) {
                                                         dismissLoadDialog();
-                                                        LogUtil.e("查询群成员信息失败" + s + i);
+                                                        LogUtil.e("鏌ヨ缇ゆ垚鍛樹俊鎭け璐? + s + i);
                                                 }
                                         });
                                 } else {
@@ -247,22 +246,21 @@ public class GroupInfoActivity extends SlideBaseActivity implements View.OnClick
                 groupName.setText(mGroupTableMessage.getGroupName());
                 groupName1.setText(mGroupTableMessage.getGroupName());
                 if (mGroupTableMessage.getGroupNick() == null || mGroupTableMessage.getGroupNick().equals("")) {
-                        numberNick.setText("未设置");
-                        LogUtil.e("未设置");
+                        numberNick.setText("鏈缃?);
+                        LogUtil.e("鏈缃?);
                 } else {
                         numberNick.setText(mGroupTableMessage.getGroupNick());
                 }
-                groupNumberCount.setText(mGroupTableMessage.getGroupNumber().size() + "人");
+                groupNumberCount.setText(mGroupTableMessage.getGroupNumber().size() + "浜?);
                 description.setText(mGroupTableMessage.getGroupDescription());
                 notification.setText(mGroupTableMessage.getNotification());
-//                默认开启状态
-                if (isRemind) {
-                        remind.setText("开启");
+//                榛樿寮€鍚姸鎬?                if (isRemind) {
+                        remind.setText("寮€鍚?);
                 } else {
-                        remind.setText("关闭");
+                        remind.setText("鍏抽棴");
                 }
                 Glide.with(this).load(mGroupTableMessage.getGroupAvatar()).into(groupAvatar);
-                createTime.setText("于" + TimeUtil.getTime(Long.valueOf(mGroupTableMessage.getCreatedTime())) + "创建");
+                createTime.setText("浜? + TimeUtil.getTime(Long.valueOf(mGroupTableMessage.getCreatedTime())) + "鍒涘缓");
         }
 
 
@@ -291,9 +289,9 @@ public class GroupInfoActivity extends SlideBaseActivity implements View.OnClick
                 int i = v.getId();
                 if (i == R.id.rl_group_info_header) {
                         List<String> list = new ArrayList<>();
-                        list.add("拍摄");
-                        list.add("从手机相册选择");
-                        showChooseDialog("设置头像", list, new AdapterView.OnItemClickListener() {
+                        list.add("鎷嶆憚");
+                        list.add("浠庢墜鏈虹浉鍐岄€夋嫨");
+                        showChooseDialog("璁剧疆澶村儚", list, new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                         dismissBaseDialog();
@@ -306,7 +304,7 @@ public class GroupInfoActivity extends SlideBaseActivity implements View.OnClick
                                 }
                         });
 
-                } else if (i == R.id.ll_group_info_number_name) {//                                编辑昵称
+                } else if (i == R.id.ll_group_info_number_name) {//                                缂栬緫鏄电О
                         Intent intent = new Intent(this, EditUserInfoDetailActivity.class);
                         intent.putExtra("groupId", mGroupTableMessage.getGroupId());
                         intent.putExtra("from", "groupNick");
@@ -344,15 +342,15 @@ public class GroupInfoActivity extends SlideBaseActivity implements View.OnClick
                         BaseApplication.getAppComponent().getSharedPreferences()
                                 .edit().putBoolean(mGroupTableMessage.getGroupId(), isRemind);
                         if (isRemind) {
-                                remind.setText("开启");
+                                remind.setText("寮€鍚?);
                         } else {
-                                remind.setText("关闭");
+                                remind.setText("鍏抽棴");
                         }
 
                 } else if (i == R.id.btn_group_info_exit_group) {
                         if (mGroupTableMessage.getCreatorId().equals(UserManager.getInstance().getCurrentUserObjectId())) {
-//                                        群主退出该群,
-                                Toast.makeText(this, "群组不能退出该群", Toast.LENGTH_SHORT).show();
+//                                        缇や富閫€鍑鸿缇?
+                                Toast.makeText(this, "缇ょ粍涓嶈兘閫€鍑鸿缇?, Toast.LENGTH_SHORT).show();
                         } else {
                                 GroupTableMessage groupTableMessage = new GroupTableMessage();
                                 groupTableMessage.setObjectId(mGroupTableMessage.getGroupId());
@@ -364,13 +362,13 @@ public class GroupInfoActivity extends SlideBaseActivity implements View.OnClick
                                 groupTableMessage.update(this, new UpdateListener() {
                                         @Override
                                         public void onSuccess() {
-                                                LogUtil.e("更新群主的群结构消息成功");
+                                                LogUtil.e("鏇存柊缇や富鐨勭兢缁撴瀯娑堟伅鎴愬姛");
                                                 finish();
                                         }
 
                                         @Override
                                         public void onFailure(int i, String s) {
-                                                LogUtil.e("更新群主的群结构消息失败" + s + i);
+                                                LogUtil.e("鏇存柊缇や富鐨勭兢缁撴瀯娑堟伅澶辫触" + s + i);
                                         }
                                 });
                         }
@@ -390,21 +388,21 @@ public class GroupInfoActivity extends SlideBaseActivity implements View.OnClick
                         String message = data.getStringExtra("message");
                         switch (requestCode) {
                                 case Constant.REQUEST_CODE_TAKE_PICTURE:
-                                        showLoadDialog("正在上传群头像，请稍后.........");
-                                        LogUtil.e("拍照的图片path为" + localImagePath);
+                                        showLoadDialog("姝ｅ湪涓婁紶缇ゅご鍍忥紝璇风◢鍚?........");
+                                        LogUtil.e("鎷嶇収鐨勫浘鐗噋ath涓? + localImagePath);
                                         final BmobFile bmobFile = new BmobFile(new File(localImagePath));
                                         bmobFile.uploadblock(BaseApplication.getInstance(), new UploadFileListener() {
                                                 @Override
                                                 public void onSuccess() {
-                                                        LogUtil.e("上传群头像成功");
+                                                        LogUtil.e("涓婁紶缇ゅご鍍忔垚鍔?);
                                                         MsgManager.getInstance().updateGroupMessage(mGroupTableMessage.getGroupId(), "groupAvatar", bmobFile.getFileUrl(BaseApplication.getInstance()), new UpdateListener() {
                                                                 @Override
                                                                 public void onSuccess() {
                                                                         dismissLoadDialog();
-                                                                        ToastUtils.showShortToast("更新群头像成功");
-                                                                        LogUtil.e("更新群消息的头像成功");
+                                                                        ToastUtils.showShortToast("鏇存柊缇ゅご鍍忔垚鍔?);
+                                                                        LogUtil.e("鏇存柊缇ゆ秷鎭殑澶村儚鎴愬姛");
                                                                         Glide.with(GroupInfoActivity.this).load(new File(localImagePath)).into(groupAvatar);
-                                                                        LogUtil.e("通知聊天界面群头像的改变");
+                                                                        LogUtil.e("閫氱煡鑱婂ぉ鐣岄潰缇ゅご鍍忕殑鏀瑰彉");
                                                                         RxBusManager.getInstance().post(new GroupInfoEvent(localImagePath,GroupInfoEvent.TYPE_GROUP_AVATRA));
 
 
@@ -413,15 +411,15 @@ public class GroupInfoActivity extends SlideBaseActivity implements View.OnClick
                                                                 @Override
                                                                 public void onFailure(int i, String s) {
                                                                         dismissLoadDialog();
-                                                                        LogUtil.e("更新群消息的头像失败" + s + i);
+                                                                        LogUtil.e("鏇存柊缇ゆ秷鎭殑澶村儚澶辫触" + s + i);
                                                                 }
                                                         });
                                                 }
                                                 @Override
                                                 public void onFailure(int i, String s) {
                                                         dismissLoadDialog();
-                                                        ToastUtils.showShortToast("上传群头像失败" + s + i);
-                                                        LogUtil.e("上传群头像失败" + s + i);
+                                                        ToastUtils.showShortToast("涓婁紶缇ゅご鍍忓け璐? + s + i);
+                                                        LogUtil.e("涓婁紶缇ゅご鍍忓け璐? + s + i);
                                                 }
                                         });
                                         break;
@@ -431,22 +429,22 @@ public class GroupInfoActivity extends SlideBaseActivity implements View.OnClick
                                         if (cursor != null && cursor.moveToFirst()) {
                                                 final String path = cursor.getString(cursor.getColumnIndexOrThrow("_data"));
                                                 if (path != null) {
-                                                        LogUtil.e("挑选的图片path为" + path);
-                                                        showLoadDialog("正在上传群头像，请稍后.........");
+                                                        LogUtil.e("鎸戦€夌殑鍥剧墖path涓? + path);
+                                                        showLoadDialog("姝ｅ湪涓婁紶缇ゅご鍍忥紝璇风◢鍚?........");
                                                         final BmobFile bmobFile1 = new BmobFile(new File(path));
                                                         bmobFile1.uploadblock(BaseApplication.getInstance(), new UploadFileListener() {
                                                                 @Override
                                                                 public void onSuccess() {
-                                                                        LogUtil.e("上传群头像成功");
+                                                                        LogUtil.e("涓婁紶缇ゅご鍍忔垚鍔?);
                                                                         MsgManager.getInstance().updateGroupMessage(mGroupTableMessage.getGroupId(), "groupAvatar", bmobFile1.getFileUrl(BaseApplication.getInstance()), new UpdateListener() {
                                                                                 @Override
                                                                                 public void onSuccess() {
                                                                                         dismissLoadDialog();
-                                                                                        ToastUtils.showShortToast("更新群头像成功");
-                                                                                        LogUtil.e("更新群消息的头像成功");
-//                                                                                        LogUtil.e("现在的群头像" + mGroupTableMessage.getGroupAvatar());
+                                                                                        ToastUtils.showShortToast("鏇存柊缇ゅご鍍忔垚鍔?);
+                                                                                        LogUtil.e("鏇存柊缇ゆ秷鎭殑澶村儚鎴愬姛");
+//                                                                                        LogUtil.e("鐜板湪鐨勭兢澶村儚" + mGroupTableMessage.getGroupAvatar());
 //                                                                                        MessageCacheManager.getInstance().getGroupTableMessage(mGroupTableMessage.getGroupId()).setGroupAvatar(bmobFile1.getFileUrl(BaseApplication.getInstance()));
-//                                                                                        LogUtil.e("如今的群头像" + mGroupTableMessage.getGroupAvatar());
+//                                                                                        LogUtil.e("濡備粖鐨勭兢澶村儚" + mGroupTableMessage.getGroupAvatar());
 //                                                                                        ChatDB.create().saveGroupTableMessage(mGroupTableMessage);
                                                                                         Glide.with(GroupInfoActivity.this).load(new File(path)).into(groupAvatar);
                                                                                         RxBusManager.getInstance().post(new GroupInfoEvent(path,GroupInfoEvent.TYPE_GROUP_AVATRA));
@@ -455,7 +453,7 @@ public class GroupInfoActivity extends SlideBaseActivity implements View.OnClick
                                                                                 @Override
                                                                                 public void onFailure(int i, String s) {
                                                                                         dismissLoadDialog();
-                                                                                        LogUtil.e("更新群消息的头像失败" + s + i);
+                                                                                        LogUtil.e("鏇存柊缇ゆ秷鎭殑澶村儚澶辫触" + s + i);
                                                                                 }
                                                                         });
                                                                 }
@@ -463,12 +461,12 @@ public class GroupInfoActivity extends SlideBaseActivity implements View.OnClick
                                                                 @Override
                                                                 public void onFailure(int i, String s) {
                                                                         dismissLoadDialog();
-                                                                        ToastUtils.showShortToast("上传群头像失败" + s + i);
-                                                                        LogUtil.e("上传群头像失败" + s + i);
+                                                                        ToastUtils.showShortToast("涓婁紶缇ゅご鍍忓け璐? + s + i);
+                                                                        LogUtil.e("涓婁紶缇ゅご鍍忓け璐? + s + i);
                                                                 }
                                                         });
                                                 } else {
-                                                        LogUtil.e("挑选的图片的路径为空");
+                                                        LogUtil.e("鎸戦€夌殑鍥剧墖鐨勮矾寰勪负绌?);
                                                 }
                                         }
                                         if (cursor != null && !cursor.isClosed()) {
@@ -476,7 +474,7 @@ public class GroupInfoActivity extends SlideBaseActivity implements View.OnClick
                                         }
                                         break;
                                 case Constant.REQUEST_CODE_EDIT_GROUP_INFO_NICK:
-                                        LogUtil.e("这里群昵称的改变");
+                                        LogUtil.e("杩欓噷缇ゆ樀绉扮殑鏀瑰彉");
                                         mGroupTableMessage.setGroupNick(message);
                                         numberNick.setText(message);
                                         List<GroupNumberInfo> list = MessageCacheManager.getInstance().getAllGroupNumberInfo(mGroupTableMessage.getGroupId());
@@ -523,3 +521,4 @@ public class GroupInfoActivity extends SlideBaseActivity implements View.OnClick
                 
         }
 }
+

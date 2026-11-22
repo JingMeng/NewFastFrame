@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright 2016 Yan Zhenjie
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +17,7 @@ package com.example.commonlibrary.baseadapter.swipeview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v4.view.ViewCompat;
+import androidx.core.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -366,7 +366,7 @@ public class SwipeMenuLayout extends FrameLayout implements SwipeSwitch {
 
     @Override
     public boolean isRightMenuOpen() {
-        CommonLogger.e(getScrollX() + "滚动");
+        CommonLogger.e(getScrollX() + "婊氬姩");
         return mSwipeRightHorizontal != null && mSwipeRightHorizontal.isMenuOpen(getScrollX());
     }
 
@@ -577,10 +577,11 @@ public class SwipeMenuLayout extends FrameLayout implements SwipeSwitch {
             if (top == 0) {
 
 //                top = (getMeasuredHeight() - rightMenu.getMeasuredHeight()) / 2;
-                CommonLogger.e("这里平衡" + "本地" + getMeasuredHeight() + "item" + rightMenu.getMeasuredHeight());
+                CommonLogger.e("杩欓噷骞宠　" + "鏈湴" + getMeasuredHeight() + "item" + rightMenu.getMeasuredHeight());
             }
             rightMenu.layout(parentViewWidth, top, parentViewWidth + menuViewWidth, top + menuViewHeight);
         }
     }
 
 }
+

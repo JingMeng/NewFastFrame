@@ -1,4 +1,4 @@
-package com.example.chat.ui;
+﻿package com.example.chat.ui;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -8,9 +8,9 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -152,8 +152,7 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
 
 
         /**
-         * 这里重新构建一个头部布局，因为封装的基类中的头部布局与滑动发生冲突
-         */
+         * 杩欓噷閲嶆柊鏋勫缓涓€涓ご閮ㄥ竷灞€锛屽洜涓哄皝瑁呯殑鍩虹被涓殑澶撮儴甯冨眬涓庢粦鍔ㄥ彂鐢熷啿绐?         */
         private RoundAngleImageView icon_1;
         private TextView right_1;
         private TextView title_1;
@@ -179,10 +178,10 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
                 } else if (from.equals(Constant.NOTIFICATION_TAG_ADD)) {
                         addOrReplaceFragment(mFragments[2], R.id.fl_content_container);
                 }
-                data.add("聊天");
-                data.add("好友");
-                data.add("邀请");
-                data.add("动态");
+                data.add("鑱婂ぉ");
+                data.add("濂藉弸");
+                data.add("閭€璇?);
+                data.add("鍔ㄦ€?);
                 menuAdapter = new MenuDisplayAdapter();
                 menuAdapter.setOnItemClickListener(new OnSimpleItemClickListener() {
                         @Override
@@ -196,13 +195,12 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
                 });
                 menuDisplay.setAdapter(menuAdapter);
                 menuAdapter.addData(data);
-//                注册消息接受器
-                initReceiver();
+//                娉ㄥ唽娑堟伅鎺ュ彈鍣?                initReceiver();
 //                bindPollService(5);
                 getWeatherInfo();
                 initUserInfo();
                 if (getIntent().getBooleanExtra("isFirstLogin", false)) {
-                        ToastUtils.showShortToast("首次登录，设置你的个人资料吧^_^");
+                        ToastUtils.showShortToast("棣栨鐧诲綍锛岃缃綘鐨勪釜浜鸿祫鏂欏惂^_^");
                         Intent intent = new Intent(this, EditUserInfoActivity.class);
                         startActivityForResult(intent, Constant.REQUEST_CODE_EDIT_USER_INFO);
                 }
@@ -215,21 +213,18 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
 
         private void initReceiver() {
                 IntentFilter intentFilter = new IntentFilter(Constant.NEW_MESSAGE_ACTION);
-//                这里设置优先级要比ChatActivity低,聊天界面一旦接受到消息，这里就不需要再接受
+//                杩欓噷璁剧疆浼樺厛绾ц姣擟hatActivity浣?鑱婂ぉ鐣岄潰涓€鏃︽帴鍙楀埌娑堟伅锛岃繖閲屽氨涓嶉渶瑕佸啀鎺ュ彈
                 intentFilter.setPriority(10);
-//                聊天消息的监听
-                registerReceiver(mReceiver = new NewMessageReceiver(), new IntentFilter(Constant.NEW_MESSAGE_ACTION));
+//                鑱婂ぉ娑堟伅鐨勭洃鍚?                registerReceiver(mReceiver = new NewMessageReceiver(), new IntentFilter(Constant.NEW_MESSAGE_ACTION));
                 IntentFilter filter = new IntentFilter();
-//                说说消息接受
+//                璇磋娑堟伅鎺ュ彈
                 filter.addAction(Constant.NEW_SHARE_MESSAGE_ACTION);
-//                说说消息改变实时监听
+//                璇磋娑堟伅鏀瑰彉瀹炴椂鐩戝惉
                 filter.addAction(Constant.NOTIFY_CHANGE_ACTION);
                 registerReceiver(shareReceiver = new ShareMessageReceiver(), filter);
-//                网络状态改变监听
-                registerReceiver(netWorkReceiver = new NetWorkChangedReceiver(), new IntentFilter(Constant.NETWORK_CONNECTION_CHANGE));
+//                缃戠粶鐘舵€佹敼鍙樼洃鍚?                registerReceiver(netWorkReceiver = new NetWorkChangedReceiver(), new IntentFilter(Constant.NETWORK_CONNECTION_CHANGE));
                 netWorkReceiver.registerListener(this);
-//                单聊和系统推送消息监听
-                PushMessageReceiver.registerListener(this);
+//                鍗曡亰鍜岀郴缁熸帹閫佹秷鎭洃鍚?                PushMessageReceiver.registerListener(this);
         }
 
         private void initUserInfo() {
@@ -240,7 +235,7 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
                         nick.setText(user.getNick());
                         updateMenuBg();
                         if (user.getSignature() == null) {
-                                signature.setText("^_^1设置属于你的个性签名吧^_^");
+                                signature.setText("^_^1璁剧疆灞炰簬浣犵殑涓€х鍚嶅惂^_^");
                         } else {
                                 signature.setText(user.getSignature());
                         }
@@ -261,7 +256,7 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
                 mWeatherInfoBean = new WeatherInfoBean();
                 List<String> addressList = LocationManager.getInstance().getLocationList();
                 if (addressList != null) {
-                        String cityName = addressList.get(4).substring(addressList.get(4).indexOf("省") + 1);
+                        String cityName = addressList.get(4).substring(addressList.get(4).indexOf("鐪?) + 1);
                         LogUtil.e("cityName" + cityName);
                         mWeatherInfoBean.setCity(cityName);
                         startSearchLiveWeather();
@@ -281,11 +276,9 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
 
 
         /**
-         * 通知说说item的实时监听绑定
-         *
-         * @param objectId 说说id
-         * @param isAdd    是否实时监听该说说
-         */
+         * 閫氱煡璇磋item鐨勫疄鏃剁洃鍚粦瀹?         *
+         * @param objectId 璇磋id
+         * @param isAdd    鏄惁瀹炴椂鐩戝惉璇ヨ璇?         */
         public void notifySharedMessageChanged(String objectId, boolean isAdd) {
                 ((RecentFragment) mFragments[0]).notifySharedMessageChanged(objectId, isAdd);
         }
@@ -360,27 +353,27 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
                         startActivity(intent);
 
                 } else if (i == R.id.main_sub_item_add) {
-                        ToastUtils.showShortToast("点击了添加好友");
+                        ToastUtils.showShortToast("鐐瑰嚮浜嗘坊鍔犲ソ鍙?);
                         SearchFriendActivity.start(this);
 
                 } else if (i == R.id.main_sub_item_create) {
-                        ToastUtils.showShortToast("点击了创建群");
+                        ToastUtils.showShortToast("鐐瑰嚮浜嗗垱寤虹兢");
                         Intent selectIntent = new Intent(this, SelectedFriendsActivity.class);
                         selectIntent.putExtra("from", "createGroup");
                         startActivity(selectIntent);
 
                 } else if (i == R.id.main_sub_item_settings) {
-                        ToastUtils.showShortToast("点击了设置");
+                        ToastUtils.showShortToast("鐐瑰嚮浜嗚缃?);
                         SettingsActivity.start(this, Constant.REQUEST_CODE_EDIT_USER_INFO);
 
                 } else if (i == R.id.main_sub_item_happy) {
                         HappyActivity.startActivity(this);
-//                                Toast.makeText(this, "启动demo", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(this, "鍚姩demo", Toast.LENGTH_SHORT).show();
 //                                Intent demo = new Intent(this, DemoActivity.class);
 //                                startActivity(demo);
 
                 } else if (i == R.id.main_sub_item_bg) {
-                        ToastUtils.showShortToast("点击了背景");
+                        ToastUtils.showShortToast("鐐瑰嚮浜嗚儗鏅?);
                         Intent wallPaperIntent = new Intent(this, WallPaperActivity.class);
                         wallPaperIntent.putExtra("from", "wallpaper");
                         startActivityForResult(wallPaperIntent, Constant.REQUEST_CODE_SELECT_WALLPAPER);
@@ -392,12 +385,11 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
         @Override
         public void OnNetWorkChanged(boolean isConnected, int type) {
                 if (isConnected) {
-//                        这里判断网络的连接类型
-                        if (type == ConnectivityManager.TYPE_WIFI) {
-                                LogUtil.e("wife类型的1");
+//                        杩欓噷鍒ゆ柇缃戠粶鐨勮繛鎺ョ被鍨?                        if (type == ConnectivityManager.TYPE_WIFI) {
+                                LogUtil.e("wife绫诲瀷鐨?");
                                 bindPollService(5);
                         } else {
-                                LogUtil.e("非wifi类型");
+                                LogUtil.e("闈瀢ifi绫诲瀷");
                                 bindPollService(6);
                         }
                         net.setVisibility(GONE);
@@ -417,23 +409,23 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
                 weatherSearch.setOnWeatherSearchListener(new WeatherSearch.OnWeatherSearchListener() {
                         @Override
                         public void onWeatherLiveSearched(LocalWeatherLiveResult localWeatherLiveResult, int i) {
-                                LogUtil.e("查询得到的天气结果" + i);
+                                LogUtil.e("鏌ヨ寰楀埌鐨勫ぉ姘旂粨鏋? + i);
                                 if (i == 1000) {
                                         if (localWeatherLiveResult != null && localWeatherLiveResult.getLiveResult() != null) {
                                                 LocalWeatherLive localWeatherLive = localWeatherLiveResult.getLiveResult();
                                                 mWeatherInfoBean.setRealTime(localWeatherLive.getReportTime());
                                                 mWeatherInfoBean.setWeatherStatus(localWeatherLive.getWeather());
-                                                mWeatherInfoBean.setTemperature(localWeatherLive.getTemperature() + "°");
-                                                mWeatherInfoBean.setWind(localWeatherLive.getWindDirection() + "风       " + localWeatherLive
-                                                        .getWindPower() + "级");
-                                                mWeatherInfoBean.setHumidity("湿度       " + localWeatherLive.getHumidity() + "%");
+                                                mWeatherInfoBean.setTemperature(localWeatherLive.getTemperature() + "掳");
+                                                mWeatherInfoBean.setWind(localWeatherLive.getWindDirection() + "椋?      " + localWeatherLive
+                                                        .getWindPower() + "绾?);
+                                                mWeatherInfoBean.setHumidity("婀垮害       " + localWeatherLive.getHumidity() + "%");
                                                 weatherCity.setText(mWeatherInfoBean.getCity());
                                                 weatherTemperature.setText(mWeatherInfoBean.getTemperature());
                                         } else {
-                                                LogUtil.e("获取到的天气信息为空");
+                                                LogUtil.e("鑾峰彇鍒扮殑澶╂皵淇℃伅涓虹┖");
                                         }
                                 } else {
-                                        LogUtil.e("获取到的天气信息失败" + i);
+                                        LogUtil.e("鑾峰彇鍒扮殑澶╂皵淇℃伅澶辫触" + i);
                                 }
                         }
 
@@ -446,9 +438,9 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
 
         @Override
         public void onLocationChanged(List<String> addressList, double latitude, double longitude) {
-                LogUtil.e("Main定位到啦啦啦");
+                LogUtil.e("Main瀹氫綅鍒板暒鍟﹀暒");
                 LocationManager.getInstance().unregisterLocationListener(this);
-                String cityName = addressList.get(4).substring(addressList.get(4).indexOf("省") + 1);
+                String cityName = addressList.get(4).substring(addressList.get(4).indexOf("鐪?) + 1);
                 mWeatherInfoBean = new WeatherInfoBean();
                 mWeatherInfoBean.setCity(cityName);
                 startSearchLiveWeather();
@@ -456,11 +448,11 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
 
         @Override
         public void onLocationFailed(int errorId, String errorMsg) {
-                LogUtil.e("Main定位失败" + errorMsg + errorId);
+                LogUtil.e("Main瀹氫綅澶辫触" + errorMsg + errorId);
                 List<String> addressList = LocationManager.getInstance().getLocationList();
                 if (addressList != null) {
                         LocationManager.getInstance().unregisterLocationListener(this);
-                        String cityName = addressList.get(4).substring(addressList.get(4).indexOf("省") + 1);
+                        String cityName = addressList.get(4).substring(addressList.get(4).indexOf("鐪?) + 1);
                         mWeatherInfoBean.setCity(cityName);
                         startSearchLiveWeather();
                 }
@@ -487,17 +479,17 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
                 public void onReceive(Context context, Intent intent) {
                         if (intent.getAction().equals(Constant.NEW_MESSAGE_ACTION)) {
                                 if (intent.getBooleanExtra("isLogout", false)) {
-                                        LogUtil.e("主界面正在关闭");
+                                        LogUtil.e("涓荤晫闈㈡鍦ㄥ叧闂?);
                                         finish();
                                         return;
                                 }
-                                LogUtil.e("1接受到广播发来的消息");
+                                LogUtil.e("1鎺ュ彈鍒板箍鎾彂鏉ョ殑娑堟伅");
                                 if (intent.getStringExtra("from").equals("person")) {
                                         List<ChatMessage> list;
                                         list = (List<ChatMessage>) intent.getSerializableExtra(Constant.NEW_MESSAGE);
                                         onProcessNewMessages(list);
                                 } else if (intent.getStringExtra("from").equals("group")) {
-                                        LogUtil.e("这里实时广播接收到实时群消息拉");
+                                        LogUtil.e("杩欓噷瀹炴椂骞挎挱鎺ユ敹鍒板疄鏃剁兢娑堟伅鎷?);
                                         GroupChatMessage message = (GroupChatMessage) intent.getSerializableExtra(Constant.NEW_MESSAGE);
                                         if (MsgManager.getInstance().saveRecentAndChatGroupMessage(message)) {
                                                 onNewGroupChatMessageCome(message);
@@ -517,7 +509,7 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
                                                 MsgManager.getInstance().queryGroupChatMessage(message.getGroupId(), new FindListener<GroupChatMessage>() {
                                                         @Override
                                                         public void onSuccess(List<GroupChatMessage> list) {
-                                                                LogUtil.e("拉去得到的最近的群聊消息如下");
+                                                                LogUtil.e("鎷夊幓寰楀埌鐨勬渶杩戠殑缇よ亰娑堟伅濡備笅");
                                                                 for (GroupChatMessage groupChatMessage
                                                                         : list
                                                                         ) {
@@ -531,12 +523,12 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
 
                                                         @Override
                                                         public void onError(int i, String s) {
-                                                                LogUtil.e("拉取最近的群消息失败" + s + i);
+                                                                LogUtil.e("鎷夊彇鏈€杩戠殑缇ゆ秷鎭け璐? + s + i);
                                                         }
                                                 });
                                         }
                                 } else if (intent.getStringExtra("from").equals("table")) {
-                                        LogUtil.e("实时检测得到的群主的群结构更改消息");
+                                        LogUtil.e("瀹炴椂妫€娴嬪緱鍒扮殑缇や富鐨勭兢缁撴瀯鏇存敼娑堟伅");
                                         GroupTableMessage message = (GroupTableMessage) intent.getSerializableExtra(Constant.NEW_MESSAGE);
                                         ((RecentFragment) mFragments[0]).updateRecentData(message.getGroupId());
                                         LogUtil.e(message);
@@ -551,24 +543,24 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
                 for (final ChatMessage chatMessage :
                         list) {
                         tag = chatMessage.getTag();
-                        LogUtil.e("tag：" + tag);
+                        LogUtil.e("tag锛? + tag);
                         chatMessage.setSendStatus(Constant.SEND_STATUS_SUCCESS);
                         chatMessage.setReadStatus(Constant.RECEIVE_UNREAD);
                         ChatNotificationManager.getInstance(this).sendChatMessageNotification(chatMessage, this);
                         switch (tag) {
                                 case Constant.TAG_ADD_FRIEND:
                                         if (MsgManager.getInstance().saveAndUpdateInvitationMsg(chatMessage) > 0) {
-                                                LogUtil.e("在服务器上成功检测到未读的邀请消息");
+                                                LogUtil.e("鍦ㄦ湇鍔″櫒涓婃垚鍔熸娴嬪埌鏈鐨勯個璇锋秷鎭?);
                                                 onAddFriendMessageCome(chatMessage);
                                         } else {
-                                                LogUtil.e("保存从服务器上检测得来的邀请消息失败");
+                                                LogUtil.e("淇濆瓨浠庢湇鍔″櫒涓婃娴嬪緱鏉ョ殑閭€璇锋秷鎭け璐?);
                                         }
                                         break;
                                 case Constant.TAG_AGREE:
                                         UserManager.getInstance().addNewFriend(chatMessage.getBelongId(), UserManager.getInstance().getCurrentUserObjectId(), new AddFriendCallBackListener() {
                                                 @Override
                                                 public void onSuccess(User user) {
-                                                        LogUtil.e("在服务器上成功检测到未读的同意消息并保存到数据库中成功");
+                                                        LogUtil.e("鍦ㄦ湇鍔″櫒涓婃垚鍔熸娴嬪埌鏈鐨勫悓鎰忔秷鎭苟淇濆瓨鍒版暟鎹簱涓垚鍔?);
                                                         UserCacheManager.getInstance().addContact(user);
                                                         MsgManager.getInstance().saveAndUploadReceiverMessage(true, chatMessage);
                                                         onAgreeMessageCome(chatMessage);
@@ -576,40 +568,38 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
 
                                                 @Override
                                                 public void onFailed(BmobException e) {
-                                                        LogUtil.e("保存从服务器上检测得来的同意消息失败");
+                                                        LogUtil.e("淇濆瓨浠庢湇鍔″櫒涓婃娴嬪緱鏉ョ殑鍚屾剰娑堟伅澶辫触");
                                                 }
                                         });
 
                                         break;
                                 case Constant.TAG_ASK_READ:
-                                        LogUtil.e("接收到的回执已读标签消息");
+                                        LogUtil.e("鎺ユ敹鍒扮殑鍥炴墽宸茶鏍囩娑堟伅");
                                         LogUtil.e(chatMessage);
                                         MsgManager.getInstance().updateReadTagMsgReaded(chatMessage.getConversationId(), chatMessage.getCreateTime());
                                         if (ChatDB.create().hasFriend(chatMessage.getBelongId()) && ChatDB.create().isBlackUser(chatMessage.getBelongId())) {
-                                                LogUtil.e("由于是黑名单，直接更新服务器上的已读回执消息为已读状态");
+                                                LogUtil.e("鐢变簬鏄粦鍚嶅崟锛岀洿鎺ユ洿鏂版湇鍔″櫒涓婄殑宸茶鍥炴墽娑堟伅涓哄凡璇荤姸鎬?);
                                                 MsgManager.getInstance().updateMsgReaded(false, chatMessage.getConversationId(), chatMessage.getCreateTime());
                                         } else {
                                                 if (MsgManager.getInstance().uploadAndUpdateChatMessageReadStatus(chatMessage, true) > 0) {
-                                                        LogUtil.e("在服务器上成功检测到未读的已读回执消息");
+                                                        LogUtil.e("鍦ㄦ湇鍔″櫒涓婃垚鍔熸娴嬪埌鏈鐨勫凡璇诲洖鎵ф秷鎭?);
                                                         onAskReadMessageCome(chatMessage);
                                                 } else {
-                                                        LogUtil.e("保存从服务器上检测得来的回执已读消息失败");
+                                                        LogUtil.e("淇濆瓨浠庢湇鍔″櫒涓婃娴嬪緱鏉ョ殑鍥炴墽宸茶娑堟伅澶辫触");
                                                 }
                                         }
                                         break;
                                 default:
-//                                                                        聊天消息这里要判断是否是黑名单用户
-                                        if (ChatDB.create().hasFriend(chatMessage.getBelongId()) && ChatDB.create().isBlackUser(chatMessage.getBelongId())) {
-//                                                                                黑名单用户
-                                                LogUtil.e("黑名单用户，不接受消息");
+//                                                                        鑱婂ぉ娑堟伅杩欓噷瑕佸垽鏂槸鍚︽槸榛戝悕鍗曠敤鎴?                                        if (ChatDB.create().hasFriend(chatMessage.getBelongId()) && ChatDB.create().isBlackUser(chatMessage.getBelongId())) {
+//                                                                                榛戝悕鍗曠敤鎴?                                                LogUtil.e("榛戝悕鍗曠敤鎴凤紝涓嶆帴鍙楁秷鎭?);
                                                 MsgManager.getInstance().updateMsgReaded(false, chatMessage.getConversationId(), chatMessage.getCreateTime());
-                                                LogUtil.e("更新服务器上黑名单发来的消息为已读");
+                                                LogUtil.e("鏇存柊鏈嶅姟鍣ㄤ笂榛戝悕鍗曞彂鏉ョ殑娑堟伅涓哄凡璇?);
                                         } else {
                                                 if (MsgManager.getInstance().saveAndUploadReceiverMessage(true, chatMessage)) {
-                                                        LogUtil.e("在服务器上成功检测到未读的聊天消息");
+                                                        LogUtil.e("鍦ㄦ湇鍔″櫒涓婃垚鍔熸娴嬪埌鏈鐨勮亰澶╂秷鎭?);
                                                         onNewChatMessageCome(chatMessage);
                                                 } else {
-                                                        LogUtil.e("在服务器上检测未读的聊天消息失败");
+                                                        LogUtil.e("鍦ㄦ湇鍔″櫒涓婃娴嬫湭璇荤殑鑱婂ぉ娑堟伅澶辫触");
                                                 }
                                         }
                                         break;
@@ -620,13 +610,13 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
 
         @Override
         protected void onResume() {
-                LogUtil.e("111222MainActivity：onResume");
+                LogUtil.e("111222MainActivity锛歰nResume");
                 super.onResume();
 //                PushMessageReceiver.registerListener(this);
         }
 
 
-//        这里说明下，由于头基类封装的头部布局与侧滑发生冲突，这里我们直接在主布局上写入头部布局,所以这里弃用基类的头部布局
+//        杩欓噷璇存槑涓嬶紝鐢变簬澶村熀绫诲皝瑁呯殑澶撮儴甯冨眬涓庝晶婊戝彂鐢熷啿绐侊紝杩欓噷鎴戜滑鐩存帴鍦ㄤ富甯冨眬涓婂啓鍏ュご閮ㄥ竷灞€,鎵€浠ヨ繖閲屽純鐢ㄥ熀绫荤殑澶撮儴甯冨眬
 
         @Override
         protected boolean isNeedHeadLayout() {
@@ -646,7 +636,7 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
 
         @Override
         protected void onPause() {
-                LogUtil.e("MainActivity：onPause");
+                LogUtil.e("MainActivity锛歰nPause");
                 super.onPause();
 //                PushMessageReceiver.unRegisterListener(this);
         }
@@ -661,8 +651,7 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
 
         @Override
         public void onCloseMenu() {
-//                当侧滑完全关闭的时候调用
-                if (ViewHelper.getAlpha(bg) != 0) {
+//                褰撲晶婊戝畬鍏ㄥ叧闂殑鏃跺€欒皟鐢?                if (ViewHelper.getAlpha(bg) != 0) {
                         ViewHelper.setAlpha(bg, 0);
                 }
                 if (ViewHelper.getAlpha(icon_1) != 1) {
@@ -678,8 +667,7 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
                 if (ViewHelper.getAlpha(icon_1) != 0) {
                         ViewHelper.setAlpha(icon_1, 0);
                 }
-                //                当侧滑完全打开的时候调用
-        }
+                //                褰撲晶婊戝畬鍏ㄦ墦寮€鐨勬椂鍊欒皟鐢?        }
 
         public void closeMenu() {
                 if (container.getCurrentState() == MainDragLayout.DRAG_STATE_OPEN) {
@@ -689,7 +677,7 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
 
         @Override
         public void onNewChatMessageCome(ChatMessage message) {
-                LogUtil.e("211新消息啦啦啦");
+                LogUtil.e("211鏂版秷鎭暒鍟﹀暒");
                 LogUtil.e(message);
                 if (mFragments[0].isAdded()) {
 
@@ -722,8 +710,7 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
         public void onAskReadMessageCome(ChatMessage chatMessage) {
                 LogUtil.e("onAskReadMessageCome");
                 notifyMenuUpdate();
-//                不处理
-        }
+//                涓嶅鐞?        }
 
         @Override
         public void onNetWorkChanged(boolean isConnected) {
@@ -747,7 +734,7 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
         @Override
         public void onAgreeMessageCome(ChatMessage chatMessage) {
                 LogUtil.e("onAgreeMessageCome");
-                LogUtil.e("同意消息格式");
+                LogUtil.e("鍚屾剰娑堟伅鏍煎紡");
                 LogUtil.e(chatMessage);
                 onNewChatMessageCome(chatMessage);
                 updateContactsData(chatMessage.getBelongId());
@@ -771,8 +758,8 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
 
         @Override
         public void onOffline() {
-//                下线通知
-                ToastUtils.showShortToast("你的帐号在其他地方登录，被迫下线");
+//                涓嬬嚎閫氱煡
+                ToastUtils.showShortToast("浣犵殑甯愬彿鍦ㄥ叾浠栧湴鏂圭櫥褰曪紝琚揩涓嬬嚎");
                 UserManager.getInstance().logout();
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
@@ -782,9 +769,8 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
         @Override
         public void onGroupTableMessageCome(GroupTableMessage message) {
                 LogUtil.e("onGroupTableMessageCome");
-                LogUtil.e("群结构消息到主界面拉");
-//                这里得到的群结构消息仅仅是自己的群结构消息
-                if (mFragments.length > 0) {
+                LogUtil.e("缇ょ粨鏋勬秷鎭埌涓荤晫闈㈡媺");
+//                杩欓噷寰楀埌鐨勭兢缁撴瀯娑堟伅浠呬粎鏄嚜宸辩殑缇ょ粨鏋勬秷鎭?                if (mFragments.length > 0) {
                         ((RecentFragment) mFragments[0]).notifyGroupTableMsgCome(message.getGroupId());
                 }
         }
@@ -796,18 +782,17 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
         }
 
         /**
-         * 点击左上角的图标的回调
-         *
+         * 鐐瑰嚮宸︿笂瑙掔殑鍥炬爣鐨勫洖璋?         *
          * @param view view
          */
         @Override
         public void onClick(View view) {
-                LogUtil.e("侧滑关闭");
+                LogUtil.e("渚ф粦鍏抽棴");
                 int i = view.getId();
                 if (i == R.id.dl_activity_main_drag_container) {
                         openMenu();
 
-                } else if (i == R.id.rl_menu_head_layout) {//                                点击进入个人信息界面之前，先实时监听个人信息界面中的说说
+                } else if (i == R.id.rl_menu_head_layout) {//                                鐐瑰嚮杩涘叆涓汉淇℃伅鐣岄潰涔嬪墠锛屽厛瀹炴椂鐩戝惉涓汉淇℃伅鐣岄潰涓殑璇磋
                         Intent intent = new Intent(this, UserDetailActivity.class);
                         intent.putExtra("from", "me");
                         intent.putExtra("uid", UserManager.getInstance().getCurrentUserObjectId());
@@ -838,11 +823,11 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
                                         nick.setText(user.getNick());
                                         signature.setText(user.getSignature());
                                         Glide.with(this).load(user.getAvatar()).diskCacheStrategy(DiskCacheStrategy.ALL).into(icon_1);
-                                        ToastUtils.showShortToast("保存个人信息成功");
+                                        ToastUtils.showShortToast("淇濆瓨涓汉淇℃伅鎴愬姛");
                                         Glide.with(this).load(user.getAvatar()).diskCacheStrategy(DiskCacheStrategy.ALL).into(avatar);
                                         break;
                                 case Constant.REQUEST_CODE_WEATHER_INFO:
-                                        LogUtil.e("返回天气数据");
+                                        LogUtil.e("杩斿洖澶╂皵鏁版嵁");
                                         WeatherInfoBean weatherInfoBean = (WeatherInfoBean) data.getSerializableExtra("WeatherInfo");
                                         if (weatherInfoBean != null) {
                                                 mWeatherInfoBean = weatherInfoBean;
@@ -859,16 +844,15 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
 
         @Override
         protected void onDestroy() {
-                LogUtil.e("定时服务取消");
+                LogUtil.e("瀹氭椂鏈嶅姟鍙栨秷");
                 PushMessageReceiver.unRegisterListener(this);
                 Intent intent = new Intent(this, PollService.class);
                 stopService(intent);
 //                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 //                alarmManager.cancel(PendingIntent.getService(getApplicationContext(), 0, new Intent(getApplicationContext(), PollService.class), PendingIntent.FLAG_UPDATE_CURRENT));
-                LogUtil.e("用户数据取消拉拉");
+                LogUtil.e("鐢ㄦ埛鏁版嵁鍙栨秷鎷夋媺");
 
-//                把定时检测的服务给取消
-                PushMessageReceiver.unRegisterListener(this);
+//                鎶婂畾鏃舵娴嬬殑鏈嶅姟缁欏彇娑?                PushMessageReceiver.unRegisterListener(this);
                 if (mReceiver != null) {
                         unregisterReceiver(mReceiver);
                         mReceiver = null;
@@ -883,7 +867,7 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
                         netWorkReceiver.unregisterListener(this);
                         netWorkReceiver = null;
                 }
-                LogUtil.e("用户数据取消拉拉，这次应该行了吧");
+                LogUtil.e("鐢ㄦ埛鏁版嵁鍙栨秷鎷夋媺锛岃繖娆″簲璇ヨ浜嗗惂");
                 super.onDestroy();
         }
 
@@ -893,7 +877,7 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
                         if (intent.getAction().equals(Constant.NEW_SHARE_MESSAGE_ACTION)) {
                                 String from = intent.getStringExtra("from");
                                 if (from != null && from.equals("share")) {
-                                        LogUtil.e("11拉取得到的说说消息来了");
+                                        LogUtil.e("11鎷夊彇寰楀埌鐨勮璇存秷鎭潵浜?);
                                         List<SharedMessage> list = (List<SharedMessage>) intent.getSerializableExtra(Constant.NEW_MESSAGE);
                                         for (SharedMessage shareMessage :
                                                 list) {
@@ -944,12 +928,13 @@ public class MainActivity extends BaseActivity implements OnDragDeltaChangeListe
         @Override
         public void onBackPressed() {
                 if (System.currentTimeMillis() - mExitTime > 2000) {
-                        ToastUtils.showShortToast("再按一次退出程序");
+                        ToastUtils.showShortToast("鍐嶆寜涓€娆￠€€鍑虹▼搴?);
                         mExitTime=System.currentTimeMillis();
                 }else {
                         super.onBackPressed();
                 }
         }
 }
+
 
 
